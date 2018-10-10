@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <Menu></Menu>
-    <p>asd</p>
-    <p>{{msg}}</p>
+
   </div>
 </template>
 
