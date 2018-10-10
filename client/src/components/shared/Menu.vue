@@ -9,9 +9,9 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-            <i class="fa fa-whatsapp icon"></i>
-            <i class="fa fa-volume-control-phone"></i>
-            <i class="fa fa-telegram icon"></i>
+            <a href="viber://pa?chatURI=+66848422111"><i class="fa fa-whatsapp icon"></i></a>
+            <a href=""><i class="fa fa-volume-control-phone"></i></a>
+            <a href=""><i class="fa fa-telegram icon"></i></a>
         </div>
     </div>
 </template>
