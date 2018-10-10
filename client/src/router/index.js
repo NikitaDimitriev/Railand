@@ -1,18 +1,15 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import {sync} from 'vuex-router-sync';
-// import store from '../store';
-import route from './route';
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '@/components/Home'
 
-Vue.use(Router);
+Vue.use(Router)
 
-const routes = route;
-
-const router = new Router({
-    // mode: 'history',
-    routes,
-});
-
-sync(router);
-
-export default router;
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    }
+  ]
+})
