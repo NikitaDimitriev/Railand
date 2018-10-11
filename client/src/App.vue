@@ -12,5 +12,10 @@ export default {
 
 <style>
 #app {
+  font-family: sans-serif;
+}
+a{
+  text-decoration: none;
+  color: initial;
 }
 </style>
