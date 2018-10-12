@@ -40,13 +40,43 @@
             </div>
           </div>
         </div>
+        <div class="bottom-header">
+          <router-link to="/"><p class="menu-link">ГЛАВНАЯ</p></router-link>
+          <p class="menu-link">НЕДВИЖЕМОСТЬ</p>
+          <p class="menu-link">ВЛАДЕЛЬЦАМ</p>
+          <p class="menu-link">ЖИЗНЬ НА ПХУКЕТЕ</p>
+          <div class="logo">
+
+          </div>
+          <router-link to="/faq"><p class="menu-link">FAQ</p></router-link>
+          <p class="menu-link">О НАС</p>
+          <p class="menu-link">КОНТАКТЫ</p>
+          <div class="button-green" @click="callModal()">
+            ЗАПОЛНИТЬ ЗАЯВКУ
+          </div>
+        </div>
+        <avra-modal
+          v-model="activeModal"
+          title="ЗАПОЛНИТЬ ЗАЯВКУ"
+          @ok="okHandler()">
+
+          <template slot="body">
+            <h1>Hello</h1>
+          </template>
+
+        </avra-modal>
     </div>
 </template>
 <script>
+import AvraModal from 'avra-modal'
 export default {
   name: "Menu",
+  components:{
+    AvraModal
+  },
   data() {
     return {
+      activeModal: false,
       options: [
         {
           value: "+66 84 84 22 111",
@@ -71,6 +101,11 @@ export default {
           {label: "฿", name:"thb"}
       ]
     };
+  },
+  methods:{
+    callModal(){
+      this.activeModal = true;
+    }
   }
 };
 </script>
