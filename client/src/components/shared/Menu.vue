@@ -37,13 +37,13 @@
           <router-link to="/faq"><p class="menu-link">FAQ</p></router-link>
           <p class="menu-link">О НАС</p>
           <p class="menu-link">КОНТАКТЫ</p>
-          <div class="button-green">
+          <div class="button-green" @click="callModal()">
             ЗАПОЛНИТЬ ЗАЯВКУ
           </div>
         </div>
         <avra-modal
-          v-model="active"
-          :title="modalTitle"
+          v-model="activeModal"
+          title="ЗАПОЛНИТЬ ЗАЯВКУ"
           @ok="okHandler()">
 
           <template slot="body">
@@ -62,7 +62,7 @@ export default {
   },
   data() {
     return {
-      active: true,
+      activeModal: false,
       options: [
         {
           value: "+66 84 84 22 111",
@@ -79,6 +79,11 @@ export default {
       phoneNumber: "+66 84 84 22 111",
       language: "russian"
     };
+  },
+  methods:{
+    callModal(){
+      this.activeModal = true;
+    }
   }
 };
 </script>
@@ -86,6 +91,8 @@ export default {
 .header {
   margin: 10px 125px 10px 125px;
   font-weight: bold;
+  /* position: fixed;
+  top:0; */
 }
 .top-header {
   display: flex;
