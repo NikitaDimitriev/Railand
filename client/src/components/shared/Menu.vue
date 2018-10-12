@@ -2,7 +2,7 @@
     <div class="header">
         <div class="top-header">
           <div class="top-header-left">
-            <el-select v-model="phoneNumber">
+            <el-select v-model="phoneNumber" style="width: 50%">
                 <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -15,15 +15,29 @@
             <a href=""><i class="fa fa-telegram icon"></i></a>
           </div>
           <div class="top-header-right">
-            <el-select v-model="language">
+            <el-select v-model="language" style="width: 30%">
                 <el-option
                     v-for="lang in languages"
                     :key="lang.value"
                     :label="lang.img"
                     :value="lang.value">
-                    <img :src="lang.img" class="language-image">
+                    <template slot="prefix">
+                        <img :src="lang.img" class="language-image">
+                    </template>
                 </el-option>
             </el-select>
+            <el-select v-model="currency" style="width: 20%">
+                <el-option
+                    v-for="cur in currencies"
+                    :key="cur.name"
+                    :label="cur.label"
+                    :value="cur.name">
+                </el-option>
+            </el-select>
+            <div class="register-panel">
+                <p style="margin-right: 5px">Регистрация | </p>
+                <p>Войти</p>
+            </div>
           </div>
         </div>
     </div>
@@ -43,11 +57,19 @@ export default {
           label: "+66 84 84 55 111"
         }
       ],
-      languages:[
-        {name:"russian", img: "../../../static/Flag_of_Russia.svg"}
+      languages: [
+        { name: "russian", img: "../../../static/Flag_of_Russia.svg" },
+        { name: "eng", img: "../../../static/Flag_of_Russia.svg" }
       ],
-      phoneNumber: '+66 84 84 22 111',
-      language: 'russian'
+      phoneNumber: "+66 84 84 22 111",
+      language: "russian",
+      currency: "$",
+      currencies:[
+          {label: "$", name:"usd"},
+          {label: "€", name:"eur"},
+          {label: "₽", name:"rub"},
+          {label: "฿", name:"thb"}
+      ]
     };
   }
 };
@@ -56,17 +78,30 @@ export default {
 .header {
   margin: 10px 125px 10px 125px;
   border-bottom: 1px solid #e5e5e5;
+  font-weight: bold;
 }
-.top-header{
-    display: flex;
-    justify-content: space-between;
+.top-header {
+  display: flex;
+  justify-content: space-between;
 }
 .icon {
   font-size: 24px;
   color: #bdbdbd;
 }
-.language-image{
+.language-image {
   height: 24px;
   width: 24px;
+}
+.el-input__inner {
+  border: none !important;
+  font-weight: bold;
+  color: #000;
+  padding-right: 10px; 
+}
+.el-select {
+  display: inline-block;
+}
+.register-panel{
+    display: inline-flex;
 }
 </style>
