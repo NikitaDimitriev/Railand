@@ -11,9 +11,14 @@
   },
   "dependencies": {
     "element-ui": "^2.4.8",
+    "jquery": "^3.3.1",
+    "slick-carousel": "^1.8.1",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.14.0",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
-    "avra-modal": "https://ckb26144:1qaz)OKM@bitbucket.org/commplat/avra-modal#2.0.7"
+    "vue-slick": "^1.1.13",
+    "vue2-google-maps": "^0.10.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -29,7 +34,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^3.0.0",
-    "file-loader": "^1.1.4",
+    "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",

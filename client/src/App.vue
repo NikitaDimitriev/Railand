@@ -11,11 +11,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: sans-serif;
-}
-a{
-  text-decoration: none;
-  color: initial;
-}
+@import './assets/style/app.css';
 </style>

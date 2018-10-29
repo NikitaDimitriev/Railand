@@ -1,142 +1,112 @@
 <template>
-    <div class="header">
-        <div class="top-header">
-          <div class="top-header-left">
-            <el-select v-model="phoneNumber">
-                <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>
-            <a href="whatsapp://send?text=!&phone=+66848422111"><i class="fa fa-whatsapp icon"></i></a>
-            <a href="viber://pa?chatURI=+66848422111"><i class="fa fa-volume-control-phone icon"></i></a>
-            <a href=""><i class="fa fa-telegram icon"></i></a>
+    <header class="header">
+        <div class="header__in header-inner">
+          <div class="header__top">
+            <div class="header__top-left">
+              <div class="tselect" :class="isActiveTselect ? 'is-active': null">
+                <div class="tselect__current">
+                  <a href="tel:+ 66 81 737 1687" class="tselect__current-link">+ 66 81 737 1687</a>
+                  <i class="tselect__arrow" @click="toogleSlectTelehone()"></i>
+                </div>
+                <ul class="tselect__list">
+                  <li class="tselect__item">+ 66 81 737 1687</li>
+                  <li class="tselect__item">+ 66 81 737 1687</li>
+                </ul>
+              </div>
+              <ul class="header__messengers messengers">
+                <li class="messengers__item">
+                  <a href="https://wa.me/+66817371687'" class="messengers__links messengers__whatsapp"></a>
+                </li>
+                <li class="messengers__item">
+                  <a href="viber://add?number=+66817371687" class="messengers__links messengers__viber"></a>
+                </li>
+                <li class="messengers__item">
+                  <a href="tg://resolve?domain=nikname" class="messengers__links messengers__telegram"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="header__top-rigth">
+              <div class="cselect" :class="isActiveLselect ? 'is-active': null" @click="toogleSlectLanguage()">
+                <div class="cselect__current">
+                  <img src="../../../static/rus.svg" width="23" height="15" alt="Russian flag">
+                </div>
+                <ul class="cselect__list">
+                  <li class="cselect__item"><img src="../../../static/gbr.svg" width="23" height="15" alt="Great Britain flag"></li>
+                </ul>
+              </div>
+              <div class="pselect" :class="isActiveCselect ? 'is-active': null" @click="toogleSlectCurrency()">
+                <div class="pselect__current">$</div>
+                <ul class="pselect__list">
+                  <li class="pselect__item">&#8381; rub</li>
+                  <li class="pselect__item">&#3647; thb</li>
+                  <li class="pselect__item">$ usd</li>
+                  <li class="pselect__item">&#8364; eur</li>
+                </ul>
+              </div>
+              <div class="form-links">
+                <a href="#" class="form-links__item">Регистрация</a>
+                <div class="form-links__separator">|</div>
+                <a href="#" class="form-links__item">Войти</a>
+              </div>
+            </div>
           </div>
-          <div class="top-header-right">
-            <el-select v-model="language">
-                <el-option
-                    v-for="lang in languages"
-                    :key="lang.value"
-                    :label="lang.img"
-                    :value="lang.value">
-                    <img :src="lang.img" class="language-image">
-                </el-option>
-            </el-select>
+          <div class="header__bottom">
+            <div class="header__bottom-left">
+              <nav class="nav">
+                <router-link to="/" class="nav__link">Главная</router-link>
+                <router-link to="/" class="nav__link">недвижимость</router-link>
+                <router-link to="/" class="nav__link">Владельцам</router-link>
+                <router-link to="/live-in-phuket" class="nav__link">жизнь на Пхукете</router-link>
+              </nav>
+            </div>
+            <div class="header__bottom-center">
+              <router-link to="/" class="header__logo">Raйland</router-link>
+            </div>
+            <div class="header__bottom-right">
+              <nav class="nav">
+               <router-link to="/faq" class="nav__link">faq</router-link>
+               <router-link to="/about" class="nav__link">О нас</router-link>
+               <router-link to="/contact" class="nav__link">контакты</router-link>
+              </nav>
+              <button type="button" class="header__btn btn btn_primary">
+                <span>Заполнить заявку</span>
+              </button>
+            </div>
           </div>
         </div>
-        <div class="bottom-header">
-          <router-link to="/"><p class="menu-link">ГЛАВНАЯ</p></router-link>
-          <p class="menu-link">НЕДВИЖЕМОСТЬ</p>
-          <p class="menu-link">ВЛАДЕЛЬЦАМ</p>
-          <p class="menu-link">ЖИЗНЬ НА ПХУКЕТЕ</p>
-          <div class="logo">
-
-          </div>
-          <router-link to="/faq"><p class="menu-link">FAQ</p></router-link>
-          <p class="menu-link">О НАС</p>
-          <p class="menu-link">КОНТАКТЫ</p>
-          <div class="button-green" @click="callModal()">
-            ЗАПОЛНИТЬ ЗАЯВКУ
-          </div>
-        </div>
-        <avra-modal
-          v-model="activeModal"
-          title="ЗАПОЛНИТЬ ЗАЯВКУ"
-          @ok="okHandler()">
-
-          <template slot="body">
-            <h1>Hello</h1>
-          </template>
-
-        </avra-modal>
-    </div>
+      </header>
 </template>
 <script>
-import AvraModal from 'avra-modal'
 export default {
   name: "Menu",
-  components:{
-    AvraModal
-  },
   data() {
     return {
-      activeModal: false,
-      options: [
-        {
-          value: "+66 84 84 22 111",
-          label: "+66 84 84 22 111"
-        },
-        {
-          value: "+66 84 84 55 111",
-          label: "+66 84 84 55 111"
-        }
-      ],
-      languages: [
-        { name: "russian", img: "../../../static/Flag_of_Russia.svg" }
-      ],
-      phoneNumber: "+66 84 84 22 111",
-      language: "russian"
+      isActiveTselect: false,
+      isActiveLselect: false,
+      isActiveCselect: false
     };
   },
   methods:{
-    callModal(){
-      this.activeModal = true;
-    }
+    toogleSlectTelehone(){
+      this.isActiveTselect = !this.isActiveTselect;
+    },
+    toogleSlectLanguage(){
+      this.isActiveLselect = !this.isActiveLselect;
+    },
+    toogleSlectCurrency(){
+      this.isActiveCselect = !this.isActiveCselect;
+    },
   }
 };
 </script>
 <style>
-.header {
-  margin: 10px 125px 10px 125px;
-  font-weight: bold;
-  /* position: fixed;
-  top:0; */
-}
-.top-header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #e5e5e5;
-}
-.icon {
-  font-size: 24px;
-  color: #bdbdbd;
-}
-.language-image {
-  height: 24px;
-  width: 24px;
-}
-.bottom-header {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-around;
-}
-.logo {
-  width: 20%;
-}
-.button-green {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: #6dc913;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: #ffffff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
-}
-.button-green:hover{
-  box-shadow: none;
-}
-.menu-link {
-  cursor: pointer;
-}
-.menu-link:hover {
-  color: #bdbdbd;
+.pselect.is-active .pselect__list{
+  display: block
 }
 .router-link-exact-active{
   color: #bdbdbd;
+}
+.header-inner{
+  padding: 10px 125px;
 }
 </style>
