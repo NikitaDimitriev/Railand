@@ -4,9 +4,9 @@
             Admin panel
         </div>
         <div class="sidebar_admin">
-            <div class="nav-item">Objects</div>
-            <div class="nav-item">Articles</div>
-            <div class="nav-item">Users</div>
+            <router-link to="/admin/objects"><div class="nav-item"><i class="fa fa-home"></i> Objects </div></router-link>
+            <router-link to="/admin/articles"><div class="nav-item"><i class="fa fa-book"></i> Articles</div></router-link>
+            <router-link to="/admin/users"><div class="nav-item"><i class="fa fa-user"></i> Users</div></router-link>
         </div>
     </div>
 </template>
@@ -29,25 +29,25 @@ export default {
     padding: 10px;
 }
 .sidebar_admin{
-    height: calc(100% - 5vh); /* Full-height: remove this if you want "auto" height */
-    width: 200px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 5vh; /* Stay at the top */
+    height: calc(100% - 5vh);
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 5vh;
     left: 0;
-    background-color: #fff; /* Black */
+    background-color: #fff;
     overflow-x: hidden;
     border-right: 1px solid #9400D3;
 }
 .nav-item{
     padding: 15px;
-    font-size: 25px;
+    font-size: 14px;
     color: #9400D3;
 }
 .nav-item:hover{
     cursor: pointer;
     padding: 15px;
-    font-size: 25px;
+    font-size: 14px;
     color: #fff;
     background-color: #9400D3;
 }
