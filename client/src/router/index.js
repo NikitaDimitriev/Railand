@@ -8,6 +8,7 @@ import About from '@/components/About'
 import Admin from '@/components/Admin'
 import Catalog from '@/components/Catalog'
 import Journal from '@/components/Journal'
+import Admin_Objects from '@/components/Admin_Objects'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin
+    },
+    {
+      path: '/admin/objects',
+      name: 'Admin_Objects',
+      component: Admin_Objects
     },
     {
       path: '/catalog',
