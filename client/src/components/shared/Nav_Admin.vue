@@ -1,17 +1,20 @@
 <template>
-    <div class="admin_objects">
+    <div class="navigation_admin">
         <div class="header_admin">
             Admin panel
         </div>
         <div class="sidebar_admin">
-            <router-link to="/admin/objects"><div class="nav-item active"><i class="fa fa-home"></i> Objects </div></router-link>
+            <router-link to="/admin/objects"><div class="nav-item"><i class="fa fa-home"></i> Objects </div></router-link>
             <router-link to="/admin/articles"><div class="nav-item"><i class="fa fa-book"></i> Articles</div></router-link>
             <router-link to="/admin/users"><div class="nav-item"><i class="fa fa-user"></i> Users</div></router-link>
+            <router-link to="/admin/reviews"><div class="nav-item"><i class="fa fa-comment"></i> reviews</div></router-link>
         </div>
     </div>
 </template>
 <script>
-    
+export default {
+    name: "Navigation"
+}
 </script>
 <style>
 .header_admin{
@@ -43,10 +46,6 @@
     cursor: pointer;
     padding: 15px;
     font-size: 14px;
-    color: #fff;
-    background-color: #9400D3;
-}
-.active{
     color: #fff;
     background-color: #9400D3;
 }

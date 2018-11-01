@@ -9,6 +9,9 @@ import Admin from '@/components/Admin'
 import Catalog from '@/components/Catalog'
 import Journal from '@/components/Journal'
 import Admin_Objects from '@/components/Admin_Objects'
+import Admin_Articles from '@/components/Admin_Articles'
+import Admin_Users from '@/components/Admin_Users'
+import Admin_Reviews from '@/components/Admin_Reviews'
 
 Vue.use(Router)
 
@@ -43,6 +46,21 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin
+    },
+    {
+      path: '/admin/articles',
+      name: 'Admin_Articles',
+      component: Admin_Articles
+    },
+    {
+      path: '/admin/reviews',
+      name: 'Admin_Reviews',
+      component: Admin_Reviews
+    },
+    {
+      path: '/admin/users',
+      name: 'Admin_Users',
+      component: Admin_Users
     },
     {
       path: '/admin/objects',
