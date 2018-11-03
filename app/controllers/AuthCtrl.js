@@ -16,6 +16,7 @@ async function signUp(req, res) {
                 .end();
         } else {
             let register = await User.create({
+                login: req.body.login,
                 email: email,
                 password: req.body.password,
                 username: req.body.firstName + ' ' + req.body.lastName,

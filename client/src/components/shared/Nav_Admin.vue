@@ -7,7 +7,7 @@
             <router-link to="/admin/objects"><div class="nav-item"><i class="fa fa-home"></i> Objects </div></router-link>
             <router-link to="/admin/articles"><div class="nav-item"><i class="fa fa-book"></i> Articles</div></router-link>
             <router-link to="/admin/users"><div class="nav-item"><i class="fa fa-user"></i> Users</div></router-link>
-            <router-link to="/admin/reviews"><div class="nav-item"><i class="fa fa-comment"></i> reviews</div></router-link>
+            <router-link to="/admin/reviews"><div class="nav-item"><i class="fa fa-comment"></i> Reviews</div></router-link>
         </div>
     </div>
 </template>

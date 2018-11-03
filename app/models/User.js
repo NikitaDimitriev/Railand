@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model('User', {
-    username: {type: String, require: true},
-    firstName: {type: String, require: true},
-    lastName: {type: String, require: true},
+    login: {type: String, require: true},
+    firstName: {type: String},
+    lastName: {type: String},
     email: {type: String, require: true},
     password: {type: String, require: true},
     phone: {type: String, require: false},

@@ -1,7 +1,8 @@
 <template>
     <div>
         <Menu></Menu>
-        <section class="catalog-promo" style="background-image: url(../img/about/about-form.jpg">
+        <div class="out">
+        <section class="catalog-promo" style="background-image: url(../../static/about-form.jpg">
         <div class="catalog-promo__in inner">
           <h2 class="catalog-promo__title"> Более 700 обьектов в базе </h2>
           <div class="catalog-promo__subtitle"> Чтобы изучить весь каталог, потребуется примерно 48 часов. <br /> Оставьте заявку, и менеджер быстро подберет варианты. </div>
@@ -208,7 +209,7 @@
                       <div class="price-wrp">
                         <div class="price price__wh"> $ 761 000 </div>
                       </div>
-                      <div class="card__slider">
+                      <div class="card__slider js-card-slider-1">
                         <div class="card__slider-item">
                           <img src="img/card/1.jpg" alt="аппартамены">
                         </div>
@@ -790,6 +791,7 @@
           <!-- END cards-main -->
         </div>
       </section>
+        </div>
         <Footer></Footer>
     </div>
 </template>

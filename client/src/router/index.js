@@ -12,6 +12,7 @@ import Admin_Objects from '@/components/Admin_Objects'
 import Admin_Articles from '@/components/Admin_Articles'
 import Admin_Users from '@/components/Admin_Users'
 import Admin_Reviews from '@/components/Admin_Reviews'
+import ObjectSingle from '@/components/ObjectSingle'
 
 Vue.use(Router)
 
@@ -33,7 +34,7 @@ export default new Router({
       component: Contact
     },
     {
-      path: '/сooperation',
+      path: '/cooperation',
       name: 'Cooperation',
       component: Cooperation
     },
@@ -76,6 +77,11 @@ export default new Router({
       path: '/live-in-phuket',
       name: 'Journal',
       component: Journal
+    },
+    {
+      path: '/catalog/:id',
+      name: 'ObjectSingle',
+      component: ObjectSingle
     }
   ]
 })

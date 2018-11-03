@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Menu></Menu>
-    <div class="main">
+    <div class="main out">
         <div class="inner">
           <div class="main__content">
             <h1 class="main__title">Аренда и продажа <br> недвижимости на Пхукете</h1>
@@ -71,18 +71,18 @@
             <button type="button" class="tab-links__item js-tab-apartments-link is-active" data-tab="0"><span>продажу</span></button>
             <button type="button" class="tab-links__item js-tab-apartments-link" data-tab="1"><span>Аренду</span></button>
           </div>
-          <ul class="alist js-tab-apartments-content is-active" data-tab="0">
+          <ul class="alist js-tab-apartments-content is-active" data-tab="0" v-for="(object, index) of objects" :key="index">
             <li class="alist__item">
               <div class="aitem">
                 <div class="aitem__pic">
                   <img src="https://via.placeholder.com/255x300" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
-                  <div class="aitem__title"> ВИЛЛА LYDIA. Удобные апартаменты с видом на закат </div>
+                  <div class="aitem__title"> {{object.title}} </div>
                   <ul class="aitem__list">
-                    <li class="aitem__list-item">Жилая площадь: от 200 м2</li>
-                    <li class="aitem__list-item">Спален: 2-3</li>
-                    <li class="aitem__list-item">До пляжа: 3 км</li>
+                    <li class="aitem__list-item">Жилая площадь: {{object.lifeArea}}</li>
+                    <li class="aitem__list-item">Спален: {{object.rooms}}</li>
+                    <li class="aitem__list-item">До пляжа: {{object.distanceToBitch}}</li>
                   </ul>
                 </div>
               </div>
@@ -451,24 +451,18 @@ export default {
   },
   data() {
     return {
-      slickOptions: {
-        slidesToShow: 5
-      }
+      objects:{}
     };
   },
+  mounted() {
+    this.getObjects();
+  },
   methods: {
-    next() {
-      this.$refs.slick.next();
-    },
-
-    prev() {
-      this.$refs.slick.prev();
-    },
-
-    reInit() {
-      this.$nextTick(() => {
-        this.$refs.slick.reSlick();
-      });
+    getObjects(){
+      this.$axios.get('http://localhost:3000/api/get-objects').then(response=>{
+        this.objects = response.data;
+        console.log(response.data);
+      })
     }
   }
 };

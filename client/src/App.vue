@@ -6,10 +6,15 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
-@import './assets/style/app.css';
+@import "./assets/style/app.css";
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 </style>

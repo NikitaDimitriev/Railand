@@ -1,53 +1,93 @@
 <template>
     <div class="admin_objects">
-        <div class="header_admin">
-            Admin panel
-        </div>
-        <div class="sidebar_admin">
-            <router-link to="/admin/objects"><div class="nav-item active"><i class="fa fa-home"></i> Objects </div></router-link>
-            <router-link to="/admin/articles"><div class="nav-item"><i class="fa fa-book"></i> Articles</div></router-link>
-            <router-link to="/admin/users"><div class="nav-item"><i class="fa fa-user"></i> Users</div></router-link>
+        <Navigation/>
+        <div class="work_area">
+            <el-tabs value="first" class="create_tab">
+                <el-tab-pane label="Create" name="first">
+                    <el-input placeholder="Name of Article" v-model="nameOfObject" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Floor" v-model="floor" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Rooms" v-model="rooms" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Price" v-model="price" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Badroom" v-model="badroom" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Bathroom" v-model="bathroom" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Distanse to bitch" v-model="distanseToBitch" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Distance to airoport" v-model="distanseToAiroport" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Area" v-model="area" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Land area" v-model="landArea" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Life area" v-model="lifeArea" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Area of pool" v-model="areaOfPool" clearable class="input_articles"></el-input>
+                    
+                    <br/>
+                    <label for="mainImage">Main Image:</label>
+                    <input type="file" @change="onFileChanged" name="mainImage">
+                    <el-button type="primary" @click="create()">Create</el-button>
+                </el-tab-pane>
+                <el-tab-pane label="Update" name="second">
+
+                </el-tab-pane>
+                <el-tab-pane label="Delete" name="third">
+
+                </el-tab-pane>
+            </el-tabs>
         </div>
     </div>
 </template>
 <script>
-    
+import Navigation from "./shared/Nav_Admin";
+export default {
+  components: {
+    Navigation
+  },
+  data() {
+    return {
+      nameOfObject: "",
+      floor:'',
+      badroom:'',
+      bathroom:'',
+      distanseToBitch: '',
+      distanseToAiroport:'',
+      area:'',
+      landArea:'',
+      lifeArea:'',
+      areaOfPool:'',
+      price: '',
+      rooms:'',
+      selectedFile: null
+    };
+  },
+  methods: {
+    onFileChanged(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    create(){
+        let data={
+            title: this.nameOfObject,
+            floor: this.floor,
+            badroom: this.badroom,
+            bathroom: this.bathroom,
+            distanseToBitch: this.distanseToBitch,
+            distanseToAiroport: this.distanseToAiroport,
+            area: this.area,
+            landArea: this.landArea,
+            lifeArea: this.lifeArea,
+            areaOfPool: this.areaOfPool,
+            price: this.price
+        }
+        this.$axios.post('http://localhost:3000/api/create-object', data).then(response=>{
+            console.log(response);
+        })
+    }
+  }
+};
 </script>
 <style>
-.header_admin{
-    display: flex;
-    align-items: center;
-    height: 5vh;
-    background-color: #9400D3;
-    font-size: 4.8vh;
-    color: #fff;
-    padding: 10px;
+.work_area {
+  padding: 15px;
+  width: calc(100% - 200px);
+  float: right;
 }
-.sidebar_admin{
-    height: calc(100% - 5vh);
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 5vh;
-    left: 0;
-    background-color: #fff;
-    overflow-x: hidden;
-    border-right: 1px solid #9400D3;
-}
-.nav-item{
-    padding: 15px;
-    font-size: 14px;
-    color: #9400D3;
-}
-.nav-item:hover{
-    cursor: pointer;
-    padding: 15px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #9400D3;
-}
-.active{
-    color: #fff;
-    background-color: #9400D3;
+.input_articles {
+display: inline-block;
+  width: 30%;
 }
 </style>

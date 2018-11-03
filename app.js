@@ -36,15 +36,22 @@ app.use(express.static(__dirname + '/public'));
 
 
 require('./app/routes');
-
-app.get('*', function(req, res) {
-    res.sendfile('./client/dist/index.html');
+app.use(async (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
 });
+
+// app.get('*', function(req, res) {
+//     res.sendfile('./client/dist/index.html');
+// });
 
 app.post('/api/sign-up-user', AuthCtrl.signUp);
 app.post('/api/log-in-user', AuthCtrl.logIn);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
+app.get('/api/get-objects', ObjectCtrl.getObjects);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
