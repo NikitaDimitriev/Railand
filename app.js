@@ -49,6 +49,7 @@ app.use(async (req, res, next) => {
 
 app.post('/api/sign-up-user', AuthCtrl.signUp);
 app.post('/api/log-in-user', AuthCtrl.logIn);
+app.get('/api/get-currentuser', AuthCtrl.getUserId);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);

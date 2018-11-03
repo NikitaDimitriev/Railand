@@ -279,6 +279,9 @@ export default {
           password: this.password
         }
         this.$axios.post('http://localhost:3000/api/sign-up-user', data).then(response=>{
+          this.showRegistrationModal = !this.showRegistrationModal;
+          localStorage.setItem('auth', response.data.auth);
+          localStorage.setItem('id', response.data.id);
           console.log(response);
         })
       }
@@ -289,6 +292,7 @@ export default {
         password: this.loginPassword
       }
       this.$axios.post('http://localhost:3000/api/log-in-user', data).then(response=>{
+          this.showLoginModal = !this.showLoginModal;
           console.log(response);
         })
     }

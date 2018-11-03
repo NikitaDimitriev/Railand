@@ -2,6 +2,7 @@ const User = require('../models/User');
 
 exports.signUp = signUp;
 exports.logIn = logIn;
+exports.getUserId = getUserId;
 
 async function signUp(req, res) {
     console.log(req.body);
@@ -23,10 +24,9 @@ async function signUp(req, res) {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName
             })
-            console.log(register);
             res
                 .status(200)
-                .json(register)
+                .json({auth:true, id: register.id})
                 .end();
         }
     } catch (error) {
@@ -41,7 +41,7 @@ async function logIn(req, res) {
         if(currentUser){
             res
                 .status(200)
-                .json(currentUser)
+                .json({auth:true})
                 .end();
         }else{
             res
@@ -51,5 +51,15 @@ async function logIn(req, res) {
         }
     } catch (error) {
         console.log(error)
+    }
+}
+
+async function getUserId(req, res){
+    console.log(req.body.id);
+    try {
+        let currentUser = await User.findOne({ id: req.body.id});
+        res.json(currentUser).end();
+    } catch (error) {
+        
     }
 }
