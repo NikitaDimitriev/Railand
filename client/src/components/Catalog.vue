@@ -165,7 +165,7 @@
                           </button>
                           <button type="button" class="btn-close js-close">
                             <svg class="icon icon-cancel">
-                              <use xlink:href="img/sprite.svg#icon-cancel"></use>
+                              <use xlink:href="../../static/sprite.svg#icon-cancel"></use>
                             </svg>
                           </button>
                         </div>

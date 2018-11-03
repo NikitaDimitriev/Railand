@@ -34,7 +34,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -52,7 +52,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -70,7 +70,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -88,7 +88,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -106,7 +106,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -124,7 +124,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>
@@ -142,7 +142,7 @@
                   <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                   <a href="#" class="n-item__link">
                     <span>читать далее <svg class="icon icon-arr">
-                        <use xlink:href="img/sprite.svg#icon-arr"></use>
+                        <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                       </svg>
                     </span>
                   </a>

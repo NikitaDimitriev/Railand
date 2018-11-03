@@ -13,7 +13,7 @@
             <ul class="info__list">
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -37,7 +37,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -61,7 +61,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -85,7 +85,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -109,7 +109,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -133,7 +133,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -162,7 +162,7 @@
             <ul class="info__list">
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -186,7 +186,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий?asas <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -210,7 +210,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -234,7 +234,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -258,7 +258,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -282,7 +282,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -306,7 +306,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -335,7 +335,7 @@
             <ul class="info__list">
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -359,7 +359,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -383,7 +383,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
@@ -407,7 +407,7 @@
               </li>
               <li class="info__list-item">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content">
