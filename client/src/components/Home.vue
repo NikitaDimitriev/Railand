@@ -461,7 +461,6 @@ export default {
     getObjects(){
       this.$axios.get('http://localhost:3000/api/get-objects').then(response=>{
         this.objects = response.data;
-        console.log(response.data);
       })
     }
   }
