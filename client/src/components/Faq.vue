@@ -13,7 +13,7 @@
             <ul class="info__list">
               <li class="info__list-item" @click="acordionItem0 = !acordionItem0" :class="{'is-active': acordionItem0}"  >
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem0}">
@@ -37,7 +37,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem1 = !acordionItem1" :class="{'is-active': acordionItem1}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem1}">
@@ -61,7 +61,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem2 = !acordionItem2" :class="{'is-active': acordionItem2}">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem2}">
@@ -85,7 +85,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem3 = !acordionItem3" :class="{'is-active': acordionItem3}">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem3}">
@@ -109,7 +109,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem4 = !acordionItem4" :class="{'is-active': acordionItem4}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem4}">
@@ -133,7 +133,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem5 = !acordionItem5" :class="{'is-active': acordionItem5}">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem5}">
@@ -162,7 +162,7 @@
             <ul class="info__list">
               <li class="info__list-item" @click="acordionItem6 = !acordionItem6" :class="{'is-active': acordionItem6}">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem6}">
@@ -210,7 +210,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem8 = !acordionItem8" :class="{'is-active': acordionItem8}">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem8}">
@@ -234,7 +234,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem9 = !acordionItem9" :class="{'is-active': acordionItem9}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem9}">
@@ -258,7 +258,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem10 = !acordionItem10" :class="{'is-active': acordionItem10}">
                 <h4 class="info__list-title js-toggle"> Ценообразование на недвижимость? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem10}">
@@ -282,7 +282,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem11 = !acordionItem11" :class="{'is-active': acordionItem11}">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem11}">
@@ -306,7 +306,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem12 = !acordionItem12" :class="{'is-active': acordionItem12}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem12}">
@@ -335,7 +335,7 @@
             <ul class="info__list">
               <li class="info__list-item" @click="acordionItem13 = !acordionItem13" :class="{'is-active': acordionItem13}">
                 <h4 class="info__list-title js-toggle"> Как выбрать виллу? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem13}">
@@ -359,7 +359,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem14 = !acordionItem14" :class="{'is-active': acordionItem14}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem14}">
@@ -383,7 +383,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem15 = !acordionItem15" :class="{'is-active': acordionItem15}">
                 <h4 class="info__list-title js-toggle"> Когда бронироватние считаеться подтвержденным? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem15}">
@@ -407,7 +407,7 @@
               </li>
               <li class="info__list-item" @click="acordionItem16 = !acordionItem16" :class="{'is-active': acordionItem16}">
                 <h4 class="info__list-title js-toggle"> Как проверить достоверность фотографий? <svg class="icon icon-arrd">
-                    <use xlink:href="img/sprite.svg#icon-arrd"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arrd"></use>
                   </svg>
                 </h4>
                 <div class="info__list-content" :class="{'activate-item' : acordionItem16}">

@@ -2,7 +2,6 @@ const User = require('../models/User');
 
 exports.signUp = signUp;
 exports.logIn = logIn;
-exports.getUserId = getUserId;
 
 async function signUp(req, res) {
     console.log(req.body);
@@ -21,9 +20,10 @@ async function signUp(req, res) {
                 email: email,
                 password: req.body.password
             })
+            console.log(register);
             res
                 .status(200)
-                .json({auth:true, id: register.id})
+                .json(register)
                 .end();
         }
     } catch (error) {
@@ -38,7 +38,7 @@ async function logIn(req, res) {
         if(currentUser){
             res
                 .status(200)
-                .json({auth:true})
+                .json(currentUser)
                 .end();
         }else{
             res

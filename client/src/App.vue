@@ -6,23 +6,7 @@
 
 <script>
 export default {
-  name: "App",
-  mounted() {
-    this.getUser();
-  },
-  methods:{
-    getUser(){
-      console.log('asdsad');
-      if(localStorage.getItem('auth') === true){
-        let data = {
-          id: localStorage.getItem('id')
-        }
-        this.$axios.get('http://localhost:3000/api/get-currentuser', data).then(response=>{
-          console.log(response);
-        })
-      }
-    }
-  }
+  name: "App"
 };
 </script>
 

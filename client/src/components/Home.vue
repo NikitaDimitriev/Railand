@@ -24,7 +24,7 @@
               <div class="iblock">
                 <div class="iblock__icon">
                   <svg class="icon icon-iblock-1">
-                    <use xlink:href="img/sprite.svg#icon-iblock-1"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-iblock-1"></use>
                   </svg>
                 </div>
                 <div class="iblock__text">12 лет опыта работы на рынке <br /> недвижимости Пхукета</div>
@@ -34,7 +34,7 @@
               <div class="iblock">
                 <div class="iblock__icon">
                   <svg class="icon icon-iblock-1">
-                    <use xlink:href="img/sprite.svg#icon-iblock-1"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-iblock-1"></use>
                   </svg>
                 </div>
                 <div class="iblock__text">Лучшие объекты на этапе <br /> строительства и вторичном рынке</div>
@@ -44,7 +44,7 @@
               <div class="iblock">
                 <div class="iblock__icon">
                   <svg class="icon icon-iblock-1">
-                    <use xlink:href="img/sprite.svg#icon-iblock-1"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-iblock-1"></use>
                   </svg>
                 </div>
                 <div class="iblock__text">Большой выбор объектов <br /> и широкий диапазон цен</div>
@@ -54,7 +54,7 @@
               <div class="iblock">
                 <div class="iblock__icon">
                   <svg class="icon icon-iblock-1">
-                    <use xlink:href="img/sprite.svg#icon-iblock-1"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-iblock-1"></use>
                   </svg>
                 </div>
                 <div class="iblock__text">Полное сопровождение сделок <br /> на русском и английском языках</div>
@@ -91,11 +91,11 @@
           <div class="aitem__price">$ 95 000</div>
         </div>
       </div>
-      
+
     <router-link to="/catalog">
       <button type="button" class="apartments__btn btn">
         <span>Показать весь список <svg class="icon icon-arr">
-            <use xlink:href="img/sprite.svg#icon-arr"></use>
+            <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>
         </span>
       </button>
@@ -204,7 +204,7 @@
                   </button>
                   <button type="button" class="btn-close js-close">
                     <svg class="icon icon-cancel">
-                      <use xlink:href="img/sprite.svg#icon-cancel"></use>
+                      <use xlink:href="../../static/sprite.svg#icon-cancel"></use>
                     </svg>
                   </button>
                 </div>
@@ -280,7 +280,7 @@
                   </button>
                   <button type="button" class="btn-close js-close">
                     <svg class="icon icon-cancel">
-                      <use xlink:href="img/sprite.svg#icon-cancel"></use>
+                      <use xlink:href="../../static/sprite.svg#icon-cancel"></use>
                     </svg>
                   </button>
                 </div>
@@ -380,7 +380,7 @@
                 семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети.</div>
               <a href="#" class="n-item__link">
                 <span>читать далее <svg class="icon icon-arr">
-                    <use xlink:href="img/sprite.svg#icon-arr"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
                 </span>
               </a>
@@ -400,7 +400,7 @@
                 иногда выбираемся на пляж или на бранч.</div>
               <a href="#" class="n-item__link">
                 <span>читать далее <svg class="icon icon-arr">
-                    <use xlink:href="img/sprite.svg#icon-arr"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
                 </span>
               </a>
@@ -420,7 +420,7 @@
                 каждый год миллионы…</div>
               <a href="#" class="n-item__link">
                 <span>читать далее <svg class="icon icon-arr">
-                    <use xlink:href="img/sprite.svg#icon-arr"></use>
+                    <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
                 </span>
               </a>
@@ -430,7 +430,7 @@
       </ul>
       <a href="#" class="news__btn btn">
         <span>Жизнь на Пхукете <svg class="icon icon-arr">
-            <use xlink:href="img/sprite.svg#icon-arr"></use>
+            <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>
         </span>
       </a>
