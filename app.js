@@ -53,6 +53,8 @@ app.get('/api/get-currentuser', AuthCtrl.getUserId);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
+app.get('/api/get-objects-pagination', ObjectCtrl.getObjectsPagination);
+app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById)
 
 app.listen(port);
 console.log('Magic happens on port ' + port);

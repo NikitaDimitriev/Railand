@@ -1,6 +1,7 @@
 <template>
     <div class="cooperation">
         <Menu/>
+        <div class="out">
         <section class="cooperation" style="background-image: url(../../static/cooperation.jpg)">
         <div class="cooperation__in inner">
           <h2 class="cooperation__title"> Сотрудничество </h2>
@@ -22,7 +23,7 @@
       <section class="audit">
         <div class="audit__in inner">
           <ul class="audit-tabs__list">
-            <li class="audit-tabs__item js-tab is-active" data-tab="0">
+            <li class="audit-tabs__item js-tab" data-tab="0" @click="showTab(0)" :class="{'is-active': tab0}">
               <!-- audit-svg-ico -->
               <svg class="audit-tabs__ico" width="26" height="31">
                 <path d="M214.956 591.188H198.37v-1.897h16.585zm-16.585 1.819h16.702v2.052h-16.702zm16.702 5.69h-16.702v-1.594h16.702zm-16.702 2.13h16.702v1.748h-16.702zm0 3.87h16.702v1.368h-16.702zm-.819-17.536v-5.69c0-.91.82-1.368 1.405-1.368.82 0 1.404.459 1.404 1.368v5.69c0 .459-.585.987-1.404.987-.586 0-1.405-.528-1.405-.987zm13.775-1.135H201.18v-2.51h10.146zm7.805-.84v23.157c0 1.368-1.054 1.897-2.108 1.897H196.03c-.898 0-1.951-.529-1.951-1.897v-23.156c0-.91 1.053-1.671 1.95-1.671h1.055v2.51h-.937v22.317h20.526v-22.317h-.82v-2.51h1.171c1.054 0 2.108.761 2.108 1.67zm-6.868 1.975v-5.69c0-.91.468-1.368 1.287-1.368 1.054 0 1.522.459 1.522 1.368v5.69c0 .459-.468.987-1.522.987-.82 0-1.287-.528-1.287-.987z" id="audit1" transform="translate(-194 -580)" fill="#e86278" />
@@ -30,7 +31,7 @@
               <!-- audit-svg-ico -->
               <h3 class="audit-tabs__title"> Профессиональный аудит </h3>
             </li>
-            <li class="audit-tabs__item js-tab" data-tab="1">
+            <li class="audit-tabs__item js-tab" data-tab="1" @click="showTab(1)" :class="{'is-active': tab1}">
               <!-- audit-svg-ico -->
               <svg class="audit-tabs__ico" width="26" height="28">
                 <path d="M477 587.827c-.533 9.94-6.396 22.163-12.73 22.163-7.283 0-12.614-12.453-13.264-22.88 3.315 3.193 7.934-5.11 13.263-5.11 5.092 0 9.71 9.37 12.73 5.827zm-2.488 2.476c-1.776-.352-3.02-1.408-5.15-3.192-1.6-1.433-3.495-3.557-5.093-3.557-1.598 0-3.553 2.124-5.684 3.557-1.598 1.189-3.374 2.476-4.618 2.84.354 4.26 1.244 8.533 3.02 12.089 2.31 3.435 4.795 6.154 7.282 6.154 2.428 0 4.559-2.719 6.335-6.154 2.132-3.556 3.375-7.707 3.908-11.737zm-6.039-2.003c1.777.935 3.197 2.84 4.263 3.07 0 1.081-.355 2.841-.888 3.921h-6.87v-9.613c.89.243 2.607 2.027 3.495 2.622zm-8.823 0c1.066-1.19 2.843-1.906 3.553-2.622v9.613h-6.928c-.71-1.432-1.064-2.84-1.064-3.92 1.776-1.068 3.018-2.136 4.44-3.071zm-3.196 8.06h6.75v10.426c-.89-.716-2.842-2.5-4.619-5.462-.711-1.784-1.598-2.84-2.131-4.965zm8.525 0h6.691c-.178 2.124-1.42 3.556-1.952 4.964-1.777 2.962-3.021 4.746-4.74 5.462z" id="audit2" transform="translate(-451 -582)" fill="#e86278" />
@@ -38,7 +39,7 @@
               <!-- audit-svg-ico -->
               <h3 class="audit-tabs__title"> Безопасность сделки</h3>
             </li>
-            <li class="audit-tabs__item js-tab" data-tab="2">
+            <li class="audit-tabs__item js-tab" data-tab="2" @click="showTab(2)" :class="{'is-active': tab2}">
               <!-- audit-svg-ico -->
               <svg class="audit-tabs__ico" width="31" height="43">
                 <path d="M713.896 572.8c0-1.44 1.888-2.797 3.786-2.797 1.45 0 3.2 1.357 3.2 2.796 0 2.16-1.75 3.516-3.2 3.516-1.898 0-3.786-1.356-3.786-3.516zm8.01 18.298v20.007c0 .628-.736 1.892-2.048 1.892-1.013 0-1.888-1.264-1.888-1.892v-14.064h-1.013v14.064c0 .628-.736 1.892-1.898 1.892-1.163 0-2.186-1.264-2.186-1.892v-29.382h-.14v11.803c0 1.531-1.311 1.624-1.748 1.624-1.113 0-1.988-.093-1.988-1.624v-14.24c0-1.08 1.451-1.624 1.988-1.624h12.758c1.461 0 2.038.545 2.038 1.625v5.14l-.14-.268c-.874 0-1.897-1.089-3.01-1.089v-1.347h-.726v1.347c-2.772 0-4.948 1.089-4.948 4.06 0 1.708 2.176 3.968 4.948 3.968zm18.094-5.86c0 .628-.437 1.892-1.749 1.892l-1.162 4.144c.725.812 1.162 1.716 1.162 2.796 0 1.624-1.162 3.424-3.348 3.424-1.113 0-2.276-.997-2.425-2.344l-4.66 2.344c0 .267-.577 1.172-2.037 1.172-.577 0-1.451-.905-1.451-1.172 0-1.08.874-2.344 1.45-2.344 1.163 0 1.461 0 2.038 1.264l4.074-2.344c0-.092 0-.544.149-1.08l-8.735-4.152c-.675.452-1.113.452-1.4.452-2.048 0-3.061-1.08-3.061-2.16 0-1.799 1.013-2.971 3.06-2.971 1.401 0 1.839 1.08 2.425 1.707l3.488.812c0-1.347.874-1.892 2.037-1.892 1.023 0 2.186 1.08 2.186 2.344 0 .628-1.163 1.708-2.186 1.708-1.163 0-2.037-.628-2.037-1.708h-3.488s0 .628-.298 1.08l8.595 3.876c.437-.812 1.312-.988 2.276-.988h1.162l1.312-4.42c-.725-.36-.875-1.172-.875-1.44 0-1.08.875-1.891 1.75-1.891 1.311 0 1.748.812 1.748 1.892z" id="audit3" fill="#e86278" transform="translate(-709 -570)" />
@@ -46,7 +47,7 @@
               <!-- audit-svg-ico -->
               <h3 class="audit-tabs__title"> Управление недвижимостью</h3>
             </li>
-            <li class="audit-tabs__item js-tab" data-tab="3">
+            <li class="audit-tabs__item js-tab" data-tab="3" @click="showTab(3)" :class="{'is-active': tab3}">
               <!-- audit-svg-ico -->
               <svg class="audit-tabs__ico" width="30" height="33">
                 <path d="M970.989 598.804h4.633v9.202h-4.633zm8.487-4.144h4.68v13.346h-4.68zm8.213-3.6h4.817v16.946h-4.817zm9.864-7.217l-1.606-1.44-8.67 7.938-4.223-3.794-9.588 9.285-2.477-3.064 11.928-11.897 4.36 3.969 5.917-5.769-1.651-1.8 9.45-2.26zm-1.193 1.532h4.633v22.631h-4.633z" id="audit4" transform="translate(-971 -575)" fill="#e86278" />
@@ -56,7 +57,7 @@
             </li>
           </ul>
           <div class="audit__col">
-            <div class="audit-content js-content is-active" data-tab="0">
+            <div class="audit-content js-content" data-tab="0" :class="{'is-active': tab0}">
               <h2 class="audit-content__title title-secondary">АУДИТ</h2>
               <div class="audit-content__sub">Оценка состояния объекта, составление плана инвестиций и расчет доходности</div>
               <div class="audit-content__body">
@@ -76,7 +77,7 @@
                 </ul>
               </div>
             </div>
-            <div class="audit-content js-content" data-tab="1">
+            <div class="audit-content js-content" data-tab="1" :class="{'is-active': tab1}">
               <h2 class="audit-content__title title-secondary">АУДИТ2</h2>
               <div class="audit-content__sub">Оценка состояния объекта, составление плана инвестиций и расчет доходности</div>
               <div class="audit-content__body">
@@ -96,7 +97,7 @@
                 </ul>
               </div>
             </div>
-            <div class="audit-content js-content" data-tab="2">
+            <div class="audit-content js-content" data-tab="2" :class="{'is-active': tab2}">
               <h2 class="audit-content__title title-secondary">АУДИТ3</h2>
               <div class="audit-content__sub">Оценка состояния объекта, составление плана инвестиций и расчет доходности</div>
               <div class="audit-content__body">
@@ -116,7 +117,7 @@
                 </ul>
               </div>
             </div>
-            <div class="audit-content js-content" data-tab="3">
+            <div class="audit-content js-content" data-tab="3" :class="{'is-active': tab3}">
               <h2 class="audit-content__title title-secondary">АУДИТ4</h2>
               <div class="audit-content__sub">Оценка состояния объекта, составление плана инвестиций и расчет доходности</div>
               <div class="audit-content__body">
@@ -186,7 +187,7 @@
       </section>
       <!-- END work -->
       <!-- BEGIN about-order -->
-      <section class="about-order about-order__cooperation" style="background-image: url(img/about/about-form.jpg)">
+      <section class="about-order about-order__cooperation" style="background-image: url(../../static/about-form.jpg)">
         <div class="about-order__in inner">
           <div class="about-order__form form">
             <h2 class="title-secondary"> Задайте нам вопрос </h2>
@@ -219,6 +220,7 @@
           </div>
         </div>
       </section>
+        </div>
       <!-- END about-order -->
       <Footer/>
     </div>    
@@ -226,13 +228,53 @@
 <script>
 import Menu from "./shared/Menu";
 import Footer from "./shared/Footer";
-    export default {
-        components:{
-            Menu,
-            Footer
-        }
+export default {
+  components: {
+    Menu,
+    Footer
+  },
+  data(){
+    return{
+      tab0: true,
+      tab1: false,
+      tab2: false,
+      tab3: false
     }
+  },
+  methods:{
+    showTab(index){
+      switch(index){
+        case 0:
+          this.tab0= true,
+          this.tab1= false,
+          this.tab2= false,
+          this.tab3= false;
+          break;
+        case 1:
+          this.tab0= false,
+          this.tab1= true,
+          this.tab2= false,
+          this.tab3= false;
+          break;
+        case 2:
+          this.tab0= false,
+          this.tab1= false,
+          this.tab2= true,
+          this.tab3= false;
+          break;
+        case 3:
+          this.tab0= false,
+          this.tab1= false,
+          this.tab2= false,
+          this.tab3= true;
+          break;
+      }
+    }
+  }
+};
 </script>
 <style>
-
+.audit__col{
+  background-color: #fff;
+}
 </style>

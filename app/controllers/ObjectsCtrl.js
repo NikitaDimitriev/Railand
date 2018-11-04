@@ -1,7 +1,10 @@
 const Apertment = require('../models/Object');
+const ObjectId = require('mongodb').ObjectID;
 
 exports.createObject = createObject;
 exports.getObjects = getObjects;
+exports.getObjectsPagination = getObjectsPagination;
+exports.getObjectById= getObjectById;
 
 async function createObject(req, res){
     console.log(req.body);
@@ -30,6 +33,24 @@ async function getObjects(req, res){
     try {
         let objects = await Apertment.find({}).limit(5);
         res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectsPagination(req, res){
+    try {
+        let objects = await Apertment.find({}).limit(req.body.items);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectById(req, res) {
+    try {
+        let object = await Apertment.findOne({_id : ObjectId(req.params.id)});
+        res.json(object).end();
     } catch (error) {
         console.log(error);
     }

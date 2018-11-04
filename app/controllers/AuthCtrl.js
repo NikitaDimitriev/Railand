@@ -19,10 +19,7 @@ async function signUp(req, res) {
             let register = await User.create({
                 login: req.body.login,
                 email: email,
-                password: req.body.password,
-                username: req.body.firstName + ' ' + req.body.lastName,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName
+                password: req.body.password
             })
             res
                 .status(200)
@@ -60,6 +57,6 @@ async function getUserId(req, res){
         let currentUser = await User.findOne({ id: req.body.id});
         res.json(currentUser).end();
     } catch (error) {
-        
+        console.log(error);
     }
 }

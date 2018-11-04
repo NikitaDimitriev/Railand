@@ -1,6 +1,7 @@
 <template>
 <div class="about-page">
     <Menu></Menu>
+    <div class="out">
           <div class="about-bg">
         <!-- BEGIN promo -->
         <section class="promo" style="background-image: url(../../static/about-promo.jpg)">
@@ -65,7 +66,7 @@
         <div class="reviews__in inner">
           <h2 class="title-secondary"><span>честные отзывы о нас </span></h2>
           <div class="reviews-slider slider js-reviews-slider">
-            <div class="reviews-slider__item r-item">
+            <div class="reviews-slider__item r-item" v-if="item0">
               <div class="r-item__pic">
                 <img src="https://via.placeholder.com/160x160" width="160" height="160" alt="Семья Литвиненко">
               </div>
@@ -73,7 +74,7 @@
               <div class="r-item__txt"> Ребята. Спасибо!!! Все было очень хорошо. Радует оперативность, отзывчивость и опека! Отдельное спасибо Елизавете и Ольге, отдельно Александру и Вадиму. Думаю, стоит поработать над экскурсиями и маршрутами для знакомства с острово, не перегружайте гостей. У нас получилось все очень здорово. Обнимаем, до новых встреч! </div>
               <div class="r-item__date">0.02.2018</div>
             </div>
-            <div class="reviews-slider__item r-item">
+            <div class="reviews-slider__item r-item" v-if="item1">
               <div class="r-item__pic">
                 <img src="https://via.placeholder.com/160x160" width="160" height="160" alt="Семья Литвиненко">
               </div>
@@ -144,7 +145,7 @@
         </div>
       </section>
       <!-- END about-order -->
-
+    </div>
     <Footer></Footer>
 </div>
 </template>

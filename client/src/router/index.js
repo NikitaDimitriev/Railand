@@ -13,6 +13,7 @@ import Admin_Articles from '@/components/Admin_Articles'
 import Admin_Users from '@/components/Admin_Users'
 import Admin_Reviews from '@/components/Admin_Reviews'
 import ObjectSingle from '@/components/ObjectSingle'
+import Article from '@/components/Article'
 
 Vue.use(Router)
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/catalog/:id',
       name: 'ObjectSingle',
       component: ObjectSingle
+    },
+    {
+      path: '/live-in-phuket/:id',
+      name: 'Article',
+      component: Article
     }
   ]
 })

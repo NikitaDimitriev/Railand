@@ -10,8 +10,8 @@
                     <el-input placeholder="Price" v-model="price" clearable class="input_articles"></el-input>
                     <el-input placeholder="Badroom" v-model="badroom" clearable class="input_articles"></el-input>
                     <el-input placeholder="Bathroom" v-model="bathroom" clearable class="input_articles"></el-input>
-                    <el-input placeholder="Distanse to bitch" v-model="distanseToBitch" clearable class="input_articles"></el-input>
-                    <el-input placeholder="Distance to airoport" v-model="distanseToAiroport" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Distanсe to bitch" v-model="distanсeToBitch" clearable class="input_articles"></el-input>
+                    <el-input placeholder="Distance to airoport" v-model="distanсeToAiroport" clearable class="input_articles"></el-input>
                     <el-input placeholder="Area" v-model="area" clearable class="input_articles"></el-input>
                     <el-input placeholder="Land area" v-model="landArea" clearable class="input_articles"></el-input>
                     <el-input placeholder="Life area" v-model="lifeArea" clearable class="input_articles"></el-input>
@@ -44,8 +44,8 @@ export default {
       floor:'',
       badroom:'',
       bathroom:'',
-      distanseToBitch: '',
-      distanseToAiroport:'',
+      distanсeToBitch: '',
+      distanсeToAiroport:'',
       area:'',
       landArea:'',
       lifeArea:'',
@@ -65,8 +65,8 @@ export default {
             floor: this.floor,
             badroom: this.badroom,
             bathroom: this.bathroom,
-            distanseToBitch: this.distanseToBitch,
-            distanseToAiroport: this.distanseToAiroport,
+            distanсeToBitch: this.distanсeToBitch,
+            distanсeToAiroport: this.distanceToAiroport,
             area: this.area,
             landArea: this.landArea,
             lifeArea: this.lifeArea,

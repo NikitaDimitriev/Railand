@@ -8,7 +8,7 @@
           <!-- END header -->
 
           <!-- BEGIN catalog-promo -->
-          <section class="catalog-promo" style="background-image: url(img/about/about-form.jpg)">
+          <section class="catalog-promo" style="background-image: url(../../static/about-form.jpg)">
             <div class="catalog-promo__in inner">
               <h2 class="catalog-promo__title"> Более 700 обьектов в базе </h2>
               <div class="catalog-promo__subtitle"> Чтобы изучить весь каталог, потребуется примерно 48 часов. <br /> Оставьте заявку, и менеджер быстро подберет варианты. </div>
@@ -202,11 +202,11 @@
                     </div>
                   </div>
                   <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
-                    <li class="cards__item">
+                    <li class="cards__item" v-for="(object, index) of objects" :key="index">
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
+                            <div class="price price__wh"> {{object.price}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
@@ -217,608 +217,17 @@
                         </div>
                         <div class="card__content">
                           <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
+                            <h3 class="card__title"> {{object.title}} </h3>
                             <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
+                              <li> Жилая площадь: {{object.lifeArea}} </li>
+                              <li> Спален: {{object.badroom}} </li>
+                              <li> До пляжа: {{object.distanceToBitch}} </li>
                             </ul>
                           </div>
                           <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
+                            <div class="price price__bl"> {{object.price}} </div>
                             <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="cards__list cards__list-tab js-content is-active" data-tab="1">
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="cards__item">
-                      <div class="card">
-                        <div class="card__top">
-                          <div class="price-wrp">
-                            <div class="price price__wh"> $ 761 000 </div>
-                          </div>
-                          <div class="card__slider">
-                            <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
-                            </div>
-                          </div>
-                          <a class="card__link" href=""></a>
-                        </div>
-                        <div class="card__content">
-                          <div class="card__body">
-                            <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                            <ul class="card__l">
-                              <li> Жилая площадь: от 200 м2 </li>
-                              <li> Спален: 2 </li>
-                              <li> До пляжа: 600 м </li>
-                            </ul>
-                          </div>
-                          <div class="card__footer">
-                            <div class="price price__bl"> $ 761 000 </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <span>Смотреть</span>
+                              <router-link :to="`/catalog/${object._id}`">Смотреть</router-link>
                             </button>
                           </div>
                         </div>
@@ -866,6 +275,30 @@ export default {
   components: {
     Menu,
     Footer
-  }
+  },
+  data() {
+    return {
+      page: 1,
+      items: 10,
+      objects:[]
+    };
+  },
+  methods: {
+    getObjects() {
+      let data = {
+        page: this.page,
+        items: this.items
+      };
+      this.$axios
+        .get("http://localhost:3000/api/get-objects-pagination", data)
+        .then(response => {
+          this.objects = response.data;
+          console.log(response);
+        });
+    }
+  },
+  mounted() {
+    this.getObjects();
+  },
 };
 </script>
