@@ -88,7 +88,6 @@
               </div>
             </li>
           </ul>
-          <div class="aitem__price">$ 95 000</div>
         </div>
       </div>
 
@@ -107,8 +106,8 @@
       <div class="order-form">
         <div class="order-form__top">
           <div class="order-tabs">
-            <button type="button" class="order-tabs__btn js-order-tab-link is-active" data-tab="0"><span>Покупка</span></button>
-            <button type="button" class="order-tabs__btn js-order-tab-link" data-tab="1"><span>Аренда</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder0}" data-tab="0" @click="tabOrder0 = true, tabOrder1 = false"><span>Покупка</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder1}" data-tab="1" @click="tabOrder0 = false, tabOrder1 = true"><span>Аренда</span></button>
           </div>
         </div>
         <div class="order-form__body js-order-tab-content is-active" data-tab="0">
@@ -453,7 +452,9 @@ export default {
     return {
       objects:{},
       tab0: true,
-      tab1: false
+      tab1: false,
+      tabOrder0: true,
+      tabOrder1: false
     };
   },
   mounted() {

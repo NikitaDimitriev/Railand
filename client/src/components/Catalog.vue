@@ -26,8 +26,8 @@
                   <span> каталог Объектов на </span>
                 </h2>
                 <div class="cards__tab-links tab-links">
-                  <button type="button" class="tab-links__item js-tab is-active" data-tab="0"><span>продажу</span></button>
-                  <button type="button" class="tab-links__item js-tab" data-tab="1"><span>Аренду</span></button>
+                  <button type="button" class="tab-links__item js-tab" data-tab="0" :class="{'is-active': tab0}" @click="tab0 = true, tab1=false"><span>продажу</span></button>
+                  <button type="button" class="tab-links__item js-tab" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true" ><span>Аренду</span></button>
                 </div>
               </div>
               <!-- BEGIN cards-main -->
@@ -280,7 +280,9 @@ export default {
     return {
       page: 1,
       items: 10,
-      objects:[]
+      objects:[],
+      tab0: true,
+      tab1: false
     };
   },
   methods: {
