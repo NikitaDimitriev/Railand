@@ -1,5 +1,5 @@
 <template>
-    <div class="cooperation">
+    <div class="cooperation-page">
         <Menu/>
         <div class="out">
         <section class="cooperation" style="background-image: url(../../static/cooperation.jpg)">

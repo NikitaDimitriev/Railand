@@ -2,6 +2,7 @@ const User = require('../models/User');
 
 exports.signUp = signUp;
 exports.logIn = logIn;
+exports.getUserId = getUserId;
 
 async function signUp(req, res) {
     console.log(req.body);

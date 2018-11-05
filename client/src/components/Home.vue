@@ -68,8 +68,8 @@
         <div class="apartments__in inner">
           <h2 class="title-primary title-primary__left"><span>Топ Объектов на </span></h2>
           <div class="apartments__tab-links tab-links">
-            <button type="button" class="tab-links__item js-tab-apartments-link is-active" data-tab="0"><span>продажу</span></button>
-            <button type="button" class="tab-links__item js-tab-apartments-link" data-tab="1"><span>Аренду</span></button>
+            <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab0}" data-tab="0" @click="tab0 = true, tab1=false"><span>продажу</span></button>
+            <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true"><span>Аренду</span></button>
           </div>
           <ul class="alist js-tab-apartments-content is-active" data-tab="0" v-for="(object, index) of objects" :key="index">
             <li class="alist__item">
@@ -451,7 +451,9 @@ export default {
   },
   data() {
     return {
-      objects:{}
+      objects:{},
+      tab0: true,
+      tab1: false
     };
   },
   mounted() {

@@ -23,8 +23,8 @@
                 </div>
               </div>
             </div>
-            <router-link :to='`/live-in-phuket/${article.id}`' >
-              <div class="rubs-list__item">
+              <div class="rubs-list__item" v-for="(article, index) of articles" :key="index">
+                <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">
                   <div class="n-item__top">
                     <img src="https://via.placeholder.com/350x180" width="350" height="180" alt="">
@@ -41,8 +41,8 @@
                     </a>
                   </div>
                 </div>
+                </router-link>
               </div>
-            </router-link>
             <div class="rubs-list__footer catalog-page">
               <div class="catalog-page__navigation">
                 <span class="catalog-page__first catalog-page__current">1</span>
@@ -69,17 +69,29 @@
     </div>
 </template>
 <script>
-import Menu from './shared/Menu';
+import Menu from "./shared/Menu";
 import Footer from "./shared/Footer";
 export default {
-    components:{
-        Menu,
-        Footer
-    },
-    data(){
-      return{
-        articles:[]
-      }
+  components: {
+    Menu,
+    Footer
+  },
+  data() {
+    return {
+      articles: []
+    };
+  },
+  mounted() {
+    this.getArticles();
+  },
+  methods: {
+    getArticles() {
+      this.$axios
+        .get("http://localhost:3000/api/get-all-articles")
+        .then(response => {
+          this.articles = response.data;
+        });
     }
-}
+  }
+};
 </script>
