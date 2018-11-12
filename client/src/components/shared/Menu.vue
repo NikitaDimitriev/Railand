@@ -44,10 +44,13 @@
                   <li class="pselect__item">&#8364; eur</li>
                 </ul>
               </div>
-              <div class="form-links">
+              <div class="form-links" v-if="!user">
                 <a href="#" class="form-links__item" @click="toggleModalRegistration()">Регистрация</a>
                 <div class="form-links__separator">|</div>
                 <a href="#" class="form-links__item" @click="toggleModalLogin()">Войти</a>
+              </div>
+              <div class="form-links" v-if="user">
+                <router-link to="/personal-area" class="form-links__item">{{user.login}}</router-link>
               </div>
             </div>
           </div>
@@ -252,11 +255,12 @@ export default {
       password:'',
       passwordCheck:'',
       loginEmail: '',
-      loginPassword: ''
+      loginPassword: '',
+      user: {}
     };
   },
   mounted(){
-    console.log(this.$parent);
+    this.getUserId();
   },
   methods: {
     toogleSlectTelehone() {
@@ -283,8 +287,8 @@ export default {
         }
         this.$axios.post('http://localhost:3000/api/sign-up-user', data).then(response=>{
           this.showRegistrationModal = !this.showRegistrationModal;
-          localStorage.setItem('auth', response.data.auth);
-          localStorage.setItem('id', response.data.id);
+          localStorage.setItem('auth', true);
+          localStorage.setItem('id', response.data._id);
           console.log(response);
         })
       }
@@ -296,8 +300,18 @@ export default {
       }
       this.$axios.post('http://localhost:3000/api/log-in-user', data).then(response=>{
           this.showLoginModal = !this.showLoginModal;
+          console.log(response.data);
+          localStorage.setItem('auth', true);
+          localStorage.setItem('id', response.data._id);
+        })
+    },
+    getUserId(){
+      if(localStorage.getItem('id')){
+        this.$axios.get('http://localhost:3000/api/get-current-user',{id: localStorage.getItem('id')}).then(response=>{
+          this.user= response.data;
           console.log(response);
         })
+      }
     }
   }
 };

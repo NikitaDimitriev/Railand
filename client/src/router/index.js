@@ -14,6 +14,7 @@ import Admin_Users from '@/components/Admin_Users'
 import Admin_Reviews from '@/components/Admin_Reviews'
 import ObjectSingle from '@/components/ObjectSingle'
 import Article from '@/components/Article'
+import Personal_Area from '@/components/Personal_Area'
 
 Vue.use(Router)
 
@@ -88,6 +89,11 @@ export default new Router({
       path: '/live-in-phuket/:id',
       name: 'Article',
       component: Article
+    },
+    {
+      path: '/personal-area',
+      name: 'Personal_Area',
+      component: Personal_Area
     }
   ]
 })

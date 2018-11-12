@@ -12,12 +12,7 @@ export default {
       currentUserId: localStorage.getItem("id") || null,
       user: {}
     }
-  },
-  mounted() {
-    this.$axios.get('http://localhost:3000/api/get-current-user', {id: this.currentUserId}).then(response=>{
-      this.user = response.data;
-    })
-  },
+  }
 }
 </script>
 
