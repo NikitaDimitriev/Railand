@@ -255,6 +255,9 @@ export default {
       loginPassword: ''
     };
   },
+  mounted(){
+    console.log(this.$parent);
+  },
   methods: {
     toogleSlectTelehone() {
       this.isActiveTselect = !this.isActiveTselect;
