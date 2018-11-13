@@ -66,29 +66,29 @@
 
       <div class="apartments">
         <div class="apartments__in inner">
-          <!-- <h2 class="title-primary title-primary__left"><span>Топ Объектов на </span></h2>
+          <h2 class="title-primary title-primary__left"><span>Топ Объектов на </span></h2>
           <div class="apartments__tab-links tab-links">
             <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab0}" data-tab="0" @click="tab0 = true, tab1=false"><span>продажу</span></button>
             <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true"><span>Аренду</span></button>
           </div>
-          <ul class="alist is-active" data-tab="0" v-for="(object, index) of objects" :key="index">
+          <ul class="alist is-active" data-tab="0" v-for="(object, index) of [1, 2, 3, 4, 5]" :key="index">
             <li class="alist__item">
               <div class="aitem">
                 <div class="aitem__pic">
                   <img src="../../static/1.jpg" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
-                  <div class="aitem__title"> {{object.title}} </div>
+                  <div class="aitem__title"> {{object.title || "Апартаменты с видом на море в Ката"}} </div>
                   <ul class="aitem__list">
-                    <li class="aitem__list-item">Жилая площадь: {{object.lifeArea}}</li>
-                    <li class="aitem__list-item">Спален: {{object.rooms}}</li>
-                    <li class="aitem__list-item">До пляжа: {{object.distanceToBitch}}</li>
+                    <li class="aitem__list-item">Жилая площадь: {{object.lifeArea || "от 200 м2"}}</li>
+                    <li class="aitem__list-item">Спален: {{object.rooms || "2"}}</li>
+                    <li class="aitem__list-item">До пляжа: {{object.distanceToBitch || "600m"}}</li>
                   </ul>
                 </div>
               </div>
             </li>
-          </ul> -->
-          <ul class=" cards__list cards__list-col4">
+          </ul> 
+          <!-- <ul class=" cards__list cards__list-col4">
               <li class="cards__item" v-for="(i, index) of [1, 2, 3, 4, 5]" :key="index">
                 <div class="card">
                   <div class="card__top">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </li>
-            </ul>
+            </ul> -->
         </div>
       </div>
 
