@@ -14,7 +14,7 @@
             <div class="rubs__item ">Здоровье и красота</div>
           </div>
           <div class="magazine__list rubs-list">
-            <div class="rubs-list__item rubs-list__item_x2">
+           <router-link :to='`/live-in-phuket/13`' style="cursor: pointer"> <div class="rubs-list__item rubs-list__item_x2">
               <div class="nlarge-item" style="background-image: url(https://via.placeholder.com/730x430)">
                 <div class="nlarge-item__content">
                   <div class="nlarge-item__date">23 апреля 2018</div>
@@ -22,7 +22,7 @@
                   <div class="nlarge-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему <br /> потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
                 </div>
               </div>
-            </div>
+            </div></router-link>
               <div class="rubs-list__item" v-for="(article, index) of articles" :key="index">
                 <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">
