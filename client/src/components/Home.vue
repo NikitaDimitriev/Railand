@@ -436,7 +436,7 @@ export default {
   },
   methods: {
     getObjects(){
-      this.$axios.get('http://localhost:3000/api/get-objects').then(response=>{
+      this.$axios.get('https://railand-front.herokuapp.com/api/get-objects').then(response=>{
         this.objects = response.data;
       })
     }

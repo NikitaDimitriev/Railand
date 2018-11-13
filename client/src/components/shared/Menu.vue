@@ -285,7 +285,7 @@ export default {
           email: this.email,
           password: this.password
         }
-        this.$axios.post('http://localhost:3000/api/sign-up-user', data).then(response=>{
+        this.$axios.post('https://railand-front.herokuapp.com/api/sign-up-user', data).then(response=>{
           this.showRegistrationModal = !this.showRegistrationModal;
           localStorage.setItem('auth', true);
           localStorage.setItem('id', response.data._id);
@@ -300,7 +300,7 @@ export default {
         email: this.loginEmail,
         password: this.loginPassword
       }
-      this.$axios.post('http://localhost:3000/api/log-in-user', data).then(response=>{
+      this.$axios.post('https://railand-front.herokuapp.com/api/log-in-user', data).then(response=>{
           this.showLoginModal = !this.showLoginModal;
           console.log(response.data);
           localStorage.setItem('auth', true);
@@ -313,7 +313,7 @@ export default {
       if(localStorage.getItem('auth') === "true"){
         let id= localStorage.getItem('id');
         console.log(id);
-        this.$axios.get(`http://localhost:3000/api/get-current-user/${id}`).then(response=>{
+        this.$axios.get(`https://railand-front.herokuapp.com/api/get-current-user/${id}`).then(response=>{
           this.user= response.data;
           console.log(response);
         })
