@@ -11,7 +11,7 @@ const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/RailandDB";
+var url = "mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb";
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -19,14 +19,14 @@ MongoClient.connect(url, function(err, db) {
   db.close();
 });
 
-const db = process.env.MONGODB_ADDON_URI || 'mongodb://localhost:27017/RailandDB';
-mongoose.connect(db, function(err, db) {
-	if (err) {
-		console.log("error:", err);
-	} else {
-  		console.log("Connected correctly to database", db.port);
-  	}
-});
+// const db = process.env.MONGODB_ADDON_URI || 'mongodb://localhost:27017/RailandDB';
+// mongoose.connect(db, function(err, db) {
+// 	if (err) {
+// 		console.log("error:", err);
+// 	} else {
+//   		console.log("Connected correctly to database", db.port);
+//   	}
+// });
 
 const port = process.env.PORT || 3000;
 
@@ -47,7 +47,7 @@ app.use(async (req, res, next) => {
 
 app.post('/api/sign-up-user', AuthCtrl.signUp);
 app.post('/api/log-in-user', AuthCtrl.logIn);
-app.get('/api/get-current-user', AuthCtrl.getUserId);
+app.get('/api/get-current-user/:id', AuthCtrl.getUserId);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);

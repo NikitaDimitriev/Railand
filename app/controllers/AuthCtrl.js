@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const ObjectId = require('mongodb').ObjectID;
 
 exports.signUp = signUp;
 exports.logIn = logIn;
@@ -53,9 +54,9 @@ async function logIn(req, res) {
 }
 
 async function getUserId(req, res){
-    console.log(req.body.id);
     try {
-        let currentUser = await User.findOne({ id: req.body.id});
+        let currentUser = await User.findOne({ _id: ObjectId(req.params.id)});
+        console.log(currentUser);
         res.json(currentUser).end();
     } catch (error) {
         console.log(error);

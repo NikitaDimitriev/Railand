@@ -32,7 +32,6 @@ async function createObject(req, res){
 async function getObjects(req, res){
     try {
         let objects = await Apertment.find({}).limit(5);
-        console.log(objects);
         res.json(objects).end();
     } catch (error) {
         console.log(error);

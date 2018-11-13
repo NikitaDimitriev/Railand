@@ -3,14 +3,14 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import Slick from 'vue-slick';
 import * as VueGoogleMaps from "vue2-google-maps";
 import axios from 'axios';
+import VueCarousel from 'vue-carousel';
 
 
 Vue.config.productionTip = false
+Vue.use(VueCarousel);
 Vue.use(Element);
-Vue.use(Slick);
 Vue.prototype.$axios = axios
 Vue.use(VueGoogleMaps, {
   load: {

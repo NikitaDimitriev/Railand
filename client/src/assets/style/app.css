@@ -2771,10 +2771,6 @@ img {
     margin: 40px 0 0
 }
 
-.reviews-slider__item {
-    max-width: 710px
-}
-
 .reviews-slider .slick-arrow {
     width: 65px;
     position: absolute;

@@ -7,12 +7,12 @@
             <h1 class="main__title">Аренда и продажа <br> недвижимости на Пхукете</h1>
             <div class="main__subtitle">Первое русское агентство недвижимости на Пхукете.</div>
             <div class="main__buttons-wrap">
-              <button type="button" class="main__btn btn">
+             <router-link to="/catalog"> <button type="button" class="main__btn btn">
                 <span>Покупка</span>
-              </button>
-              <button type="button" class="main__btn btn">
+              </button></router-link>
+              <router-link to="/catalog"><button type="button" class="main__btn btn">
                 <span>Aренда</span>
-              </button>
+              </button></router-link>
             </div>
           </div>
         </div>
@@ -66,16 +66,16 @@
 
       <div class="apartments">
         <div class="apartments__in inner">
-          <h2 class="title-primary title-primary__left"><span>Топ Объектов на </span></h2>
+          <!-- <h2 class="title-primary title-primary__left"><span>Топ Объектов на </span></h2>
           <div class="apartments__tab-links tab-links">
             <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab0}" data-tab="0" @click="tab0 = true, tab1=false"><span>продажу</span></button>
             <button type="button" class="tab-links__item js-tab-apartments-link" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true"><span>Аренду</span></button>
           </div>
-          <ul class="alist js-tab-apartments-content is-active" data-tab="0" v-for="(object, index) of objects" :key="index">
+          <ul class="alist is-active" data-tab="0" v-for="(object, index) of objects" :key="index">
             <li class="alist__item">
               <div class="aitem">
                 <div class="aitem__pic">
-                  <img src="https://via.placeholder.com/255x300" width="255" height="300" alt="">
+                  <img src="../../static/1.jpg" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
                   <div class="aitem__title"> {{object.title}} </div>
@@ -87,7 +87,40 @@
                 </div>
               </div>
             </li>
-          </ul>
+          </ul> -->
+          <ul class=" cards__list cards__list-col4">
+              <li class="cards__item" v-for="(i, index) of [1, 2, 3, 4, 5]" :key="index">
+                <div class="card">
+                  <div class="card__top">
+                    <div class="price-wrp">
+                      <div class="price price__wh"> $ 761 000 </div>
+                    </div>
+                    <div class="card__slider">
+                      <div class="card__slider-item">
+                        <img src="../../static/1.jpg" alt="аппартамены" />
+                      </div>
+                    </div>
+                    <a class="card__link" href=""></a>
+                  </div>
+                  <div class="card__content">
+                    <div class="card__body">
+                      <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
+                      <ul class="card__l">
+                        <li> Жилая площадь: от 200 м2 </li>
+                        <li> Спален: 2 </li>
+                        <li> До пляжа: 600 м </li>
+                      </ul>
+                    </div>
+                    <div class="card__footer">
+                      <div class="price price__bl"> $ 761 000 </div>
+                      <button type="button" class="card__btn btn btn_primary">
+                        <span>Смотреть</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
         </div>
       </div>
 
@@ -366,12 +399,12 @@
           </div>
         </li>
       </ul>
-      <a href="#" class="news__btn btn">
+      <router-link to="/journal" class="news__btn btn">
         <span>Жизнь на Пхукете <svg class="icon icon-arr">
             <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>
         </span>
-      </a>
+      </router-link>
     </div>
   </div>
   <Footer></Footer>

@@ -45,9 +45,9 @@
                 </ul>
               </div>
               <div class="form-links" v-if="!user">
-                <a href="#" class="form-links__item" @click="toggleModalRegistration()">Регистрация</a>
+                <a style="cursor: pointer" class="form-links__item" @click="toggleModalRegistration()">Регистрация</a>
                 <div class="form-links__separator">|</div>
-                <a href="#" class="form-links__item" @click="toggleModalLogin()">Войти</a>
+                <a style="cursor: pointer" class="form-links__item" @click="toggleModalLogin()">Войти</a>
               </div>
               <div class="form-links" v-if="user">
                 <router-link to="/personal-area" class="form-links__item">{{user.login}}</router-link>
@@ -59,7 +59,7 @@
               <nav class="nav">
                 <router-link to="/" class="nav__link">Главная</router-link>
                 <router-link to="/catalog" class="nav__link">недвижимость</router-link>
-                <router-link to="/cooperation" class="nav__link">Владельцам</router-link>
+                <!-- <router-link to="/cooperation" class="nav__link">Владельцам</router-link> -->
                 <router-link to="/live-in-phuket" class="nav__link">жизнь на Пхукете</router-link>
               </nav>
             </div>
@@ -256,7 +256,7 @@ export default {
       passwordCheck:'',
       loginEmail: '',
       loginPassword: '',
-      user: {}
+      user: false
     };
   },
   mounted(){
@@ -290,6 +290,8 @@ export default {
           localStorage.setItem('auth', true);
           localStorage.setItem('id', response.data._id);
           console.log(response);
+          this.getUserId();
+          this.$router.push("/personal-area");
         })
       }
     },
@@ -303,11 +305,15 @@ export default {
           console.log(response.data);
           localStorage.setItem('auth', true);
           localStorage.setItem('id', response.data._id);
+          this.getUserId();
+          this.$router.push("/personal-area");
         })
     },
     getUserId(){
-      if(localStorage.getItem('id')){
-        this.$axios.get('http://localhost:3000/api/get-current-user',{id: localStorage.getItem('id')}).then(response=>{
+      if(localStorage.getItem('auth') === "true"){
+        let id= localStorage.getItem('id');
+        console.log(id);
+        this.$axios.get(`http://localhost:3000/api/get-current-user/${id}`).then(response=>{
           this.user= response.data;
           console.log(response);
         })

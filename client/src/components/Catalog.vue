@@ -201,7 +201,7 @@
                       <a class="catalog-page__link" href="">50</a>
                     </div>
                   </div>
-                  <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+                  <!-- <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
                     <li class="cards__item" v-for="(object, index) of objects" :key="index">
                       <div class="card">
                         <div class="card__top">
@@ -233,7 +233,40 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
+                  <ul class=" cards__list cards__list-col4">
+              <li class="cards__item" v-for="(i, index) of [1, 2, 3, 4, 5]" :key="index">
+                <div class="card">
+                  <div class="card__top">
+                    <div class="price-wrp">
+                      <div class="price price__wh"> $ 761 000 </div>
+                    </div>
+                    <div class="card__slider">
+                      <div class="card__slider-item">
+                        <img src="../../static/1.jpg" alt="аппартамены" />
+                      </div>
+                    </div>
+                    <a class="card__link" href=""></a>
+                  </div>
+                  <div class="card__content">
+                    <div class="card__body">
+                      <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
+                      <ul class="card__l">
+                        <li> Жилая площадь: от 200 м2 </li>
+                        <li> Спален: 2 </li>
+                        <li> До пляжа: 600 м </li>
+                      </ul>
+                    </div>
+                    <div class="card__footer">
+                      <div class="price price__bl"> $ 761 000 </div>
+                      <button type="button" class="card__btn btn btn_primary">
+                        <router-link :to="`/catalog/456`">Смотреть</router-link>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
                   <div class="catalog-page">
                     <div class="catalog-page__navigation">
                       <span class="catalog-page__first catalog-page__current">1</span>
