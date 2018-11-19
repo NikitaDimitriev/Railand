@@ -261,6 +261,7 @@ export default {
   },
   mounted() {
     this.getUserId();
+    this.test();
   },
   methods: {
     toogleSlectTelehone() {
