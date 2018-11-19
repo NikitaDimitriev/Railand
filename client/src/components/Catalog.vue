@@ -347,7 +347,7 @@ export default {
         items: this.items
       };
       this.$axios
-        .get("http://localhost:3000/api/get-objects-pagination", data)
+        .get("https://railand-front.herokuapp.com/api/get-objects-pagination", data)
         .then(response => {
           this.objects = response.data;
           console.log(response);
