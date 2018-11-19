@@ -7,7 +7,7 @@ exports.getObjectsPagination = getObjectsPagination;
 exports.getObjectById= getObjectById;
 exports.test = test;
 
-function test (){
+function test (req, res){
     res.json("create").end();
 }
 
