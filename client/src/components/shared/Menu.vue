@@ -73,7 +73,7 @@
                <router-link to="/contact" class="nav__link">контакты</router-link>
               </nav>
               <button type="button" class="header__btn btn btn_primary">
-                <span>Заполнить заявку</span>
+                <a href="#order"><span>Заполнить заявку</span></a>
               </button>
             </div>
           </div>
@@ -277,6 +277,11 @@ export default {
     },
     toggleModalLogin() {
       this.showLoginModal = !this.showLoginModal;
+    },
+    test(){
+      this.$axios.get("https://railand-front.herokuapp.com/api/test-route").then(response=>{
+        console.log(response);
+      })
     },
     register() {
       if (this.password === this.passwordCheck) {

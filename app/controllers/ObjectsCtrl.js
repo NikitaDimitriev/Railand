@@ -5,6 +5,11 @@ exports.createObject = createObject;
 exports.getObjects = getObjects;
 exports.getObjectsPagination = getObjectsPagination;
 exports.getObjectById= getObjectById;
+exports.test = test;
+
+async function test (){
+    res.json("create").end();
+}
 
 async function createObject(req, res){
     console.log(req.body);

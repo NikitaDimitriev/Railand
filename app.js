@@ -49,6 +49,8 @@ app.post('/api/sign-up-user', AuthCtrl.signUp);
 app.post('/api/log-in-user', AuthCtrl.logIn);
 app.get('/api/get-current-user/:id', AuthCtrl.getUserId);
 
+app.get('/api/test-route', ObjectCtrl.test);
+
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
 app.get('/api/get-objects-pagination', ObjectCtrl.getObjectsPagination);

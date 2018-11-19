@@ -19,6 +19,7 @@ import Personal_Area from '@/components/Personal_Area'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
