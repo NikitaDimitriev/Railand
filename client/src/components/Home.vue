@@ -139,64 +139,71 @@
       <div class="order-form">
         <div class="order-form__top">
           <div class="order-tabs">
-            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder0}" data-tab="0" @click="tabOrder0 = true, tabOrder1 = false"><span>Покупка</span></button>
-            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder1}" data-tab="1" @click="tabOrder0 = false, tabOrder1 = true"><span>Аренда</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder0}" data-tab="0" @click="tabOrder0 = true, tabOrder1 = false, type='sales' "><span>Покупка</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder1}" data-tab="1" @click="tabOrder0 = false, tabOrder1 = true, type='rent' "><span>Аренда</span></button>
           </div>
         </div>
-        <div class="order-form__body js-order-tab-content is-active" data-tab="0">
+        <div class="order-form__body" data-tab="0" :class="{'is-active': tabOrder0}">
           <div class="order-form__left">
             <div class="order-options">
               <div class="order-options__row">
                 <div class="select-l">
-                  <select class="select-l__el">
-                    <option value selected>Расположение</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                  <select class="select-l__el" v-model="filter.location">
+                    <option value="all" selected>Расположение</option>
+                    <option value="bang-tao">BANG TAO</option>
+                    <option value="laguna">LAGUNA</option>
+                    <option value="nai-thon">NAI THON</option>
+                    <option value="maikhao">MAIKHAO</option>
+                    <option value="nai-harn">NAI HARN</option>
+                    <option value="rawai">RAWAI</option>
+                    <option value="surin">SURIN</option>
+                    <option value="kamala">KAMALA</option>
+                    <option value="patong">PATONG</option>
+                    <option value="kata">KATA</option>
+                    <option value="cape-yamu">CAPE YAMU</option>
                   </select>
                 </div>
                 <div class="select-l">
-                  <select class="select-l__el">
-                    <option value selected>Количество спален</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                  <select class="select-l__el" v-model="filter.rooms">
+                    <option value="all" selected>Количество спален</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4+">4+</option>
                   </select>
                 </div>
               </div>
               <div class="order-options__row order-options__row-justify">
                 <div class="checkbox checkbox_right">
-                  <input name="" id="apart" type="checkbox" class="checkbox__field">
+                  <input name="" id="apart" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.apartment">
                   <label for="apart" class="checkbox__label"><span class="checkbox__title">Апартаменты</span></label>
                 </div>
                 <div class="checkbox checkbox_right">
-                  <input name="" id="villa" type="checkbox" class="checkbox__field">
+                  <input name="" id="villa" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.villa">
                   <label for="villa" class="checkbox__label"><span class="checkbox__title">Вилла</span></label>
                 </div>
                 <div class="checkbox checkbox_right">
-                  <input name="" id="house" type="checkbox" class="checkbox__field">
+                  <input name="" id="house" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.house">
                   <label for="house" class="checkbox__label"><span class="checkbox__title">Дом</span></label>
                 </div>
                 <div class="checkbox checkbox_right">
-                  <input name="" id="region" type="checkbox" class="checkbox__field">
+                  <input name="" id="region" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.land">
                   <label for="region" class="checkbox__label"><span class="checkbox__title">Земельный участок</span></label>
                 </div>
               </div>
               <div class="order-options__row">
                 <div class="select-l">
-                  <select class="select-l__el">
-                    <option value selected>Цель</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                  <select class="select-l__el" v-model="filter.target">
+                    <option value="all">Цель</option>
+                    <option value="personal">Личное пользование</option>
+                    <option value="business">Инвестиции</option>
                   </select>
                 </div>
                 <div class="select-l">
-                  <select class="select-l__el">
-                    <option value selected>Статус объекта</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                  <select class="select-l__el" v-model="filter.statusOfObject">
+                    <option value="all">Статус объекта</option>
+                    <option value="building">Строительство</option>
+                    <option value="complete">Сдано в эксплуатацию</option>
                   </select>
                 </div>
               </div>
@@ -206,10 +213,10 @@
                     <h5 class="range-slider__title"> Стоимость: </h5>
                     <div class="range-slider__controls">
                       <div class="range-slider__col">
-                        <input type="text" class="range-slider__input js-from" placeholder="От $" />
+                        <input type="text" class="range-slider__input js-from" placeholder="От $" v-model="filter.priceBegin"/>
                       </div>
                       <div class="range-slider__col">
-                        <input type="text" placeholder="До $" class="range-slider__input js-to" />
+                        <input type="text" placeholder="До $" class="range-slider__input js-to" v-model="filter.priceEnd"/>
                       </div>
                     </div>
                     <div class="range-slider__output">
@@ -231,7 +238,7 @@
               </div>
               <div class="order-send__bottom">
                 <div class="order-send__bottom-in">
-                  <button type="submit" class="btn">
+                  <button type="submit" class="btn" @click="searchByFilter">
                     <span> Искать</span>
                   </button>
                   <button type="button" class="btn-close js-close">
@@ -255,25 +262,48 @@
             </div>
           </div>
         </div>
-        <div class="order-form__body js-order-tab-content" data-tab="1">
+        <div class="order-form__body " data-tab="1" :class="{'is-active': tabOrder1}">
           <div class="order-form__left">
             <div class="order-options">
               <div class="order-options__row">
                 <div class="select-l">
                   <select class="select-l__el">
-                    <option value selected>Расположение</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                    <option value="all" selected>Расположение</option>
+                    <option value="bang-tao">BANG TAO</option>
+                    <option value="laguna">LAGUNA</option>
+                    <option value="nai-thon">NAI THON</option>
+                    <option value="maikhao">MAIKHAO</option>
+                    <option value="nai-harn">NAI HARN</option>
+                    <option value="rawai">RAWAI</option>
+                    <option value="surin">SURIN</option>
+                    <option value="kamala">KAMALA</option>
+                    <option value="patong">PATONG</option>
+                    <option value="kata">KATA</option>
+                    <option value="cape-yamu">CAPE YAMU</option>
                   </select>
                 </div>
                 <div class="select-l">
                   <select class="select-l__el">
-                    <option value selected>Количество спален</option>
-                    <option value="Option 1">Option 1</option>
-                    <option value="Option 2">Option 2</option>
-                    <option value="Option 3">Option 3</option>
+                    <option value="all" selected>Количество спален</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4+">4+</option>
                   </select>
+                </div>
+              </div>
+              <div class="order-options__row order-options__row-justify">
+                <div class="checkbox checkbox_right">
+                  <input name="" id="apart" type="checkbox" class="checkbox__field">
+                  <label for="apart" class="checkbox__label"><span class="checkbox__title">Апартаменты</span></label>
+                </div>
+                <div class="checkbox checkbox_right">
+                  <input name="" id="villa" type="checkbox" class="checkbox__field">
+                  <label for="villa" class="checkbox__label"><span class="checkbox__title">Вилла</span></label>
+                </div>
+                <div class="checkbox checkbox_right">
+                  <input name="" id="house" type="checkbox" class="checkbox__field">
+                  <label for="house" class="checkbox__label"><span class="checkbox__title">Дом</span></label>
                 </div>
               </div>
               <div class="order-options__row">
@@ -424,21 +454,41 @@ export default {
   },
   data() {
     return {
-      objects:{},
+      objects: {},
       tab0: true,
       tab1: false,
       tabOrder0: true,
-      tabOrder1: false
+      tabOrder1: false,
+      filter:{
+        type: "sales",
+        location: "all",
+        rooms: "all",
+        typeOfObject: {
+          apartment: false,
+          villa: false,
+          house: false,
+          land: false
+        },
+        target: "all",
+        statusOfObject: "all",
+        priceBegin: "",
+        priceEnd: ""
+      }
     };
   },
   mounted() {
     this.getObjects();
   },
   methods: {
-    getObjects(){
-      this.$axios.get('https://railand-front.herokuapp.com/api/get-objects').then(response=>{
-        this.objects = response.data;
-      })
+    getObjects() {
+      this.$axios
+        .get("https://railand-front.herokuapp.com/api/get-objects")
+        .then(response => {
+          this.objects = response.data;
+        });
+    },
+    searchByFilter(){
+      this.$router.push({path: '/catalog', query: { filter: this.filter}});
     }
   }
 };

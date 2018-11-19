@@ -73,7 +73,8 @@ export default new Router({
     {
       path: '/catalog',
       name: 'Catalog',
-      component: Catalog
+      component: Catalog,
+      props: true
     },
     {
       path: '/live-in-phuket',

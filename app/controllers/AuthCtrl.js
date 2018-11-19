@@ -7,6 +7,7 @@ exports.getUserId = getUserId;
 
 async function signUp(req, res) {
     console.log(req.body);
+    console.log(req.get("host"));
     try {
         let email = req.body.email;
         let currentUser = await User.findOne({ email: email })
@@ -34,6 +35,8 @@ async function signUp(req, res) {
 }
 
 async function logIn(req, res) {
+    console.log(req.body);
+    console.log(req.get("host"));
     try {
         let email = req.body.email;
         let currentUser = await User.findOne({ email: email, password: req.body.password });
