@@ -303,7 +303,7 @@ export default {
         password: this.loginPassword
       };
       this.$axios
-        .post("http://localhost:3000/api/log-in-user", data)
+        .post("https://railand-front.herokuapp.com/api/log-in-user", data)
         .then(response => {
           this.showLoginModal = !this.showLoginModal;
           console.log(response.data);
@@ -317,7 +317,7 @@ export default {
       if (localStorage.getItem("auth") === "true") {
         let id = localStorage.getItem("id");
         this.$axios
-          .get(`http://localhost:3000/api/get-current-user/${id}`)
+          .get(`https://railand-front.herokuapp.com/api/get-current-user/${id}`)
           .then(response => {
             this.user = response.data;
             console.log(response);

@@ -11,22 +11,22 @@ const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
 var MongoClient = require('mongodb').MongoClient;
-// var url = "mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb";
+var url = "mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb";
 
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-//   db.close();
-// });
-
-const db = process.env.MONGODB_ADDON_URI || 'mongodb://localhost:27017/RailandDB';
-mongoose.connect(db, function(err, db) {
-	if (err) {
-		console.log("error:", err);
-	} else {
-  		console.log("Connected correctly to database", db.port);
-  	}
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
 });
+
+// const db = process.env.MONGODB_ADDON_URI || 'mongodb://localhost:27017/RailandDB';
+// mongoose.connect(db, function(err, db) {
+// 	if (err) {
+// 		console.log("error:", err);
+// 	} else {
+//   		console.log("Connected correctly to database", db.port);
+//   	}
+// });
 
 const port = process.env.PORT || 3000;
 
