@@ -127,7 +127,7 @@
     <div class="popup popup_login" id="popup_login" style="display:block">
         <div class="cross popup-close js-close" @click="toggleModalLogin()"></div>
         <div class="popup__in">
-          <h2 class="popup__title">Введите email и пароль указанные <br> при регистрации</h2>
+          <h2 class="popup__title">Введите email и пароль указанные при регистрации</h2>
           <form>
             <!-- BEGIN popup-form -->
             <div class="popup__form">
