@@ -319,7 +319,7 @@ export default {
   data() {
     return {
       page: 1,
-      items: 10,
+      perPage: 10,
       objects: [],
       tab0: true,
       tab1: false,
@@ -344,7 +344,7 @@ export default {
     getObjects() {
       let data = {
         page: this.page,
-        items: this.items
+        items: this.perPage
       };
       this.$axios
         .get("https://railand-front.herokuapp.com/api/get-objects-pagination", data)

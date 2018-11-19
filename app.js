@@ -11,23 +11,24 @@ const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://nikitadimitriev:QTurshaZJZ77DvQb@railanddb-5m7ys.mongodb.net/test?retryWrites=true";
+// var url = process.env.MONGODB_URI || "mongodb://localhost:27017/RailandDB";
+// console.log(url);
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  console.log("Database created!");
-});
-
-// const db = process.env.MONGODB_ADDON_URI || 'mongodb://localhost:27017/RailandDB';
-// mongoose.connect(db, function(err, db) {
-// 	if (err) {
-// 		console.log("error:", err);
-// 	} else {
-//   		console.log("Connected correctly to database", db.port);
-//   	}
+// MongoClient.connect(url, function(err, db) {
+//   if (err) throw err;
+//   console.log("Database created!");
 // });
 
-const port = process.env.PORT || 3000;
+const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
+mongoose.connect(db, function(err, db) {
+	if (err) {
+		console.log("error:", err);
+	} else {
+  		console.log("Connected correctly to database", db.port);
+  	}
+});
+
+const port = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));

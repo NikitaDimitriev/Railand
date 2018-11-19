@@ -8,6 +8,7 @@ exports.getObjectById= getObjectById;
 exports.test = test;
 
 function test (req, res){
+    console.log("apartment here");
     res.json("create").end();
 }
 
