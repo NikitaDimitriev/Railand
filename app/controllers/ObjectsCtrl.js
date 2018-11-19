@@ -45,7 +45,7 @@ async function getObjects(req, res){
 
 async function getObjectsPagination(req, res){
     try {
-        let objects = await Apertment.find({}).limit(req.body.items);
+        let objects = await Apertment.find({}).limit(req.body.perPage).skip(req.body.perPage * req.body.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
