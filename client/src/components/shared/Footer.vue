@@ -6,10 +6,10 @@
           <ul class="fnav">
             <li class="fnav__item"><a href="#" class="fnav__link">Покупка</a></li>
             <li class="fnav__item"><a href="#" class="fnav__link">Аренда</a></li>
-            <li class="fnav__item"><a href="#" class="fnav__link">Недвижимость</a></li>
-            <li class="fnav__item"><a href="#" class="fnav__link">Жизнь на Пхукете</a></li>
-            <li class="fnav__item"><a href="#" class="fnav__link">О Нас</a></li>
-            <li class="fnav__item"><a href="#" class="fnav__link">Контакты</a></li>
+            <li class="fnav__item"><router-link to="/catalog" class="fnav__link">Недвижимость</router-link></li>
+            <li class="fnav__item"><router-link to="/live-in-phuket" class="fnav__link">Жизнь на Пхукете</router-link></li>
+            <li class="fnav__item"><router-link to="/about" class="fnav__link">О Нас</router-link></li>
+            <li class="fnav__item"><router-link to="/contact" class="fnav__link">Контакты</router-link></li>
           </ul>
         </div>
         <div class="footer__top-right">
@@ -37,10 +37,10 @@
         </div>
         <div class="footer__bottom-right">
           <ul class="social">
-            <li class="social__item"><a href="#" class="social__link social__fb"></a></li>
-            <li class="social__item"><a href="#" class="social__link social__tw"></a></li>
+            <li class="social__item"><a href="https://www.facebook.com/railand.property.international/" target="_blank" class="social__link social__fb"></a></li>
+            <li class="social__item"><a href="https://twitter.com/RailandProperty" target="_blank" class="social__link social__tw"></a></li>
             <li class="social__item"><a href="#" class="social__link social__vk"></a></li>
-            <li class="social__item"><a href="#" class="social__link social__insta"></a></li>
+            <li class="social__item"><a href="https://www.instagram.com/railand_property_international/" target="_blank" class="social__link social__insta"></a></li>
           </ul>
         </div>
       </div>
