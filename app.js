@@ -10,15 +10,6 @@ const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
-var MongoClient = require('mongodb').MongoClient;
-// var url = process.env.MONGODB_URI || "mongodb://localhost:27017/RailandDB";
-// console.log(url);
-
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-// });
-
 const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
 mongoose.connect(db, function(err, db) {
 	if (err) {

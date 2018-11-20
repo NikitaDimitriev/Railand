@@ -1,5 +1,9 @@
 const Apertment = require('../models/Object');
 const ObjectId = require('mongodb').ObjectID;
+const fs = require('fs').readFileSync;
+const file = require('./text.txt');
+let newDataJson = JSON.parse(fs.readFileSync(file, 'utf-8'));
+console.log(newDataJson);
 
 exports.createObject = createObject;
 exports.getObjects = getObjects;

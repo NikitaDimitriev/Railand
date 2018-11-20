@@ -133,7 +133,7 @@
       </button>
     </router-link>
 
-    <div class="order">
+    <div class="order" id="order">
     <div class="order__in inner">
       <h2 class="title-primary"><span>Заявка на подбор недвижимости</span></h2>
       <div class="order-form">

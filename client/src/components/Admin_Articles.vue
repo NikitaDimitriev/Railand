@@ -27,7 +27,7 @@
                     comment: this.commentOfArticle
                 }
                 console.log(data);
-                this.$axios.post('http://localhost:3000/api/create-article', data).then(response=>{
+                this.$axios.post('https://railand-front.herokuapp.com/api/create-article', data).then(response=>{
                     console.log(response);
                 })
             }
