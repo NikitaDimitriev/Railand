@@ -13,7 +13,7 @@ const file = require('./dump.json');
 let newDataJson = JSON.parse(JSON.stringify(file));
 console.log(newDataJson.property[0]['Main photo']);
 let dump = newDataJson.property;
-create(dump);
+// create(dump);
 async function create(dump) {
     try {
         for (let i = 0; i < dump.length; i++) {

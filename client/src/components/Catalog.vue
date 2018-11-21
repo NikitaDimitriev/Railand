@@ -358,7 +358,7 @@ export default {
         items: this.perPage
       };
       this.$axios
-        .get(`https://railand-front.herokuapp.com/get-objects-pagination/${this.page}/${this.perPage}`)
+        .get(`https://railand-front.herokuapp.com/api/get-objects-pagination/${this.page}/${this.perPage}`)
         .then(response => {
           this.objects = response.data;
           console.log(this.objects);
