@@ -10,6 +10,12 @@ const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
+// const fs = require("fs").readFileSync;
+// const file = require('./dump.json');
+// // let json = fs.readFileSync(file);
+// let newDataJson = JSON.parse(JSON.stringify(file));
+// console.log(newDataJson.property[0]['Main photo']);
+
 const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
 mongoose.connect(db, function(err, db) {
 	if (err) {
@@ -19,7 +25,7 @@ mongoose.connect(db, function(err, db) {
   	}
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
@@ -40,12 +46,12 @@ app.post('/api/sign-up-user', AuthCtrl.signUp);
 app.post('/api/log-in-user', AuthCtrl.logIn);
 app.get('/api/get-current-user/:id', AuthCtrl.getUserId);
 
-app.get('/api/test-route', ObjectCtrl.test);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
-app.get('/api/get-objects-pagination', ObjectCtrl.getObjectsPagination);
+app.get('/api/get-objects-pagination/:page/:perPage', ObjectCtrl.getObjectsPagination);
 app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById);
+app.get('/api/get-info', ObjectCtrl.getInfo);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);

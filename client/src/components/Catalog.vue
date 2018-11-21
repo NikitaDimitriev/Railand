@@ -192,39 +192,37 @@
                 <div class="cards__body">
                   <div class="catalog-page">
                     <div class="catalog-page__navigation">
-                      <span class="catalog-page__first catalog-page__current">1</span>
-                      <a href="" class="catalog-page__link">2</a>
-                      <a href="" class="catalog-page__link">3</a>
-                      <a href="" class="catalog-page__link">4</a>
-                      <a href="" class="catalog-page__link">5</a>
-                      <a class="catalog-page__link catalog-page__line" href="">-</a>
-                      <a href="" class="catalog-page__link">25</a>
-                      <a class="catalog-page__link catalog-page__next" href="">>></a>
+                      <div v-for="(item, index) of pages" :key="index">
+                        <span class="catalog-page__link" :style="{'cursor': 'pointer'}"  @click="page = item, getObjects()">
+                          {{index +1}}
+                        </span>
+                      </div>
+                      <span class="catalog-page__link catalog-page__next" @click="page++">>></span>
                     </div>
                     <div class="catalog-page__navigation pagecount">
                       <span class="catalog-page__title">Показывать по: </span>
-                      <span class="catalog-page__first catalog-page__current">10</span>
-                      <a class="catalog-page__link" href="">20</a>
-                      <a class="catalog-page__link" href="">50</a>
+                      <span class="catalog-page__first" @click="perPage = 10, getObjects(), setPages()">10</span>
+                      <span class="catalog-page__link" @click="perPage = 20, getObjects(), setPages()">20</span>
+                      <span class="catalog-page__link" @click="perPage = 50, getObjects(), setPages()">50</span>
                     </div>
                   </div>
-                  <!-- <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+                  <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
                     <li class="cards__item" v-for="(object, index) of objects" :key="index">
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh"> {{object.price}} </div>
+                            <div class="price price__wh">$ {{object.price}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
-                              <img src="https://via.placeholder.com/350x220" alt="аппартамены" />
+                              <img src="../../static/1.jpg" alt="аппартамены" />
                             </div>
                           </div>
                           <a class="card__link" href=""></a>
                         </div>
                         <div class="card__content">
                           <div class="card__body">
-                            <h3 class="card__title"> {{object.title}} </h3>
+                            <h3 class="card__title"> {{object.titleRu}} </h3>
                             <ul class="card__l">
                               <li> Жилая площадь: {{object.lifeArea}} </li>
                               <li> Спален: {{object.badroom}} </li>
@@ -233,15 +231,17 @@
                           </div>
                           <div class="card__footer">
                             <div class="price price__bl"> {{object.price}} </div>
-                            <button type="button" class="card__btn btn btn_primary">
-                              <router-link :to="`/catalog/${object._id}`">Смотреть</router-link>
-                            </button>
+                            <router-link :to="`/catalog/${object._id}`">
+                              <button type="button" class="card__btn btn btn_primary">
+                                Смотреть
+                              </button>
+                            </router-link>
                           </div>
                         </div>
                       </div>
                     </li>
-                  </ul> -->
-                  <ul class=" cards__list cards__list-col4">
+                  </ul>
+                  <!-- <ul class=" cards__list cards__list-col4">
               <li class="cards__item" v-for="(i, index) of [1, 2, 3, 4, 5]" :key="index">
                 <div class="card">
                   <div class="card__top">
@@ -273,8 +273,8 @@
                   </div>
                 </div>
               </li>
-            </ul>
-                  <div class="catalog-page">
+            </ul> -->
+                  <!-- <div class="catalog-page">
                     <div class="catalog-page__navigation">
                       <span class="catalog-page__first catalog-page__current">1</span>
                       <a href="" class="catalog-page__link">2</a>
@@ -292,7 +292,7 @@
                       <a class="catalog-page__link" href="">50</a>
                       <a class="catalog-page__link" href="">100</a>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- END cards-body -->
               </div>
@@ -320,7 +320,9 @@ export default {
     return {
       page: 1,
       perPage: 10,
+      pages: 0,
       objects: [],
+      info:{},
       tab0: true,
       tab1: false,
       filter: {
@@ -341,25 +343,36 @@ export default {
     };
   },
   methods: {
+    setPages(){
+      this.pages = Math.floor(this.info / this.perPage);
+    },
+    getInfo(){
+      this.$axios.get("https://railand-front.herokuapp.com/api/get-info").then(response=>{
+        this.info = response.data;
+        this.setPages();
+      })
+    },
     getObjects() {
       let data = {
         page: this.page,
         items: this.perPage
       };
       this.$axios
-        .get("https://railand-front.herokuapp.com/api/get-objects-pagination", data)
+        .get(`https://railand-front.herokuapp.com/get-objects-pagination/${this.page}/${this.perPage}`)
         .then(response => {
           this.objects = response.data;
-          console.log(response);
+          console.log(this.objects);
         });
     },
     setFilter() {
-      this.filter = this.$route.query.filter;
+      if (!!this.$route.query.filter) {
+        this.filter = this.$route.query.filter;
+      }
     }
   },
   mounted() {
     this.setFilter();
-    console.log(this.$route.query);
+    this.getInfo();
     this.getObjects();
   }
 };

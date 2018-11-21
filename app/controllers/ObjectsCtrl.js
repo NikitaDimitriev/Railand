@@ -1,19 +1,58 @@
 const Apertment = require('../models/Object');
 const ObjectId = require('mongodb').ObjectID;
-const fs = require('fs').readFileSync;
-const file = require('./text.txt');
-let newDataJson = JSON.parse(fs.readFileSync(file, 'utf-8'));
-console.log(newDataJson);
 
 exports.createObject = createObject;
 exports.getObjects = getObjects;
 exports.getObjectsPagination = getObjectsPagination;
 exports.getObjectById= getObjectById;
-exports.test = test;
+exports.getInfo = getInfo;
 
-function test (req, res){
-    console.log("apartment here");
-    res.json("create").end();
+const fs = require("fs").readFileSync;
+const file = require('./dump.json');
+// let json = fs.readFileSync(file);
+let newDataJson = JSON.parse(JSON.stringify(file));
+console.log(newDataJson.property[0]['Main photo']);
+let dump = newDataJson.property;
+create(dump);
+async function create(dump) {
+    try {
+        for (let i = 0; i < dump.length; i++) {
+            const data = dump[i];
+            await Apertment.create({
+                titleRu: data["Title Ru"],
+                titleEn: data["Title En"],
+                price: 60000 * Math.floor(Math.random() * 10) + 1,
+                area: data["Built-up area"],
+                distanceToBitch: data["Distance to the beach"],
+                rooms: data["Number of bedrooms"],
+                distanceToAiroport: data["Distance to the airport"],
+                badroom: data["Number of bedrooms"],
+                bathroom: data["Number of bathrooms"],
+                landArea: data["Built-up area"],
+                lifeArea: data["Indoor area"],
+                areaOfPool: data["Swimming pool size"],
+                floor: data["Number of storeys"],
+                descriptionRu: data["Description Ru"],
+                descriptionEn: data["Description En"],
+                locationId: data["Location"],
+                typeOfObject: data["Property type"],
+                address: data["Address"]
+            });
+            console.log("create");
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getInfo(req, res) {
+    try {
+        let info = await Apertment.find({}).count();
+        console.log(info);
+        res.json(info).end();
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 async function createObject(req, res){
@@ -41,7 +80,7 @@ async function createObject(req, res){
 
 async function getObjects(req, res){
     try {
-        let objects = await Apertment.find({}).limit(5);
+        let objects = await Apertment.find({}).limit(5).skip(50);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -50,7 +89,13 @@ async function getObjects(req, res){
 
 async function getObjectsPagination(req, res){
     try {
-        let objects = await Apertment.find({}).limit(req.body.perPage).skip(req.body.perPage * req.body.page);
+        let paginationData = {
+            page: parseInt(req.params.page),
+            perPage: parseInt(req.params.perPage)
+        }
+        console.log(paginationData);
+        let objects = await Apertment.find({}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        // console.log(objects);
         res.json(objects).end();
     } catch (error) {
         console.log(error);

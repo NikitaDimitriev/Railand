@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 module.exports = mongoose.model('Object', {
-    title: {type: String, require: true},
+    titleRu: {type: String, require: true},
+    titleEn: {type: String, require: true},
     price: {type: String, require: true},
     area: {type: String, require: true},
     distanceToBitch: {type: String},
@@ -13,8 +14,13 @@ module.exports = mongoose.model('Object', {
     lifeArea:{type:String},
     areaOfPool:{type:String},
     rooms: {type: String},
-    location:{
+    coordinat:{
         x:String,
         y:String
-    }
+    },
+    location:{type:String},
+    descriptionRu:{type:String},
+    descriptionEn:{type:String},
+    typeOfObject:{type:String},
+    address: {type:String}
 })
