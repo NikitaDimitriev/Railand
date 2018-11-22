@@ -6,11 +6,11 @@
             <div class="header__top-left">
               <div class="tselect" :class="isActiveTselect ? 'is-active': null">
                 <div class="tselect__current">
-                  <a href="tel:+ 66 81 737 1687" class="tselect__current-link">+ 66 81 737 1687</a>
-                  <i class="tselect__arrow" @click="toogleSlectTelehone()"></i>
+                  <a href="tel:+ 66 84 845 5111" class="tselect__current-link">+ 66 84 845 5111</a>
+                  <i class="tselect__arrow"></i>
                 </div>
                 <ul class="tselect__list">
-                  <li class="tselect__item">+ 66 81 737 1687</li>
+                  <li class="tselect__item">+ 66 84 845 5111</li>
                   <li class="tselect__item">+ 66 81 737 1687</li>
                 </ul>
               </div>
@@ -261,8 +261,6 @@ export default {
   },
   mounted() {
     this.getUserId();
-    this.test();
-    // if(this.$router.)
   },
   methods: {
     toogleSlectTelehone() {
@@ -279,11 +277,6 @@ export default {
     },
     toggleModalLogin() {
       this.showLoginModal = !this.showLoginModal;
-    },
-    test(){
-      this.$axios.get("https://railand-front.herokuapp.com/api/test-route").then(response=>{
-        console.log(response);
-      })
     },
     register() {
       if (this.password === this.passwordCheck) {

@@ -3,9 +3,11 @@ const ObjectId = require('mongodb').ObjectID;
 
 exports.createObject = createObject;
 exports.getObjects = getObjects;
-exports.getObjectsPagination = getObjectsPagination;
+exports.getObjectsPaginationSales = getObjectsPaginationSales;
+exports.getObjectsPaginationRent = getObjectsPaginationRent;
 exports.getObjectById = getObjectById;
-exports.getInfo = getInfo;
+exports.getInfoSales = getInfoSales;
+exports.getInfoRent = getInfoRent;
 
 const fs = require("fs");
 const request = require('request');
@@ -14,16 +16,34 @@ const file = require('./dump.json');
 let newDataJson = JSON.parse(JSON.stringify(file));
 console.log(newDataJson.property[0]['Main photo']);
 let dump = newDataJson.property;
-// create(dump);
+create(dump);
 async function create(dump) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
-
+                let priceSales = '';
+                let currencySales = '';
+                let priceRent = '';
+                let currencyRent = '';
+                let property = [];
+                let sales = false;
+                let rent = false
+            if(data["PRICES"]){
+                for (let j = 0; j < data["PRICES"].length; j++) {
+                    if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
+                        priceSales = data["PRICES"][j].price;
+                        currencySales = data["PRICES"][j].currency;
+                        sales = true
+                    }else if(data["PRICES"][j].rental_type === 'rent' && data["PRICES"][j].price > 0){
+                        priceRent = data["PRICES"][j].price;
+                        currencyRent = data["PRICES"][j].currency;
+                        rent = true
+                    }
+                }
+            }
             await Apertment.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
-                price: 60000 * Math.floor(Math.random() * 10) + 1,
                 area: data["Built-up area"],
                 distanceToBitch: data["Distance to the beach"],
                 rooms: data["Number of bedrooms"],
@@ -40,7 +60,15 @@ async function create(dump) {
                 typeOfObject: data["Property type"],
                 address: data["Address"],
                 mainPhoto: data["Main photo"],
-                photo:[]
+                sales: sales,
+                rent: rent,
+                photo:[],
+                price:{
+                    priceSales: priceSales,
+                    currencySales: currencySales,
+                    priceRent: priceRent,
+                    currencyRent: currencyRent
+                }
             });
             console.log("create");
         }
@@ -76,9 +104,19 @@ function makeid() {
     return text;
 }
 
-async function getInfo(req, res) {
+async function getInfoSales(req, res) {
     try {
-        let info = await Apertment.find({}).count();
+        let info = await Apertment.find({sales: true}).countDocuments();
+        console.log(info);
+        res.json(info).end();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getInfoRent(req, res) {
+    try {
+        let info = await Apertment.find({rent: true}).countDocuments();
         console.log(info);
         res.json(info).end();
     } catch (error) {
@@ -118,15 +156,28 @@ async function getObjects(req, res) {
     }
 }
 
-async function getObjectsPagination(req, res) {
+async function getObjectsPaginationSales(req, res) {
     try {
         let paginationData = {
             page: parseInt(req.params.page),
             perPage: parseInt(req.params.perPage)
         }
         console.log(paginationData);
-        let objects = await Apertment.find({}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
-        // console.log(objects);
+        let objects = await Apertment.find({sales: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectsPaginationRent(req, res) {
+    try {
+        let paginationData = {
+            page: parseInt(req.params.page),
+            perPage: parseInt(req.params.perPage)
+        }
+        console.log(paginationData);
+        let objects = await Apertment.find({rent: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);

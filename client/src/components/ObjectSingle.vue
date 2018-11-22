@@ -16,9 +16,9 @@
                   <div class="options__body">
                     <dl class="options-list">
                       <dt class="options-list__title">Цена объекта:</dt>
-                      <dd class="options-list__description">$ {{object.price}}</dd>
+                      <dd class="options-list__description">$ {{object.price.priceSales}}</dd>
                       <dt class="options-list__title">Цена за м2</dt>
-                      <dd class="options-list__description">от {{Math.floor(object.price / object.area)}} $</dd>
+                      <dd class="options-list__description">от {{Math.floor(object.priceSales / object.area)}} $</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>

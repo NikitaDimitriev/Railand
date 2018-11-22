@@ -43,9 +43,11 @@ app.get('/api/get-current-user/:id', AuthCtrl.getUserId);
 
 app.post('/api/create-object', ObjectCtrl.createObject);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
-app.get('/api/get-objects-pagination/:page/:perPage', ObjectCtrl.getObjectsPagination);
+app.get('/api/get-objects-pagination-sales/:page/:perPage', ObjectCtrl.getObjectsPaginationSales);
+app.get('/api/get-objects-pagination-rent/:page/:perPage', ObjectCtrl.getObjectsPaginationRent);
 app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById);
-app.get('/api/get-info', ObjectCtrl.getInfo);
+app.get('/api/get-info-sales', ObjectCtrl.getInfoSales);
+app.get('/api/get-info-rent', ObjectCtrl.getInfoRent);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);

@@ -76,7 +76,7 @@
             <li class="alist__item" v-for="(object, index) of objects" :key="index">
               <div class="aitem">
                 <div class="aitem__pic">
-                  <img src="../../static/1.jpg" width="255" height="300" alt="">
+                  <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
                   <div class="aitem__title"> {{object.titleRu || "Апартаменты с видом на море в Ката"}} </div>
