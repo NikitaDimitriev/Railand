@@ -4,20 +4,23 @@ const ObjectId = require('mongodb').ObjectID;
 exports.createObject = createObject;
 exports.getObjects = getObjects;
 exports.getObjectsPagination = getObjectsPagination;
-exports.getObjectById= getObjectById;
+exports.getObjectById = getObjectById;
 exports.getInfo = getInfo;
 
-const fs = require("fs").readFileSync;
+const fs = require("fs");
+const request = require('request');
 const file = require('./dump.json');
 // let json = fs.readFileSync(file);
 let newDataJson = JSON.parse(JSON.stringify(file));
 console.log(newDataJson.property[0]['Main photo']);
 let dump = newDataJson.property;
-// create(dump);
+create(dump);
 async function create(dump) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
+            // let imageUrl = getImage(data["Main photo"]);
+            // console.log(imageUrl);
             await Apertment.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
@@ -36,13 +39,41 @@ async function create(dump) {
                 descriptionEn: data["Description En"],
                 locationId: data["Location"],
                 typeOfObject: data["Property type"],
-                address: data["Address"]
+                address: data["Address"],
+                mainPhoto: data["Main photo"]
             });
             console.log("create");
         }
     } catch (error) {
         console.log(error)
     }
+}
+// getMainPhoto()
+async function getMainPhoto() {
+    try {
+        for (let i = 0; i < dump.length; i++) {
+            let image = dump[i]["Main photo"];
+            getImage(image);
+        }
+    } catch (error) {
+
+    }
+}
+
+function getImage(image) {
+        let url = makeid();
+        request.get("http://rl-property.ru/upload/" + image).pipe(fs.createWriteStream('./app/upload/' + url + '.jpg'));
+        return './app/upload/' + url + '.jpg';
+}
+
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }
 
 async function getInfo(req, res) {
@@ -55,10 +86,10 @@ async function getInfo(req, res) {
     }
 }
 
-async function createObject(req, res){
+async function createObject(req, res) {
     console.log(req.body);
     try {
-       let create = await Apertment.create({
+        let create = await Apertment.create({
             title: req.body.title,
             price: req.body.price,
             area: req.body.area,
@@ -78,7 +109,7 @@ async function createObject(req, res){
     }
 }
 
-async function getObjects(req, res){
+async function getObjects(req, res) {
     try {
         let objects = await Apertment.find({}).limit(5).skip(50);
         res.json(objects).end();
@@ -87,7 +118,7 @@ async function getObjects(req, res){
     }
 }
 
-async function getObjectsPagination(req, res){
+async function getObjectsPagination(req, res) {
     try {
         let paginationData = {
             page: parseInt(req.params.page),
@@ -104,7 +135,7 @@ async function getObjectsPagination(req, res){
 
 async function getObjectById(req, res) {
     try {
-        let object = await Apertment.findOne({_id : ObjectId(req.params.id)});
+        let object = await Apertment.findOne({ _id: ObjectId(req.params.id) });
         res.json(object).end();
     } catch (error) {
         console.log(error);

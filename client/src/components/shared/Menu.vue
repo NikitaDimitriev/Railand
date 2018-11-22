@@ -72,8 +72,8 @@
                <router-link to="/about" class="nav__link">О нас</router-link>
                <router-link to="/contact" class="nav__link">контакты</router-link>
               </nav>
-              <button type="button" class="header__btn btn btn_primary">
-                <a href="#order"><span>Заполнить заявку</span></a>
+              <button type="button" class="header__btn btn btn_primary" @click="scrollTo">
+                <a><span>Заполнить заявку</span></a>
               </button>
             </div>
           </div>
@@ -262,6 +262,7 @@ export default {
   mounted() {
     this.getUserId();
     this.test();
+    // if(this.$router.)
   },
   methods: {
     toogleSlectTelehone() {
@@ -329,7 +330,10 @@ export default {
             console.log(response);
           });
       }
-    }
+    },
+    scrollTo() {
+      this.$router.push({path: '/', query: { redirect: "sales"}})
+    },
   }
 };
 </script>

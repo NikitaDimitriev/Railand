@@ -480,6 +480,11 @@ export default {
   },
   mounted() {
     this.getObjects();
+    if(this.$route.query.redirect === "sales"){
+      console.log(this.$route.query.redirect === "sales");
+      var container = this.$el.querySelector("#order");
+      container.scrollTop = container.scrollHeight;
+    }
   },
   methods: {
     getObjects() {

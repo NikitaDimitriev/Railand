@@ -10,12 +10,6 @@ const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
-// const fs = require("fs").readFileSync;
-// const file = require('./dump.json');
-// // let json = fs.readFileSync(file);
-// let newDataJson = JSON.parse(JSON.stringify(file));
-// console.log(newDataJson.property[0]['Main photo']);
-
 const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
 mongoose.connect(db, function(err, db) {
 	if (err) {

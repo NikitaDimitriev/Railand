@@ -96,7 +96,8 @@ export default new Router({
       path: '/personal-area',
       name: 'Personal_Area',
       component: Personal_Area
-    }
+    },
+    { path: '/a', redirect: { name: 'Home' }}
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

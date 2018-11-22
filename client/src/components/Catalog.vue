@@ -215,7 +215,7 @@
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
-                              <img src="../../static/1.jpg" alt="аппартамены" />
+                              <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" alt="аппартамены" />
                             </div>
                           </div>
                           <a class="card__link" href=""></a>
@@ -347,7 +347,7 @@ export default {
       this.pages = Math.floor(this.info / this.perPage);
     },
     getInfo(){
-      this.$axios.get("https://railand-front.herokuapp.com/api/get-info").then(response=>{
+      this.$axios.get("http://localhost:8000/api/get-info").then(response=>{
         this.info = response.data;
         this.setPages();
       })
@@ -358,7 +358,7 @@ export default {
         items: this.perPage
       };
       this.$axios
-        .get(`https://railand-front.herokuapp.com/api/get-objects-pagination/${this.page}/${this.perPage}`)
+        .get(`http://localhost:8000/api/get-objects-pagination/${this.page}/${this.perPage}`)
         .then(response => {
           this.objects = response.data;
           console.log(this.objects);
