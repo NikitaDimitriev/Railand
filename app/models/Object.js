@@ -23,5 +23,6 @@ module.exports = mongoose.model('Object', {
     descriptionEn:{type:String},
     typeOfObject:{type:String},
     address: {type:String},
-    mainPhoto:{type:String}
+    mainPhoto:{type:String},
+    photo: {type: Array}
 })

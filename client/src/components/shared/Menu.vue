@@ -332,7 +332,7 @@ export default {
       }
     },
     scrollTo() {
-      this.$router.push({path: '/', query: { redirect: "sales"}})
+      this.$router.push({path: '/',hash:"#order"})
     },
   }
 };

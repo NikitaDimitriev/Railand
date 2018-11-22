@@ -374,6 +374,13 @@ export default {
     this.setFilter();
     this.getInfo();
     this.getObjects();
+    if(this.$route.query.to === "sales"){
+      this.tab0 = true,
+      this.tab1 = false
+    }else if(this.$route.query.to === "rent"){
+      this.tab0 = false,
+      this.tab1 = true
+    }
   }
 };
 </script>

@@ -14,13 +14,12 @@ const file = require('./dump.json');
 let newDataJson = JSON.parse(JSON.stringify(file));
 console.log(newDataJson.property[0]['Main photo']);
 let dump = newDataJson.property;
-create(dump);
+// create(dump);
 async function create(dump) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
-            // let imageUrl = getImage(data["Main photo"]);
-            // console.log(imageUrl);
+
             await Apertment.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
@@ -40,7 +39,8 @@ async function create(dump) {
                 locationId: data["Location"],
                 typeOfObject: data["Property type"],
                 address: data["Address"],
-                mainPhoto: data["Main photo"]
+                mainPhoto: data["Main photo"],
+                photo:[]
             });
             console.log("create");
         }
