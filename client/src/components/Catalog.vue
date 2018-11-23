@@ -193,7 +193,7 @@
                   <div class="catalog-page">
                     <div class="catalog-page__navigation">
                       <div v-for="(item, index) of pages" :key="index">
-                        <span class="catalog-page__link" :style="{'cursor': 'pointer'}"  @click="page = item, getObjects()">
+                        <span class="catalog-page__link" :style="{'cursor': 'pointer'}"  @click="page = item, getObjectsSales()">
                           {{index +1}}
                         </span>
                       </div>
@@ -201,9 +201,9 @@
                     </div>
                     <div class="catalog-page__navigation pagecount">
                       <span class="catalog-page__title">Показывать по: </span>
-                      <span class="catalog-page__first" @click="perPage = 10, getObjects(), setPages()">10</span>
-                      <span class="catalog-page__link" @click="perPage = 20, getObjects(), setPages()">20</span>
-                      <span class="catalog-page__link" @click="perPage = 50, getObjects(), setPages()">50</span>
+                      <span class="catalog-page__first" @click="perPage = 10, getObjectsSales(), setPages()">10</span>
+                      <span class="catalog-page__link" @click="perPage = 20, getObjectsSales(), setPages()">20</span>
+                      <span class="catalog-page__link" @click="perPage = 50, getObjectsSales(), setPages()">50</span>
                     </div>
                   </div>
                   <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
@@ -211,7 +211,7 @@
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object)}} {{getPrice(object) || "По запросу"}} </div>
+                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object) || "По запросу"}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
@@ -229,7 +229,7 @@
                             </ul>
                           </div>
                           <div class="card__footer">
-                            <div class="price price__bl"> {{getPrice(object)}} </div>
+                            <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div>
                             <router-link :to="`/catalog/${object._id}`">
                               <button type="button" class="card__btn btn btn_primary">
                                 Смотреть

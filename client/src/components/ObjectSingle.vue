@@ -57,26 +57,26 @@
               <!-- BEGIN slideshow -->
               <div class="slideshow">
                 <div class="slideshow__preview">
-                  <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" width="730" height="450" alt="">
+                  <img :src="mainPhoto || 'http://rl-property.ru/upload/'+this.object.mainPhoto" width="730" height="450" alt="">
                 </div>
-                <!-- <div class="slideshow__thumbs">
+                <div class="slideshow__thumbs">
                   <button type="button" class="slideshow__arrow-left">prev</button>
                   <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
-                    <div class="thumbs-list__item is-active ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
+                    <div class="thumbs-list__item " v-for="(photo, index) of 4" :key="index" :class="{'is-active' : activePhoto === index}" @click="clicked = true, setPhoto(index) ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[index]" width="160" height="100" alt="">
+                    </div>
+                    <!-- <div class="thumbs-list__item ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[1]" width="160" height="100" alt="">
                     </div>
                     <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[2]" width="160" height="100" alt="">
                     </div>
                     <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
-                    </div>
-                    <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
-                    </div>
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[3]" width="160" height="100" alt="">
+                    </div> -->
                   </div>
-                </div> -->
+                </div>
               </div>
               <!-- END slideshow -->
               <div class="columns">
@@ -162,7 +162,10 @@ export default {
   data(){
     return{
       object:{},
-      isShort: true
+      isShort: true,
+      activePhoto: 0,
+      clicked: false,
+      mainPhoto: ''
     }
   },
   mounted(){
@@ -176,6 +179,14 @@ export default {
             this.object = response.data;
             console.log(this.object);
           })
+      },
+      setPhoto(index){
+        this.activePhoto = index;
+        if(!this.clicked){
+          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.mainPhoto;
+        }else if(this.clicked){
+          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.photo[index];
+        }
       }
   }
 };

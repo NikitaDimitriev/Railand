@@ -2,7 +2,8 @@ const Apertment = require('../models/Object');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.createObject = createObject;
-exports.getObjects = getObjects;
+exports.getObjectsSales = getObjectsSales;
+exports.getObjectsRent = getObjectsRent;
 exports.getObjectsPaginationSales = getObjectsPaginationSales;
 exports.getObjectsPaginationRent = getObjectsPaginationRent;
 exports.getObjectById = getObjectById;
@@ -12,32 +13,44 @@ exports.getInfoRent = getInfoRent;
 const fs = require("fs");
 const request = require('request');
 const file = require('./dump.json');
+const filePhoto = require('./dumpPhoto.json');
 // let json = fs.readFileSync(file);
 let newDataJson = JSON.parse(JSON.stringify(file));
+let newDataJsonPhoto = JSON.parse(JSON.stringify(filePhoto));
 console.log(newDataJson.property[0]['Main photo']);
+console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
-create(dump);
-async function create(dump) {
+let dumpPhoto = newDataJsonPhoto.property;
+create(dump, dumpPhoto);
+async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
+            const dataPhoto = dumpPhoto[i];
                 let priceSales = '';
                 let currencySales = '';
                 let priceRent = '';
                 let currencyRent = '';
-                let property = [];
+                let photo = [];
                 let sales = false;
                 let rent = false;
             if(data["PRICES"]){
                 for (let j = 0; j < data["PRICES"].length; j++) {
                     if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
-                        priceSales = data["PRICES"][j].price;
+                        priceSales = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
                         currencySales = data["PRICES"][j].currency;
                         sales = true
                     }else if(data["PRICES"][j].rental_type === 'rent' && data["PRICES"][j].price > 0){
-                        priceRent = data["PRICES"][j].price;
+                        priceRent = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
                         currencyRent = data["PRICES"][j].currency;
                         rent = true
+                    }
+                }
+            };
+            if(dataPhoto.Photo.VALUE){
+                for (let j = 0; j < dataPhoto.Photo.VALUE.length; j++) {
+                    if(dataPhoto.Photo.VALUE[j].includes("iblock")){
+                        photo.push(dataPhoto.Photo.VALUE[j])
                     }
                 }
             }
@@ -66,11 +79,11 @@ async function create(dump) {
                 mainPhoto: data["Main photo"],
                 sales: sales,
                 rent: rent,
-                // photo:photo,
+                photo:photo,
                 price:{
-                    priceSales: priceSales,
+                    priceSales: formatPrice(priceSales),
                     currencySales: currencySales,
-                    priceRent: priceRent,
+                    priceRent: formatPrice(priceRent),
                     currencyRent: currencyRent
                 }
             });
@@ -85,6 +98,11 @@ async function getPhotoArray(data){
     if(data["Photo"]){
         return data["Photo"]["VALUE"];
     }
+}
+
+function formatPrice(value) {
+    let val = (value/1).toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").slice(0, -1).slice(0, -2)
 }
 async function getMainPhoto() {
     try {
@@ -156,9 +174,18 @@ async function createObject(req, res) {
     }
 }
 
-async function getObjects(req, res) {
+async function getObjectsSales(req, res) {
     try {
-        let objects = await Apertment.find({}).limit(5).skip(50);
+        let objects = await Apertment.find({sales:true}).limit(5).skip(50);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectsRent(req, res) {
+    try {
+        let objects = await Apertment.find({rent:true}).limit(5).skip(10);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
