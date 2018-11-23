@@ -27,7 +27,7 @@ async function create(dump) {
                 let currencyRent = '';
                 let property = [];
                 let sales = false;
-                let rent = false
+                let rent = false;
             if(data["PRICES"]){
                 for (let j = 0; j < data["PRICES"].length; j++) {
                     if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
@@ -41,19 +41,23 @@ async function create(dump) {
                     }
                 }
             }
+            let area = data["Built-up area"] || '';
+            let indoor = data["Indoor area"] || '';
+            let toBitch = data["Distance to the beach"] || '';
+            let toAiroport = data["Distance to the airport"] || '';
             await Apertment.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
-                area: data["Built-up area"],
-                distanceToBitch: data["Distance to the beach"],
-                rooms: data["Number of bedrooms"],
-                distanceToAiroport: data["Distance to the airport"],
-                badroom: data["Number of bedrooms"],
-                bathroom: data["Number of bathrooms"],
-                landArea: data["Built-up area"],
-                lifeArea: data["Indoor area"],
+                area: area.substring(0, area.indexOf(".")),
+                distanceToBitch: toBitch.substring(0, toBitch.indexOf(".")+2),
+                rooms: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
+                distanceToAiroport: toAiroport.substring(0, toAiroport.indexOf(".")),
+                badroom: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
+                bathroom: data["Number of bathrooms"].substring(0, data["Number of bathrooms"].indexOf(".")),
+                landArea: area.substring(0, area.indexOf(".")),
+                lifeArea: indoor.substring(0, indoor.indexOf(".")),
                 areaOfPool: data["Swimming pool size"],
-                floor: data["Number of storeys"],
+                floor: data["Number of storeys"].substring(0, data["Number of storeys"].indexOf(".")),
                 descriptionRu: data["Description Ru"],
                 descriptionEn: data["Description En"],
                 locationId: data["Location"],
@@ -62,7 +66,7 @@ async function create(dump) {
                 mainPhoto: data["Main photo"],
                 sales: sales,
                 rent: rent,
-                photo:[],
+                // photo:photo,
                 price:{
                     priceSales: priceSales,
                     currencySales: currencySales,
@@ -77,6 +81,11 @@ async function create(dump) {
     }
 }
 // getMainPhoto()
+async function getPhotoArray(data){
+    if(data["Photo"]){
+        return data["Photo"]["VALUE"];
+    }
+}
 async function getMainPhoto() {
     try {
         for (let i = 0; i < dump.length; i++) {

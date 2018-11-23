@@ -94,7 +94,7 @@
       </div>
 
     <router-link to="/catalog">
-      <button type="button" class="apartments__btn btn">
+      <button type="button" class="apartments__btn btn" style="margin: 90px 190px">
         <span>Показать весь список <svg class="icon icon-arr">
             <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>

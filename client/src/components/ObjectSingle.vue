@@ -16,9 +16,9 @@
                   <div class="options__body">
                     <dl class="options-list">
                       <dt class="options-list__title">Цена объекта:</dt>
-                      <dd class="options-list__description">$ {{object.price.priceSales}}</dd>
+                      <dd class="options-list__description">&#3647; {{object.price.priceSales}}</dd>
                       <dt class="options-list__title">Цена за м2</dt>
-                      <dd class="options-list__description">от {{Math.floor(object.priceSales / object.area)}} $</dd>
+                      <dd class="options-list__description">от {{Math.floor(parseInt(object.priceSales) / object.area)}} &#3647;</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
@@ -57,9 +57,9 @@
               <!-- BEGIN slideshow -->
               <div class="slideshow">
                 <div class="slideshow__preview">
-                  <img src="../../static/1.jpg" width="730" height="450" alt="">
+                  <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" width="730" height="450" alt="">
                 </div>
-                <div class="slideshow__thumbs">
+                <!-- <div class="slideshow__thumbs">
                   <button type="button" class="slideshow__arrow-left">prev</button>
                   <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
@@ -76,7 +76,7 @@
                       <img src="../../static/1.jpg" width="160" height="100" alt="">
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- END slideshow -->
               <div class="columns">
@@ -85,35 +85,35 @@
                     <div class="info-object__in">
                       <div class="info-object__row">
                         <div class="info-object__name">Этажность</div>
-                        <div class="info-object__val">{{object.floor.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.floor}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Количество спален</div>
-                        <div class="info-object__val">{{object.badroom.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.badroom}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Количество ванных комнат</div>
-                        <div class="info-object__val">{{object.bathroom.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.bathroom}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Растояние до пляжа</div>
-                        <div class="info-object__val">{{object.distanceToBitch.substring(0, 4)}}km</div>
+                        <div class="info-object__val">{{object.distanceToBitch}}km</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Растояние до аэропорта</div>
-                        <div class="info-object__val">{{object.distanceToAiroport.substring(0, 5)}}km</div>
+                        <div class="info-object__val">{{object.distanceToAiroport}}km</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Общая площадь</div>
-                        <div class="info-object__val">{{object.area.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.area}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Площать земельного участка</div>
-                        <div class="info-object__val">{{object.landArea.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.landArea}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Жилая площадь</div>
-                        <div class="info-object__val">{{object.lifeArea.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.lifeArea}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Размеры басейна</div>

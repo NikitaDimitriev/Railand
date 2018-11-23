@@ -14,15 +14,33 @@
             <div class="rubs__item ">Здоровье и красота</div>
           </div>
           <div class="magazine__list rubs-list">
-           <router-link :to='`/live-in-phuket/13`' style="cursor: pointer"> <div class="rubs-list__item rubs-list__item_x2">
-              <div class="nlarge-item" style="background-image: url(https://via.placeholder.com/730x430)">
+            <div class="rubs-list__item rubs-list__item_x2">
+              <div class="nlarge-item" style="background-image: url(https://reallifephuket.com/wp-content/uploads/2018/10/Screenshot_4-Custom.jpg)">
                 <div class="nlarge-item__content">
                   <div class="nlarge-item__date">23 апреля 2018</div>
-                  <div class="nlarge-item__title">Эволюционируя вместе <br />с Пхукетом</div>
-                  <div class="nlarge-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему <br /> потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
+                  <div class="nlarge-item__title">750 лет гастрономической традиции</div>
+                  <div class="nlarge-item__txt"> Более 750 лет истории, почти 25000 членов и представительство в 80 странах – все это делает французскую гильдию гастрономов и рестораторов La Chaine de Rotisseurs силой, которую сложно не учитывать, даже если вы живете на Пхукете. Однако в чем смысл этого объединения и почему его деятельность актуальна и для нас с вами? </div>
                 </div>
               </div>
-            </div></router-link>
+            </div>
+            <div class="rubs-list__item ">
+              <div class="nlarge-item" style="background-image: url(https://reallifephuket.com/wp-content/uploads/2018/11/KRSR.jpg)">
+                <div class="nlarge-item__content">
+                  <div class="nlarge-item__date">23 апреля 2018</div>
+                  <div class="nlarge-item__title">Kata Rocks Superyacht Rendezvous возвращается</div>
+                  <div class="nlarge-item__txt"> Kata Rocks Superyacht Rendezvous (KRSR) возвращается на Пхукет, и с 6 по 9 декабря 2018 года владельцы самых роскошных яхт в мире будут вновь наслаждаться пхукетским гостеприимством.</div>
+                </div>
+              </div>
+            </div>
+            <div class="rubs-list__item">
+              <div class="nlarge-item" style="background-image: url(https://reallifephuket.com/wp-content/uploads/2018/10/RPM-Condo-6-Custom.jpg)">
+                <div class="nlarge-item__content">
+                  <div class="nlarge-item__date">23 апреля 2018</div>
+                  <div class="nlarge-item__title">Престижная жизнь в RPM</div>
+                  <div class="nlarge-item__txt"> Если вы ищете недвижимость на Пхукете, то причин обратить внимание на Royal Phuket Marina целое множество.</div>
+                </div>
+              </div>
+            </div>
               <div class="rubs-list__item" v-for="(article, index) of articles" :key="index">
                 <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">
