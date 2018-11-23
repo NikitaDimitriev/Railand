@@ -211,7 +211,7 @@
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object)}} {{getPrice(object)}} </div>
+                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object)}} {{getPrice(object) || "По запросу"}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
@@ -312,7 +312,7 @@ export default {
       };
       this.$axios
         .get(
-          `https://railand-front.herokuapp.com/get-objects-pagination-sales/${this.page}/${this.perPage}`
+          `https://railand-front.herokuapp.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;
