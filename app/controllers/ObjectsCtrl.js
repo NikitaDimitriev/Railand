@@ -21,7 +21,7 @@ console.log(newDataJson.property[0]['Main photo']);
 console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
 let dumpPhoto = newDataJsonPhoto.property;
-create(dump, dumpPhoto);
+// create(dump, dumpPhoto);
 async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
