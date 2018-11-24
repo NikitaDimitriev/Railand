@@ -44,14 +44,14 @@
                   <li class="pselect__item">&#8364; eur</li>
                 </ul>
               </div>
-              <div class="form-links" v-if="!user">
+              <!-- <div class="form-links" v-if="!user">
                 <a style="cursor: pointer" class="form-links__item" @click="toggleModalRegistration()">Регистрация</a>
                 <div class="form-links__separator">|</div>
                 <a style="cursor: pointer" class="form-links__item" @click="toggleModalLogin()">Войти</a>
               </div>
               <div class="form-links" v-if="user">
                 <router-link to="/personal-area" class="form-links__item">{{user.login}}</router-link>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="header__bottom">
