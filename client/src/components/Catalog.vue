@@ -211,7 +211,7 @@
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object) || "По запросу"}} </div>
+                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : ' '}} {{getPrice(object) || "По запросу"}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
@@ -229,7 +229,7 @@
                             </ul>
                           </div>
                           <div class="card__footer">
-                            <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div>
+                            <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
                             <router-link :to="`/catalog/${object._id}`">
                               <button type="button" class="card__btn btn btn_primary">
                                 Смотреть
@@ -345,14 +345,14 @@ export default {
       if (this.tab0) {
         return object.price.priceSales;
       } else {
-        return object.price.priceRent;
+        return "По запросу";
       }
     },
     getPriceCurrency(object) {
       if (this.tab0) {
         return object.price.currencySales;
       } else {
-        return object.price.currencyRent;
+        return " ";
       }
     }
   },

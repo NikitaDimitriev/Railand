@@ -113,7 +113,7 @@
       </div>
 
     <router-link to="/catalog">
-      <button type="button" class="apartments__btn btn" style="margin: 90px 190px">
+      <button type="button" class="apartments__btn btn" style="margin: 90px 45%">
         <span>Показать весь список <svg class="icon icon-arr">
             <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>
@@ -242,11 +242,7 @@
             <div class="order-form__title">
               <span>48 ЧАСОВ</span> <br /> НА ИЗУЧЕНИЕ ВСЕГО <br /> КАТАЛОГА </div>
             <div class="order-form__txt">
-              <p> Потратьте минуту и опишите критерии "той самой" идеальной виллы, которую Вы хотите арендовать или
-                купить. В течении 20 минут с Вами свяжется менеджер и приступит к подбору вариантов. Для этого
-                заполните поля формы и укажите свои предпочтения. </p>
-              <p> В нашей базе недвижимости 2000+ вилл. Мы обязательно найдем подходящий вариант. Достаточно заполнить
-                форму, и мы приступим к поиску! </p>
+              <p>Заполните эту заявку — все поля формы, — выбрав подходящие вам параметры. <br/>Укажите ваши контактные данные. <br/>В течение 20 минут после того, как вы отправите заявку, специалисты Rайland её рассмотрят. <br/>Менеджер свяжется с вами для уточнения деталей. И мы сразу же приступим к поиску подходящих объектов в нашей базе недвижимости на Пхукете. </p>
             </div>
           </div>
         </div>
@@ -341,9 +337,7 @@
             <div class="order-form__title">
               <span>48 ЧАСОВ</span> <br /> НА ИЗУЧЕНИЕ ВСЕГО <br /> КАТАЛОГА </div>
             <div class="order-form__txt">
-              <p> Потратьте минуту и опишите критерии "той самой" идеальной виллы, которую Вы хотите арендовать или
-                купить. В течении 20 минут с Вами свяжется менеджер и приступит к подбору вариантов. Для этого
-                заполните поля формы и укажите свои предпочтения. </p>
+              <p>Заполните эту заявку — все поля формы, — выбрав подходящие вам параметры. <br/>Укажите ваши контактные данные. <br/>В течение 20 минут после того, как вы отправите заявку, специалисты Rайland её рассмотрят. <br/>Менеджер свяжется с вами для уточнения деталей. И мы сразу же приступим к поиску подходящих объектов в нашей базе недвижимости на Пхукете. </p>
             </div>
           </div>
         </div>
@@ -355,23 +349,22 @@
 
   <div class="news">
     <div class="news__in inner">
-      <h2 class="title-primary"><span>Лучшее на Пхукете: Мероприятия</span></h2>
+      <h2 class="title-primary"><span>Лучшее на Пхукете: Недвижимость</span></h2>
       <ul class="news__list">
         <li class="news__list-item">
           <div class="n-item">
             <div class="n-item__top">
-              <img src="img/news-item.jpg" alt="">
+              <img src="https://RealLifePhuket.com/wp-content/uploads/2018/09/Baan-Kata-Villa-2-Landscape.jpg" alt="">
             </div>
             <div class="n-item__body">
               <div class="n-item__data">23 апреля 2018</div>
-              <h3 class="n-item__title">Эволюционируя вместе <br /> с Пхукетом</h3>
-              <div class="n-item__txt">Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь
-                семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети.</div>
+              <h3 class="n-item__title">Выдающийся дом – Baan Kata Villa</h3>
+              <div class="n-item__txt">Не все виллы на Пхукете созданы равными. Но чтобы действительно выделиться из общего ряда на таком уникальном острове, дом должен отвечать некоторым критериям.</div>
               <a href="#" class="n-item__link">
-                <span>читать далее <svg class="icon icon-arr">
+               <router-link :to='`/live-in-phuket/Kata`'>  <span>читать далее <svg class="icon icon-arr">
                     <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
-                </span>
+                </span></router-link>
               </a>
             </div>
           </div>
@@ -379,19 +372,17 @@
         <li class="news__list-item">
           <div class="n-item">
             <div class="n-item__top">
-              <img src="img/news-item.jpg" alt="">
+              <img src="https://RealLifePhuket.com/wp-content/uploads/2018/10/RPM-Condo-4-Custom.jpg" alt="">
             </div>
             <div class="n-item__body">
               <div class="n-item__data">23 апреля 2018</div>
-              <h3 class="n-item__title">6 способов встряхнуть свою жизнь на Пхукете</h3>
-              <div class="n-item__txt">Как и в других уголках мира, быт местных жителей и туристов значительно
-                отличаются. С понедельника по пятницу мы ходим на работу, на выходных занимаемся домашними делами,
-                иногда выбираемся на пляж или на бранч.</div>
+              <h3 class="n-item__title">Престижная жизнь в RPM</h3>
+              <div class="n-item__txt">Если вы ищете недвижимость на Пхукете, то причин обратить внимание на Royal Phuket Marina целое множество.</div>
               <a href="#" class="n-item__link">
-                <span>читать далее <svg class="icon icon-arr">
+               <router-link :to='`/live-in-phuket/RPM`'> <span>читать далее <svg class="icon icon-arr">
                     <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
-                </span>
+                </span></router-link>
               </a>
             </div>
           </div>
@@ -399,25 +390,23 @@
         <li class="news__list-item">
           <div class="n-item">
             <div class="n-item__top">
-              <img src="img/news-item.jpg" alt="">
+              <img src="https://RealLifePhuket.com/wp-content/uploads/2018/08/Botanica-Villa-Phuket-2.jpg" alt="">
             </div>
             <div class="n-item__body">
               <div class="n-item__data">23 апреля 2018</div>
-              <h3 class="n-item__title">Каникулы на Пхукете: Идеальные выходные на Най-Харне</h3>
-              <div class="n-item__txt">Mачек Климович Бывает ли у вас иногда ощущение, что все вокруг только и делают,
-                что отдыхают, пока вы трудитесь в поте лица? У жителей Пхукета это распространенный синдром, поскольку
-                каждый год миллионы…</div>
+              <h3 class="n-item__title">Kata Rocks Superyacht Rendezvous возвращается</h3>
+              <div class="n-item__txt">Kata Rocks Superyacht Rendezvous (KRSR) возвращается на Пхукет, и с 6 по 9 декабря 2018 года владельцы самых роскошных яхт в мире будут вновь наслаждаться пхукетским гостеприимством.</div>
               <a href="#" class="n-item__link">
-                <span>читать далее <svg class="icon icon-arr">
+                <router-link :to='`/live-in-phuket/Botanica`'><span>читать далее <svg class="icon icon-arr">
                     <use xlink:href="../../static/sprite.svg#icon-arr"></use>
                   </svg>
-                </span>
+                </span></router-link>
               </a>
             </div>
           </div>
         </li>
       </ul>
-      <router-link to="/journal" class="news__btn btn">
+      <router-link to="/live-in-phuket" class="news__btn btn">
         <span>Жизнь на Пхукете <svg class="icon icon-arr">
             <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>

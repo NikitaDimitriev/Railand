@@ -26,16 +26,16 @@
                     </dl>
                   </div>
                   <div class="options__bottom">
-                    <button type="button" class="options__btn btn"><span>Отправить запрос</span></button>
+                    <button type="button" class="options__btn btn" @click="scrollTo"><span>Отправить запрос</span></button>
                   </div>
                 </div>
-                <div class="small-map">
+                <!-- <div class="small-map">
                   <div class="small-map__title">Объекты на карте:</div>
                   <div class="aside__toggle js-toggle"> Объекты на карте:</div>
                   <div class="small-map__container">
                     <img src="img/map-xs.jpg" alt="">
                   </div>
-                </div>
+                </div> -->
               </div>
             </aside>
             <!-- END cards-aside -->
@@ -45,11 +45,11 @@
               <!-- BEGIN topper -->
               <div class="topper">
                 <ul class="topper__breadcrumb breadcrumb">
-                  <li class="breadcrumb__item"><a href="#">главная</a></li>
+                  <li class="breadcrumb__item"><router-link to="/">главная</router-link></li>
                   <li class="breadcrumb__separator">/</li>
-                  <li class="breadcrumb__item"><a href="#">каталог</a></li>
-                  <li class="breadcrumb__separator">/</li>
-                  <li class="breadcrumb__item"><span>карточка комплекса</span></li>
+                  <li class="breadcrumb__item"><router-link to="/catalog">каталог</router-link></li>
+                  <!-- <li class="breadcrumb__separator">/</li> -->
+                  <!-- <li class="breadcrumb__item"><span>карточка комплекса</span></li> -->
                 </ul>
                 <div class="topper__name">комплекс №14</div>
               </div>
@@ -129,7 +129,7 @@
                     <button type="button" class="columns__btn-more btn-more js-collapse-link" @click="isShort = !isShort"><span>Больше описания</span></button>
                   </div>
                 </div>
-                <div class="columns__right">
+                <!-- <div class="columns__right">
                   <div class="similar">
                     <div class="similar__top">Rang Hill Residence</div>
                     <div class="similar__pic"><img src="https://via.placeholder.com/225x140" width="225" height="140" alt=""></div>
@@ -138,7 +138,7 @@
                       <span>Задать вопрос о комплексе</span>
                     </button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- END cards-body -->
@@ -187,7 +187,10 @@ export default {
         }else if(this.clicked){
           this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.photo[index];
         }
-      }
+      },
+      scrollTo() {
+        this.$router.push({path: '/',hash:"#order"})
+      },
   }
 };
 </script>
