@@ -11,6 +11,7 @@ const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
 const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
+
 mongoose.connect(db, function(err, db) {
 	if (err) {
 		console.log("error:", err);
