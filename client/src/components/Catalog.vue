@@ -294,13 +294,13 @@ export default {
       this.pages = Math.floor(this.info / this.perPage);
     },
     getInfoSales() {
-      this.$axios.get("https://railand-front.herokuapp.com/api/get-info-sales").then(response => {
+      this.$axios.get("https://rl-property.herokuapp.com/api/get-info-sales").then(response => {
         this.info = response.data;
         this.setPages();
       });
     },
     getInfoRent() {
-      this.$axios.get("https://railand-front.herokuapp.com/api/get-info-rent").then(response => {
+      this.$axios.get("https://rl-property.herokuapp.com/api/get-info-rent").then(response => {
         this.info = response.data;
         this.setPages();
       });
@@ -312,7 +312,7 @@ export default {
       };
       this.$axios
         .get(
-          `https://railand-front.herokuapp.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
+          `https://rl-property.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;
@@ -326,7 +326,7 @@ export default {
       };
       this.$axios
         .get(
-          `https://railand-front.herokuapp.com/api/get-objects-pagination-rent/${this.page}/${this.perPage}`
+          `https://rl-property.herokuapp.com/api/get-objects-pagination-rent/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;
