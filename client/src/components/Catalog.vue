@@ -312,7 +312,7 @@ export default {
       };
       this.$axios
         .get(
-          `https://rl-property.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
+          `https://rl-property.herokuapp.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;
