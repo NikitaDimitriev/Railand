@@ -127,8 +127,8 @@
       <div class="order-form">
         <div class="order-form__top">
           <div class="order-tabs">
-            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder0}" data-tab="0" @click="tabOrder0 = true, tabOrder1 = false, type='sales' "><span>Покупка</span></button>
-            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder1}" data-tab="1" @click="tabOrder0 = false, tabOrder1 = true, type='rent' "><span>Аренда</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder0}" data-tab="0" @click="tabOrder0 = true, tabOrder1 = false, filter.type='sales' "><span>Покупка</span></button>
+            <button type="button" class="order-tabs__btn js-order-tab-link" :class="{'is-active': tabOrder1}" data-tab="1" @click="tabOrder0 = false, tabOrder1 = true, filter.type='rent' "><span>Аренда</span></button>
           </div>
         </div>
         <div class="order-form__body" data-tab="0" :class="{'is-active': tabOrder0}">
@@ -251,7 +251,7 @@
             <div class="order-options">
               <div class="order-options__row">
                 <div class="select-l">
-                  <select class="select-l__el">
+                  <select class="select-l__el" v-model="filter.location">
                     <option value="all" selected>Расположение</option>
                     <option value="bang-tao">BANG TAO</option>
                     <option value="laguna">LAGUNA</option>
@@ -267,7 +267,7 @@
                   </select>
                 </div>
                 <div class="select-l">
-                  <select class="select-l__el">
+                  <select class="select-l__el" v-model="filter.rooms">
                     <option value="all" selected>Количество спален</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -278,15 +278,15 @@
               </div>
               <div class="order-options__row order-options__row-justify">
                 <div class="checkbox checkbox_right">
-                  <input name="" id="apart" type="checkbox" class="checkbox__field">
+                  <input name="" id="apart" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.apartment">
                   <label for="apart" class="checkbox__label"><span class="checkbox__title">Апартаменты</span></label>
                 </div>
                 <div class="checkbox checkbox_right">
-                  <input name="" id="villa" type="checkbox" class="checkbox__field">
+                  <input name="" id="villa" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.villa">
                   <label for="villa" class="checkbox__label"><span class="checkbox__title">Вилла</span></label>
                 </div>
                 <div class="checkbox checkbox_right">
-                  <input name="" id="house" type="checkbox" class="checkbox__field">
+                  <input name="" id="house" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.house">
                   <label for="house" class="checkbox__label"><span class="checkbox__title">Дом</span></label>
                 </div>
               </div>
@@ -296,10 +296,10 @@
                     <h5 class="range-slider__title"> Стоимость: </h5>
                     <div class="range-slider__controls">
                       <div class="range-slider__col">
-                        <input type="text" class="range-slider__input js-from" placeholder="От $" />
+                        <input type="text" class="range-slider__input js-from" placeholder="От $" v-model="filter.priceBegin"/>
                       </div>
                       <div class="range-slider__col">
-                        <input type="text" placeholder="До $" class="range-slider__input js-to" />
+                        <input type="text" placeholder="До $" class="range-slider__input js-to" v-model="filter.priceEnd"/>
                       </div>
                     </div>
                     <div class="range-slider__output">
@@ -321,7 +321,7 @@
               </div>
               <div class="order-send__bottom">
                 <div class="order-send__bottom-in">
-                  <button type="submit" class="btn">
+                  <button type="submit" class="btn" @click="searchByFilter">
                     <span> Искать</span>
                   </button>
                   <button type="button" class="btn-close js-close">

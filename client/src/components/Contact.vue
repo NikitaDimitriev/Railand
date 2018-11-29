@@ -43,7 +43,7 @@
             </div>
           </div>
           <div class="contact-layout__right">
-            <!-- <Map></Map> -->
+            <Map></Map>
           </div>
         </div>
       </div>

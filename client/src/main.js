@@ -30,7 +30,7 @@ Vue.use(Element);
 Vue.prototype.$axios = axios
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyBUBauxRVEUYy1DRnHPd2XhkLPM5dv0FJo",
+    key: "AIzaSyB8tBd9ZPhS9UOWhG3Y9aS-1Y0DY_e7TGc",
     libraries: "places" // necessary for places input
   }
 });
