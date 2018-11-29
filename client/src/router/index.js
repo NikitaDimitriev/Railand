@@ -22,7 +22,6 @@ import Personal_Area from '@/components/Personal_Area'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -114,8 +113,7 @@ export default new Router({
       path: '/personal-area',
       name: 'Personal_Area',
       component: Personal_Area
-    },
-    { path: '/a', redirect: { name: 'Home' }}
+    }
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
