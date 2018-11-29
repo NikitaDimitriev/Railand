@@ -69,7 +69,7 @@
             <div class="header__bottom-right">
               <nav class="nav">
                <router-link to="/faq" class="nav__link">faq</router-link>
-               <router-link to="/about" class="nav__link">О нас</router-link>
+               <!-- <router-link to="/about" class="nav__link">О нас</router-link> -->
                <router-link to="/contact" class="nav__link">контакты</router-link>
               </nav>
               <button type="button" class="header__btn btn btn_primary" @click="scrollTo">
