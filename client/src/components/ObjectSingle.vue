@@ -16,9 +16,9 @@
                   <div class="options__body">
                     <dl class="options-list">
                       <dt class="options-list__title">Цена объекта:</dt>
-                      <dd class="options-list__description">$ {{object.price}}</dd>
+                      <dd class="options-list__description">&#3647; {{object.price.priceSales}}</dd>
                       <dt class="options-list__title">Цена за м2</dt>
-                      <dd class="options-list__description">от {{Math.floor(object.price / object.area)}} $</dd>
+                      <dd class="options-list__description">от {{Math.floor(parseInt(object.priceSales) / object.area)}} &#3647;</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
@@ -26,16 +26,16 @@
                     </dl>
                   </div>
                   <div class="options__bottom">
-                    <button type="button" class="options__btn btn"><span>Отправить запрос</span></button>
+                    <button type="button" class="options__btn btn" @click="scrollTo"><span>Отправить запрос</span></button>
                   </div>
                 </div>
-                <div class="small-map">
+                <!-- <div class="small-map">
                   <div class="small-map__title">Объекты на карте:</div>
                   <div class="aside__toggle js-toggle"> Объекты на карте:</div>
                   <div class="small-map__container">
                     <img src="img/map-xs.jpg" alt="">
                   </div>
-                </div>
+                </div> -->
               </div>
             </aside>
             <!-- END cards-aside -->
@@ -45,11 +45,11 @@
               <!-- BEGIN topper -->
               <div class="topper">
                 <ul class="topper__breadcrumb breadcrumb">
-                  <li class="breadcrumb__item"><a href="#">главная</a></li>
+                  <li class="breadcrumb__item"><router-link to="/">главная</router-link></li>
                   <li class="breadcrumb__separator">/</li>
-                  <li class="breadcrumb__item"><a href="#">каталог</a></li>
-                  <li class="breadcrumb__separator">/</li>
-                  <li class="breadcrumb__item"><span>карточка комплекса</span></li>
+                  <li class="breadcrumb__item"><router-link to="/catalog">каталог</router-link></li>
+                  <!-- <li class="breadcrumb__separator">/</li> -->
+                  <!-- <li class="breadcrumb__item"><span>карточка комплекса</span></li> -->
                 </ul>
                 <div class="topper__name">комплекс №14</div>
               </div>
@@ -57,24 +57,24 @@
               <!-- BEGIN slideshow -->
               <div class="slideshow">
                 <div class="slideshow__preview">
-                  <img src="../../static/1.jpg" width="730" height="450" alt="">
+                  <img :src="mainPhoto || 'http://rl-property.ru/upload/'+this.object.mainPhoto" width="730" height="450" alt="">
                 </div>
                 <div class="slideshow__thumbs">
                   <button type="button" class="slideshow__arrow-left">prev</button>
                   <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
-                    <div class="thumbs-list__item is-active ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
+                    <div class="thumbs-list__item " v-for="(photo, index) of 4" :key="index" :class="{'is-active' : activePhoto === index}" @click="clicked = true, setPhoto(index) ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[index]" width="160" height="100" alt="">
+                    </div>
+                    <!-- <div class="thumbs-list__item ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[1]" width="160" height="100" alt="">
                     </div>
                     <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[2]" width="160" height="100" alt="">
                     </div>
                     <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
-                    </div>
-                    <div class="thumbs-list__item ">
-                      <img src="../../static/1.jpg" width="160" height="100" alt="">
-                    </div>
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[3]" width="160" height="100" alt="">
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -85,35 +85,35 @@
                     <div class="info-object__in">
                       <div class="info-object__row">
                         <div class="info-object__name">Этажность</div>
-                        <div class="info-object__val">{{object.floor.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.floor}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Количество спален</div>
-                        <div class="info-object__val">{{object.badroom.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.badroom}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Количество ванных комнат</div>
-                        <div class="info-object__val">{{object.bathroom.substring(0, 1)}}</div>
+                        <div class="info-object__val">{{object.bathroom}}</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Растояние до пляжа</div>
-                        <div class="info-object__val">{{object.distanceToBitch.substring(0, 4)}}km</div>
+                        <div class="info-object__val">{{object.distanceToBitch}}km</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Растояние до аэропорта</div>
-                        <div class="info-object__val">{{object.distanceToAiroport.substring(0, 5)}}km</div>
+                        <div class="info-object__val">{{object.distanceToAiroport}}km</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Общая площадь</div>
-                        <div class="info-object__val">{{object.area.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.area}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Площать земельного участка</div>
-                        <div class="info-object__val">{{object.landArea.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.landArea}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Жилая площадь</div>
-                        <div class="info-object__val">{{object.lifeArea.substring(0, 5)}}m2</div>
+                        <div class="info-object__val">{{object.lifeArea}}m2</div>
                       </div>
                       <div class="info-object__row">
                         <div class="info-object__name">Размеры басейна</div>
@@ -129,7 +129,7 @@
                     <button type="button" class="columns__btn-more btn-more js-collapse-link" @click="isShort = !isShort"><span>Больше описания</span></button>
                   </div>
                 </div>
-                <div class="columns__right">
+                <!-- <div class="columns__right">
                   <div class="similar">
                     <div class="similar__top">Rang Hill Residence</div>
                     <div class="similar__pic"><img src="https://via.placeholder.com/225x140" width="225" height="140" alt=""></div>
@@ -138,7 +138,7 @@
                       <span>Задать вопрос о комплексе</span>
                     </button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- END cards-body -->
@@ -162,7 +162,10 @@ export default {
   data(){
     return{
       object:{},
-      isShort: true
+      isShort: true,
+      activePhoto: 0,
+      clicked: false,
+      mainPhoto: ''
     }
   },
   mounted(){
@@ -172,11 +175,22 @@ export default {
       getObjectById(){
           let id = this.$route.params.id;
           console.log(id);
-          this.$axios.get(`https://railand-front.herokuapp.com/api/get-object-by-id/${id}`).then(response=>{
+          this.$axios.get(`http://167.99.138.90:8000/api/get-object-by-id/${id}`).then(response=>{
             this.object = response.data;
             console.log(this.object);
           })
-      }
+      },
+      setPhoto(index){
+        this.activePhoto = index;
+        if(!this.clicked){
+          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.mainPhoto;
+        }else if(this.clicked){
+          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.photo[index];
+        }
+      },
+      scrollTo() {
+        this.$router.push({path: '/',hash:"#order"})
+      },
   }
 };
 </script>

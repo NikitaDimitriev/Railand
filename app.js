@@ -10,7 +10,8 @@ const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 
-const db = process.env.MONGODB_URI || 'mongodb://localhost:27017/RailandDB';
+const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
+
 mongoose.connect(db, function(err, db) {
 	if (err) {
 		console.log("error:", err);
@@ -42,10 +43,13 @@ app.get('/api/get-current-user/:id', AuthCtrl.getUserId);
 
 
 app.post('/api/create-object', ObjectCtrl.createObject);
-app.get('/api/get-objects', ObjectCtrl.getObjects);
-app.get('/api/get-objects-pagination/:page/:perPage', ObjectCtrl.getObjectsPagination);
+app.get('/api/get-objects-sales', ObjectCtrl.getObjectsSales);
+app.get('/api/get-objects-rent', ObjectCtrl.getObjectsRent);
+app.get('/api/get-objects-pagination-sales/:page/:perPage', ObjectCtrl.getObjectsPaginationSales);
+app.get('/api/get-objects-pagination-rent/:page/:perPage', ObjectCtrl.getObjectsPaginationRent);
 app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById);
-app.get('/api/get-info', ObjectCtrl.getInfo);
+app.get('/api/get-info-sales', ObjectCtrl.getInfoSales);
+app.get('/api/get-info-rent', ObjectCtrl.getInfoRent);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);

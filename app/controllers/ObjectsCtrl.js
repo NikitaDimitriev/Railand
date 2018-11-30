@@ -2,45 +2,90 @@ const Apertment = require('../models/Object');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.createObject = createObject;
-exports.getObjects = getObjects;
-exports.getObjectsPagination = getObjectsPagination;
+exports.getObjectsSales = getObjectsSales;
+exports.getObjectsRent = getObjectsRent;
+exports.getObjectsPaginationSales = getObjectsPaginationSales;
+exports.getObjectsPaginationRent = getObjectsPaginationRent;
 exports.getObjectById = getObjectById;
-exports.getInfo = getInfo;
+exports.getInfoSales = getInfoSales;
+exports.getInfoRent = getInfoRent;
 
 const fs = require("fs");
 const request = require('request');
 const file = require('./dump.json');
+const filePhoto = require('./dumpPhoto.json');
 // let json = fs.readFileSync(file);
 let newDataJson = JSON.parse(JSON.stringify(file));
+let newDataJsonPhoto = JSON.parse(JSON.stringify(filePhoto));
 console.log(newDataJson.property[0]['Main photo']);
+console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
-// create(dump);
-async function create(dump) {
+let dumpPhoto = newDataJsonPhoto.property;
+// create(dump, dumpPhoto);
+async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
-
+            const dataPhoto = dumpPhoto[i];
+                let priceSales = '';
+                let currencySales = '';
+                let priceRent = '';
+                let currencyRent = '';
+                let photo = [];
+                let sales = false;
+                let rent = false;
+            if(data["PRICES"]){
+                for (let j = 0; j < data["PRICES"].length; j++) {
+                    if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
+                        priceSales = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
+                        currencySales = data["PRICES"][j].currency;
+                        sales = true
+                    }else if(data["PRICES"][j].rental_type === 'rent' && data["PRICES"][j].price > 0){
+                        priceRent = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
+                        currencyRent = data["PRICES"][j].currency;
+                        rent = true
+                    }
+                }
+            };
+            if(dataPhoto.Photo.VALUE){
+                for (let j = 0; j < dataPhoto.Photo.VALUE.length; j++) {
+                    if(dataPhoto.Photo.VALUE[j].includes("iblock")){
+                        photo.push(dataPhoto.Photo.VALUE[j])
+                    }
+                }
+            }
+            let area = data["Built-up area"] || '';
+            let indoor = data["Indoor area"] || '';
+            let toBitch = data["Distance to the beach"] || '';
+            let toAiroport = data["Distance to the airport"] || '';
             await Apertment.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
-                price: 60000 * Math.floor(Math.random() * 10) + 1,
-                area: data["Built-up area"],
-                distanceToBitch: data["Distance to the beach"],
-                rooms: data["Number of bedrooms"],
-                distanceToAiroport: data["Distance to the airport"],
-                badroom: data["Number of bedrooms"],
-                bathroom: data["Number of bathrooms"],
-                landArea: data["Built-up area"],
-                lifeArea: data["Indoor area"],
+                area: area.substring(0, area.indexOf(".")),
+                distanceToBitch: toBitch.substring(0, toBitch.indexOf(".")+2),
+                rooms: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
+                distanceToAiroport: toAiroport.substring(0, toAiroport.indexOf(".")),
+                badroom: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
+                bathroom: data["Number of bathrooms"].substring(0, data["Number of bathrooms"].indexOf(".")),
+                landArea: area.substring(0, area.indexOf(".")),
+                lifeArea: indoor.substring(0, indoor.indexOf(".")),
                 areaOfPool: data["Swimming pool size"],
-                floor: data["Number of storeys"],
+                floor: data["Number of storeys"].substring(0, data["Number of storeys"].indexOf(".")),
                 descriptionRu: data["Description Ru"],
                 descriptionEn: data["Description En"],
                 locationId: data["Location"],
                 typeOfObject: data["Property type"],
                 address: data["Address"],
                 mainPhoto: data["Main photo"],
-                photo:[]
+                sales: sales,
+                rent: rent,
+                photo:photo,
+                price:{
+                    priceSales: formatPrice(priceSales),
+                    currencySales: currencySales,
+                    priceRent: formatPrice(priceRent),
+                    currencyRent: currencyRent
+                }
             });
             console.log("create");
         }
@@ -49,6 +94,16 @@ async function create(dump) {
     }
 }
 // getMainPhoto()
+async function getPhotoArray(data){
+    if(data["Photo"]){
+        return data["Photo"]["VALUE"];
+    }
+}
+
+function formatPrice(value) {
+    let val = (value/1).toFixed(2).replace('.', ',')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").slice(0, -1).slice(0, -2)
+}
 async function getMainPhoto() {
     try {
         for (let i = 0; i < dump.length; i++) {
@@ -76,9 +131,19 @@ function makeid() {
     return text;
 }
 
-async function getInfo(req, res) {
+async function getInfoSales(req, res) {
     try {
-        let info = await Apertment.find({}).count();
+        let info = await Apertment.find({sales: true}).countDocuments();
+        console.log(info);
+        res.json(info).end();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function getInfoRent(req, res) {
+    try {
+        let info = await Apertment.find({rent: true}).countDocuments();
         console.log(info);
         res.json(info).end();
     } catch (error) {
@@ -109,24 +174,46 @@ async function createObject(req, res) {
     }
 }
 
-async function getObjects(req, res) {
+async function getObjectsSales(req, res) {
     try {
-        let objects = await Apertment.find({}).limit(5).skip(50);
+        let objects = await Apertment.find({sales:true}).limit(5).skip(50);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
     }
 }
 
-async function getObjectsPagination(req, res) {
+async function getObjectsRent(req, res) {
+    try {
+        let objects = await Apertment.find({rent:true}).limit(5).skip(10);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectsPaginationSales(req, res) {
     try {
         let paginationData = {
             page: parseInt(req.params.page),
             perPage: parseInt(req.params.perPage)
         }
         console.log(paginationData);
-        let objects = await Apertment.find({}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
-        // console.log(objects);
+        let objects = await Apertment.find({sales: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjectsPaginationRent(req, res) {
+    try {
+        let paginationData = {
+            page: parseInt(req.params.page),
+            perPage: parseInt(req.params.perPage)
+        }
+        console.log(paginationData);
+        let objects = await Apertment.find({rent: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);

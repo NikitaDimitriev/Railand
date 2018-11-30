@@ -4,7 +4,7 @@
         <div class="magazine out">
         <div class="magazine__in inner">
           <h2 class="title-primary"><span>Жизнь на Пхукете</span></h2>
-          <div class="magazine__rubs rubs">
+          <!-- <div class="magazine__rubs rubs">
             <div class="rubs__txt">Выбрать рубрику: </div>
             <div class="rubs__item is-active">Все рубрики</div>
             <div class="rubs__item ">Еда и рестораны</div>
@@ -12,17 +12,41 @@
             <div class="rubs__item ">Спорт</div>
             <div class="rubs__item ">Путешествия</div>
             <div class="rubs__item ">Здоровье и красота</div>
-          </div>
-          <div class="magazine__list rubs-list">
-           <router-link :to='`/live-in-phuket/13`' style="cursor: pointer"> <div class="rubs-list__item rubs-list__item_x2">
-              <div class="nlarge-item" style="background-image: url(https://via.placeholder.com/730x430)">
+          </div> -->
+         <div class="magazine__list rubs-list">
+            <div class="rubs-list__item rubs-list__item_x2">
+            <router-link :to='`/live-in-phuket/Kata`'> 
+              <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/09/Baan-Kata-Villa-2-Landscape.jpg)">
                 <div class="nlarge-item__content">
                   <div class="nlarge-item__date">23 апреля 2018</div>
-                  <div class="nlarge-item__title">Эволюционируя вместе <br />с Пхукетом</div>
-                  <div class="nlarge-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему <br /> потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
+                  <div class="nlarge-item__title">Выдающийся дом – Baan Kata Villa</div>
+                  <div class="nlarge-item__txt"> Не все виллы на Пхукете созданы равными. Но чтобы действительно выделиться из общего ряда на таком уникальном острове, дом должен отвечать некоторым критериям. </div>
                 </div>
               </div>
-            </div></router-link>
+            </router-link>
+            </div>
+            <div class="rubs-list__item " style="width:300px">
+            <router-link :to='`/live-in-phuket/Botanica`'>
+              <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/08/Botanica-Villa-Phuket-2.jpg)">
+                <div class="nlarge-item__content">
+                  <div class="nlarge-item__date">23 апреля 2018</div>
+                  <div class="nlarge-item__title">Kata Rocks Superyacht Rendezvous возвращается</div>
+                  <div class="nlarge-item__txt"> Kata Rocks Superyacht Rendezvous (KRSR) возвращается на Пхукет, и с 6 по 9 декабря 2018 года владельцы самых роскошных яхт в мире будут вновь наслаждаться пхукетским гостеприимством.</div>
+                </div>
+              </div>
+            </router-link>
+            </div>
+            <div class="rubs-list__item" style="width:300px">
+            <router-link :to='`/live-in-phuket/RPM`'>
+              <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/10/RPM-Condo-4-Custom.jpg)">
+                <div class="nlarge-item__content">
+                  <div class="nlarge-item__date">23 апреля 2018</div>
+                  <div class="nlarge-item__title">Престижная жизнь в RPM</div>
+                  <div class="nlarge-item__txt"> Если вы ищете недвижимость на Пхукете, то причин обратить внимание на Royal Phuket Marina целое множество.</div>
+                </div>
+              </div>
+            </router-link>
+            </div>
               <div class="rubs-list__item" v-for="(article, index) of articles" :key="index">
                 <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">

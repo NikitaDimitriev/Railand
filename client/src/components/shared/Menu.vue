@@ -6,11 +6,11 @@
             <div class="header__top-left">
               <div class="tselect" :class="isActiveTselect ? 'is-active': null">
                 <div class="tselect__current">
-                  <a href="tel:+ 66 81 737 1687" class="tselect__current-link">+ 66 81 737 1687</a>
-                  <i class="tselect__arrow" @click="toogleSlectTelehone()"></i>
+                  <a href="tel:+ 66 84 845 5111" class="tselect__current-link">+ 66 84 845 5111</a>
+                  <i class="tselect__arrow"></i>
                 </div>
                 <ul class="tselect__list">
-                  <li class="tselect__item">+ 66 81 737 1687</li>
+                  <li class="tselect__item">+ 66 84 845 5111</li>
                   <li class="tselect__item">+ 66 81 737 1687</li>
                 </ul>
               </div>
@@ -44,14 +44,14 @@
                   <li class="pselect__item">&#8364; eur</li>
                 </ul>
               </div>
-              <div class="form-links" v-if="!user">
+              <!-- <div class="form-links" v-if="!user">
                 <a style="cursor: pointer" class="form-links__item" @click="toggleModalRegistration()">Регистрация</a>
                 <div class="form-links__separator">|</div>
                 <a style="cursor: pointer" class="form-links__item" @click="toggleModalLogin()">Войти</a>
               </div>
               <div class="form-links" v-if="user">
                 <router-link to="/personal-area" class="form-links__item">{{user.login}}</router-link>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="header__bottom">
@@ -69,7 +69,7 @@
             <div class="header__bottom-right">
               <nav class="nav">
                <router-link to="/faq" class="nav__link">faq</router-link>
-               <router-link to="/about" class="nav__link">О нас</router-link>
+               <!-- <router-link to="/about" class="nav__link">О нас</router-link> -->
                <router-link to="/contact" class="nav__link">контакты</router-link>
               </nav>
               <button type="button" class="header__btn btn btn_primary" @click="scrollTo">
@@ -261,8 +261,6 @@ export default {
   },
   mounted() {
     this.getUserId();
-    this.test();
-    // if(this.$router.)
   },
   methods: {
     toogleSlectTelehone() {
@@ -280,11 +278,6 @@ export default {
     toggleModalLogin() {
       this.showLoginModal = !this.showLoginModal;
     },
-    test(){
-      this.$axios.get("https://railand-front.herokuapp.com/api/test-route").then(response=>{
-        console.log(response);
-      })
-    },
     register() {
       if (this.password === this.passwordCheck) {
         let data = {
@@ -293,7 +286,7 @@ export default {
           password: this.password
         };
         this.$axios
-          .post("https://railand-front.herokuapp.com/api/sign-up-user", data)
+          .post("http://167.99.138.90:8000/api/sign-up-user", data)
           .then(response => {
             this.showRegistrationModal = !this.showRegistrationModal;
             localStorage.setItem("auth", true);
@@ -310,7 +303,7 @@ export default {
         password: this.loginPassword
       };
       this.$axios
-        .post("https://railand-front.herokuapp.com/api/log-in-user", data)
+        .post("http://167.99.138.90:8000/api/log-in-user", data)
         .then(response => {
           this.showLoginModal = !this.showLoginModal;
           console.log(response.data);
@@ -324,7 +317,7 @@ export default {
       if (localStorage.getItem("auth") === "true") {
         let id = localStorage.getItem("id");
         this.$axios
-          .get(`https://railand-front.herokuapp.com/api/get-current-user/${id}`)
+          .get(`http://167.99.138.90:8000/api/get-current-user/${id}`)
           .then(response => {
             this.user = response.data;
             console.log(response);

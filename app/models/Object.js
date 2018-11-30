@@ -24,5 +24,14 @@ module.exports = mongoose.model('Object', {
     typeOfObject:{type:String},
     address: {type:String},
     mainPhoto:{type:String},
-    photo: {type: Array}
+    photo: {type: Array},
+    price:{
+        currencySales:{type:String},
+        priceSales:{type: String},
+        currencyRent:{type:String},
+        priceRent:{type: String}
+    },
+    property:{type:Array},
+    sales:{type:String},
+    rent:{type:String}
 })

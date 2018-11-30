@@ -12,7 +12,7 @@
             <div class="catalog-promo__in inner">
               <h2 class="catalog-promo__title"> Более 700 обьектов в базе </h2>
               <div class="catalog-promo__subtitle"> Чтобы изучить весь каталог, потребуется примерно 48 часов. <br /> Оставьте заявку, и менеджер быстро подберет варианты. </div>
-              <button type="button" class="catalog-promo__btn btn">
+              <button type="button" class="catalog-promo__btn btn" @click="scrollTo">
                 <span>Заполнить заявку</span>
               </button>
             </div>
@@ -26,8 +26,8 @@
                   <span> каталог Объектов на </span>
                 </h2>
                 <div class="cards__tab-links tab-links">
-                  <button type="button" class="tab-links__item js-tab" data-tab="0" :class="{'is-active': tab0}" @click="tab0 = true, tab1=false"><span>продажу</span></button>
-                  <button type="button" class="tab-links__item js-tab" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true" ><span>Аренду</span></button>
+                  <button type="button" class="tab-links__item js-tab" data-tab="0" :class="{'is-active': tab0}" @click="tab0 = true, tab1=false, getObjectsSales(), getInfoSales()"><span>продажу</span></button>
+                  <button type="button" class="tab-links__item js-tab" :class="{'is-active': tab1}" data-tab="1" @click="tab0 = false, tab1=true, getObjectsRent(), getInfoRent()" ><span>Аренду</span></button>
                 </div>
               </div>
               <!-- BEGIN cards-main -->
@@ -193,7 +193,7 @@
                   <div class="catalog-page">
                     <div class="catalog-page__navigation">
                       <div v-for="(item, index) of pages" :key="index">
-                        <span class="catalog-page__link" :style="{'cursor': 'pointer'}"  @click="page = item, getObjects()">
+                        <span class="catalog-page__link" :style="{'cursor': 'pointer'}"  @click="page = item, getObjectsSales()">
                           {{index +1}}
                         </span>
                       </div>
@@ -201,9 +201,9 @@
                     </div>
                     <div class="catalog-page__navigation pagecount">
                       <span class="catalog-page__title">Показывать по: </span>
-                      <span class="catalog-page__first" @click="perPage = 10, getObjects(), setPages()">10</span>
-                      <span class="catalog-page__link" @click="perPage = 20, getObjects(), setPages()">20</span>
-                      <span class="catalog-page__link" @click="perPage = 50, getObjects(), setPages()">50</span>
+                      <span class="catalog-page__first" @click="perPage = 10, getObjectsSales(), setPages()">10</span>
+                      <span class="catalog-page__link" @click="perPage = 20, getObjectsSales(), setPages()">20</span>
+                      <span class="catalog-page__link" @click="perPage = 50, getObjectsSales(), setPages()">50</span>
                     </div>
                   </div>
                   <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
@@ -211,14 +211,13 @@
                       <div class="card">
                         <div class="card__top">
                           <div class="price-wrp">
-                            <div class="price price__wh">$ {{object.price}} </div>
+                            <div class="price price__wh" style="font-size: 20px">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : ' '}} {{getPrice(object) || "По запросу"}} </div>
                           </div>
                           <div class="card__slider">
                             <div class="card__slider-item">
                               <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" alt="аппартамены" />
                             </div>
                           </div>
-                          <a class="card__link" href=""></a>
                         </div>
                         <div class="card__content">
                           <div class="card__body">
@@ -230,7 +229,7 @@
                             </ul>
                           </div>
                           <div class="card__footer">
-                            <div class="price price__bl"> {{object.price}} </div>
+                            <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
                             <router-link :to="`/catalog/${object._id}`">
                               <button type="button" class="card__btn btn btn_primary">
                                 Смотреть
@@ -241,58 +240,6 @@
                       </div>
                     </li>
                   </ul>
-                  <!-- <ul class=" cards__list cards__list-col4">
-              <li class="cards__item" v-for="(i, index) of [1, 2, 3, 4, 5]" :key="index">
-                <div class="card">
-                  <div class="card__top">
-                    <div class="price-wrp">
-                      <div class="price price__wh"> $ 761 000 </div>
-                    </div>
-                    <div class="card__slider">
-                      <div class="card__slider-item">
-                        <img src="../../static/1.jpg" alt="аппартамены" />
-                      </div>
-                    </div>
-                    <a class="card__link" href=""></a>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__body">
-                      <h3 class="card__title"> Апартаменты с видом на море в Ката </h3>
-                      <ul class="card__l">
-                        <li> Жилая площадь: от 200 м2 </li>
-                        <li> Спален: 2 </li>
-                        <li> До пляжа: 600 м </li>
-                      </ul>
-                    </div>
-                    <div class="card__footer">
-                      <div class="price price__bl"> $ 761 000 </div>
-                      <button type="button" class="card__btn btn btn_primary">
-                        <router-link :to="`/catalog/456`">Смотреть</router-link>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul> -->
-                  <!-- <div class="catalog-page">
-                    <div class="catalog-page__navigation">
-                      <span class="catalog-page__first catalog-page__current">1</span>
-                      <a href="" class="catalog-page__link">2</a>
-                      <a href="" class="catalog-page__link">3</a>
-                      <a href="" class="catalog-page__link">4</a>
-                      <a href="" class="catalog-page__link">5</a>
-                      <a class="catalog-page__link catalog-page__line" href="">-</a>
-                      <a href="" class="catalog-page__link">25</a>
-                      <a class="catalog-page__link catalog-page__next" href="">&gt;&gt;</a>
-                    </div>
-                    <div class="catalog-page__navigation pagecount">
-                      <span class="catalog-page__title">Показывать по: </span>
-                      <span class="catalog-page__first catalog-page__current">10</span>
-                      <a class="catalog-page__link" href="">20</a>
-                      <a class="catalog-page__link" href="">50</a>
-                      <a class="catalog-page__link" href="">100</a>
-                    </div>
-                  </div> -->
                 </div>
                 <!-- END cards-body -->
               </div>
@@ -322,7 +269,7 @@ export default {
       perPage: 10,
       pages: 0,
       objects: [],
-      info:{},
+      info: {},
       tab0: true,
       tab1: false,
       filter: {
@@ -343,22 +290,44 @@ export default {
     };
   },
   methods: {
-    setPages(){
+    setPages() {
       this.pages = Math.floor(this.info / this.perPage);
     },
-    getInfo(){
-      this.$axios.get("http://localhost:8000/api/get-info").then(response=>{
+    getInfoSales() {
+      this.$axios.get("http://167.99.138.90:8000/api/get-info-sales").then(response => {
         this.info = response.data;
         this.setPages();
-      })
+      });
     },
-    getObjects() {
+    getInfoRent() {
+      this.$axios.get("http://167.99.138.90:8000/api/get-info-rent").then(response => {
+        this.info = response.data;
+        this.setPages();
+      });
+    },
+    getObjectsSales() {
       let data = {
         page: this.page,
         items: this.perPage
       };
       this.$axios
-        .get(`http://localhost:8000/api/get-objects-pagination/${this.page}/${this.perPage}`)
+        .get(
+          `http://167.99.138.90:8000/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
+        )
+        .then(response => {
+          this.objects = response.data;
+          console.log(this.objects);
+        });
+    },
+    getObjectsRent() {
+      let data = {
+        page: this.page,
+        items: this.perPage
+      };
+      this.$axios
+        .get(
+          `http://167.99.138.90:8000/api/get-objects-pagination-rent/${this.page}/${this.perPage}`
+        )
         .then(response => {
           this.objects = response.data;
           console.log(this.objects);
@@ -368,19 +337,45 @@ export default {
       if (!!this.$route.query.filter) {
         this.filter = this.$route.query.filter;
       }
+    },
+    scrollTo() {
+      this.$router.push({ path: "/", hash: "#order" });
+    },
+    getPrice(object) {
+      if (this.tab0) {
+        return object.price.priceSales;
+      } else {
+        return "По запросу";
+      }
+    },
+    getPriceCurrency(object) {
+      if (this.tab0) {
+        return object.price.currencySales;
+      } else {
+        return " ";
+      }
     }
   },
   mounted() {
-    this.setFilter();
-    this.getInfo();
-    this.getObjects();
-    if(this.$route.query.to === "sales"){
-      this.tab0 = true,
-      this.tab1 = false
-    }else if(this.$route.query.to === "rent"){
-      this.tab0 = false,
-      this.tab1 = true
+    if (this.$route.query.to === "sales") {
+      this.tab0 = true;
+      this.tab1 = false;
+      this.getInfoSales();
+      this.getObjectsSales();
+    } else if (this.$route.query.to === "rent") {
+      this.tab0 = false;
+      this.tab1 = true;
+      this.getInfoRent();
+      this.getObjectsRent();
     }
+    if(this.tab0 === true){
+      this.getInfoSales();
+      this.getObjectsSales();
+    }else{
+      this.getInfoRent();
+      this.getObjectsRent();
+    }
+    this.setFilter();
   }
 };
 </script>

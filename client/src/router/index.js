@@ -14,12 +14,14 @@ import Admin_Users from '@/components/Admin_Users'
 import Admin_Reviews from '@/components/Admin_Reviews'
 import ObjectSingle from '@/components/ObjectSingle'
 import Article from '@/components/Article'
+import Kata from '@/components/Kata'
+import Botanica from '@/components/Botanica'
+import RPM from '@/components/RPM'
 import Personal_Area from '@/components/Personal_Area'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -88,6 +90,21 @@ export default new Router({
       component: ObjectSingle
     },
     {
+      path: '/live-in-phuket/Botanica',
+      name: 'Botanica',
+      component: Botanica
+    },
+    {
+      path: '/live-in-phuket/Kata',
+      name: 'Kata',
+      component: Kata
+    },
+    {
+      path: '/live-in-phuket/RPM',
+      name: 'RPM',
+      component: RPM
+    },
+    {
       path: '/live-in-phuket/:id',
       name: 'Article',
       component: Article
@@ -96,8 +113,7 @@ export default new Router({
       path: '/personal-area',
       name: 'Personal_Area',
       component: Personal_Area
-    },
-    { path: '/a', redirect: { name: 'Home' }}
+    }
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
