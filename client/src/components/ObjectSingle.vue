@@ -129,16 +129,6 @@
                     <button type="button" class="columns__btn-more btn-more js-collapse-link" @click="isShort = !isShort"><span>Больше описания</span></button>
                   </div>
                 </div>
-                <!-- <div class="columns__right">
-                  <div class="similar">
-                    <div class="similar__top">Rang Hill Residence</div>
-                    <div class="similar__pic"><img src="https://via.placeholder.com/225x140" width="225" height="140" alt=""></div>
-                    <div class="similar__txt">Владельцев недвижимости комплекса ожидает ряд привилегий и вознаграждений Бесплатное участие в программе SANCTUARY CLUB предлагает следующие бонусы: - Скидки и льготы в отелях, курортах, спа и торговых галереях Banyan </div>
-                    <button type="button" class="similar__btn btn btn_primary">
-                      <span>Задать вопрос о комплексе</span>
-                    </button>
-                  </div>
-                </div> -->
               </div>
             </div>
             <!-- END cards-body -->
@@ -175,7 +165,7 @@ export default {
       getObjectById(){
           let id = this.$route.params.id;
           console.log(id);
-          this.$axios.get(`http://167.99.138.90:8000/api/get-object-by-id/${id}`).then(response=>{
+          this.$axios.get(`http://rl-property.com/api/get-object-by-id/${id}`).then(response=>{
             this.object = response.data;
             console.log(this.object);
           })

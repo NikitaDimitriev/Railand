@@ -466,7 +466,7 @@ export default {
   methods: {
     getObjectsRent() {
       this.$axios
-        .get("http://167.99.138.90:8000/api/get-objects-rent")
+        .get("http://rl-property.com/api/get-objects-rent")
         .then(response => {
           this.objectsRent = response.data;
           console.log(this.objects);
@@ -474,7 +474,7 @@ export default {
     },
     getObjectsSales() {
       this.$axios
-        .get("http://167.99.138.90:8000/api/get-objects-sales")
+        .get("http://rl-property.com/api/get-objects-sales")
         .then(response => {
           this.objectsSales = response.data;
           console.log(this.objects);

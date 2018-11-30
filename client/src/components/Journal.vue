@@ -111,7 +111,7 @@ export default {
   methods: {
     getArticles() {
       this.$axios
-        .get("http://localhost:3000/api/get-all-articles")
+        .get("http://rl-property.com/api/get-all-articles")
         .then(response => {
           this.articles = response.data;
         });
