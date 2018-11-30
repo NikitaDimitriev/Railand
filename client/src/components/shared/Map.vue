@@ -1,6 +1,8 @@
 <template>
   <div>
-    <google-map name='map'></google-map>
+    <google-map 
+      :name=map>
+    </google-map>
   </div>
 </template>
 
@@ -9,15 +11,12 @@ export default {
   name: "Map",
   data() {
     return {
-      name: 'map'
+      name: "map"
     };
   },
 
-  mounted() {
-    
-  },
+  mounted() {},
 
-  methods: {
-  }
+  methods: {}
 };
 </script>
