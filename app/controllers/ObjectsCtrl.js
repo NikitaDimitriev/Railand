@@ -21,7 +21,7 @@ console.log(newDataJson.property[0]['Main photo']);
 console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
 let dumpPhoto = newDataJsonPhoto.property;
-// create(dump, dumpPhoto);
+create(dump, dumpPhoto);
 async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
@@ -34,6 +34,15 @@ async function create(dump, dumpPhoto) {
                 let photo = [];
                 let sales = false;
                 let rent = false;
+                let mapPosition = {
+                    x: 0,
+                    y:0
+                }
+            if(data["Map position"]){
+                mapPosition.x = parseFloat(data["Map position"].substring(0, data["Map position"].indexOf(",")));
+                mapPosition.y = parseFloat(data["Map position"].substring(data["Map position"].indexOf(",")+2));
+                console.log(mapPosition);
+            }
             if(data["PRICES"]){
                 for (let j = 0; j < data["PRICES"].length; j++) {
                     if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
@@ -85,7 +94,8 @@ async function create(dump, dumpPhoto) {
                     currencySales: currencySales,
                     priceRent: formatPrice(priceRent),
                     currencyRent: currencyRent
-                }
+                },
+                coordinat: mapPosition
             });
             console.log("create");
         }

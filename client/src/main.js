@@ -7,7 +7,6 @@ import * as VueGoogleMaps from "vue2-google-maps";
 import axios from 'axios';
 import VueCarousel from 'vue-carousel';
 import VueScrollTo from 'vue-scrollto';
-import VueGoogleMaps from 'vue2-google-maps'
 
 
 Vue.use(VueScrollTo);

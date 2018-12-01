@@ -124,7 +124,7 @@
                                 </label>
                               </div>
                             </li>
-                            <li class="checkbox__item">
+                            <li class="checkbox__item" v-if="tab0">
                               <div class="checkbox">
                                 <input name="" id="as" type="checkbox" class="checkbox__field" v-model="filter.typeOfObject.land"/>
                                 <label for="as" class="checkbox__label">
@@ -135,7 +135,7 @@
                           </ul>
                         </div>
                         <div class="aside__col">
-                          <div class="select-l">
+                          <div class="select-l" v-if="tab0">
                             <select class="select-l__el" v-model="filter.statusOfObject">
                               <option value="all">Статус объекта</option>
                               <option value="building">Строительство</option>
@@ -144,7 +144,7 @@
                           </div>
                         </div>
                         <div class="aside__col">
-                          <div class="select-l">
+                          <div class="select-l" v-if="tab0">
                             <select class="select-l__el" v-model="filter.target">
                               <option value="all">Цель</option>
                               <option value="personal">Личное пользование</option>
@@ -182,7 +182,20 @@
                       <h5> Объекты на карте: </h5>
                       <div class="aside__toggle js-toggle"> Объекты на карте:</div>
                       <div class="aside__pic">
-                        <img src="img/card/map.jpg" alt="" />
+                        <GmapMap style="width: 100%; height: 500px;" :zoom="12" :center="{lat: 7.896892, lng: 98.298922}">
+                          <GmapMarker v-for="(marker, index) of objects"
+                            :key="index"
+                            :position="{
+                              lat: marker.coordinat.x,
+                              lng: marker.coordinat.y,
+                            }"
+                            />
+                          <!-- <GmapMarker
+                            :position="{
+                              lat: object.coordinat.x,
+                              lng: object.coordinat.y,
+                            }"/> -->
+                        </GmapMap>
                       </div>
                     </div>
                   </div>
@@ -294,13 +307,13 @@ export default {
       this.pages = Math.floor(this.info / this.perPage);
     },
     getInfoSales() {
-      this.$axios.get("http://rl-property.com/api/get-info-sales").then(response => {
+      this.$axios.get("http://localhost:80/api/get-info-sales").then(response => {
         this.info = response.data;
         this.setPages();
       });
     },
     getInfoRent() {
-      this.$axios.get("http://rl-property.com/api/get-info-rent").then(response => {
+      this.$axios.get("http://localhost:80/api/get-info-rent").then(response => {
         this.info = response.data;
         this.setPages();
       });
@@ -312,11 +325,11 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
+          `http://localhost:80/api/get-objects-pagination-sales/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;
-          console.log(this.objects);
+          console.log(this.objects[0].coordinat);
         });
     },
     getObjectsRent() {
@@ -326,7 +339,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-rent/${this.page}/${this.perPage}`
+          `http://localhost:80/api/get-objects-pagination-rent/${this.page}/${this.perPage}`
         )
         .then(response => {
           this.objects = response.data;

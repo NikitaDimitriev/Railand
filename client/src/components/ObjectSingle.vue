@@ -29,13 +29,23 @@
                     <button type="button" class="options__btn btn" @click="scrollTo"><span>Отправить запрос</span></button>
                   </div>
                 </div>
-                <!-- <div class="small-map">
-                  <div class="small-map__title">Объекты на карте:</div>
+                <div class="small-map">
+                  <div class="small-map__title">Объект на карте:</div>
                   <div class="aside__toggle js-toggle"> Объекты на карте:</div>
                   <div class="small-map__container">
-                    <img src="img/map-xs.jpg" alt="">
+                    <GmapMap style="width: 100%; height: 500px;" :zoom="12" :center="{lat: object.coordinat.x, lng: object.coordinat.y}">
+                      <!-- <GmapMarker v-for="(marker, index) in markers"
+                        :key="index"
+                        :position="marker.position"
+                        /> -->
+                      <GmapMarker
+                        :position="{
+                          lat: object.coordinat.x,
+                          lng: object.coordinat.y,
+                        }"/>
+                    </GmapMap>
                   </div>
-                </div> -->
+                </div>
               </div>
             </aside>
             <!-- END cards-aside -->
@@ -165,7 +175,7 @@ export default {
       getObjectById(){
           let id = this.$route.params.id;
           console.log(id);
-          this.$axios.get(`http://rl-property.com/api/get-object-by-id/${id}`).then(response=>{
+          this.$axios.get(`http://localhost:80/api/get-object-by-id/${id}`).then(response=>{
             this.object = response.data;
             console.log(this.object);
           })
