@@ -175,7 +175,7 @@ export default {
       getObjectById(){
           let id = this.$route.params.id;
           console.log(id);
-          this.$axios.get(`http://localhost:80/api/get-object-by-id/${id}`).then(response=>{
+          this.$axios.get(`http://rl-property.com/api/get-object-by-id/${id}`).then(response=>{
             this.object = response.data;
             console.log(this.object);
           })
