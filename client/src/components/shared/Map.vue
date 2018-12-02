@@ -8,15 +8,15 @@
     </label>
     <br/> -->
 
-    <GmapMap style="width: 700px; height: 500px;" :zoom="12" :center="{lat: 7.896892, lng: 98.298922}">
+    <GmapMap style="width: 700px; height: 500px;" :zoom="12" :center="{lat: 7.996769, lng: 98.302661}">
       <!-- <GmapMarker v-for="(marker, index) in markers"
         :key="index"
         :position="marker.position"
         /> -->
       <GmapMarker
         :position="{
-          lat: 7.896892,
-          lng: 98.298922,
+          lat: 7.996769,
+          lng: 98.302661,
         }"/>
     </GmapMap>
   </div>

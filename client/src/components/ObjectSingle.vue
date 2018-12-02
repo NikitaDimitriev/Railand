@@ -22,7 +22,8 @@
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
-                      <dd class="options-list__description">На этапе строительства</dd>
+                      <dd class="options-list__description" v-if="object.stage !== 'none'">{{object.stage === "underconstruction" ? "На этапе строительства" : "Вторичный рынок"}}</dd>
+                      <dd class="options-list__description" v-if="object.stage === 'none'">{{"Сдан в эксплуатацию"}}</dd>
                     </dl>
                   </div>
                   <div class="options__bottom">

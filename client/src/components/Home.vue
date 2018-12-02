@@ -190,7 +190,7 @@
                 <div class="select-l">
                   <select class="select-l__el" v-model="filter.statusOfObject">
                     <option value="all">Статус объекта</option>
-                    <option value="building">Строительство</option>
+                    <option value="underconstruction">Строительство</option>
                     <option value="complete">Сдано в эксплуатацию</option>
                   </select>
                 </div>
@@ -481,6 +481,9 @@ export default {
         });
     },
     searchByFilter() {
+      this.$axios.post("http://rl-property.com/api/send-order-mail", { filter: this.filter }).then(response=>{
+        console.log(response);
+      })
       this.$router.push({ path: "/catalog", query: { filter: this.filter } });
     },
     redirect(to) {

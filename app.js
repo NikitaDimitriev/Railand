@@ -9,6 +9,7 @@ const serveStatic    = require('serve-static');
 const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
+const MailCtrl = require('./app/controllers/MailCtrl');
 
 const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
 // const db = 'mongodb://localhost:27017/RailandDB';
@@ -51,10 +52,13 @@ app.get('/api/get-objects-pagination-rent/:page/:perPage', ObjectCtrl.getObjects
 app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById);
 app.get('/api/get-info-sales', ObjectCtrl.getInfoSales);
 app.get('/api/get-info-rent', ObjectCtrl.getInfoRent);
+app.post('/api/get-objects-filters', ObjectCtrl.getFilter)
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);
 app.get('/api/get-article-by-id', ArticlesCtrl.getArticleById);
+
+app.post('/api/send-order-mail', MailCtrl.sendMail);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
