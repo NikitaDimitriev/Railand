@@ -18,7 +18,7 @@
                       <dt class="options-list__title">Цена объекта:</dt>
                       <dd class="options-list__description">&#3647; {{object.price.priceSales}}</dd>
                       <dt class="options-list__title">Цена за м2</dt>
-                      <dd class="options-list__description">от {{Math.floor(parseInt(object.priceSales) / object.area)}} &#3647;</dd>
+                      <dd class="options-list__description">от {{makePriceForMetr()}} &#3647;</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
@@ -192,6 +192,14 @@ export default {
       scrollTo() {
         this.$router.push({path: '/',hash:"#order"})
       },
+      makePriceForMetr(){
+        let metrPrice = Math.floor(parseInt(this.object.price.priceSales.replace(/\./g,'')) / this.object.area);
+        metrPrice = metrPrice.toString().split("").reverse();
+        metrPrice.splice(3, 0, ".").reverse().join();
+        metrPrice = metrPrice.reverse().join("");
+        console.log(metrPrice);
+        return metrPrice;
+      }
   }
 };
 </script>

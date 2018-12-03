@@ -69,7 +69,7 @@
             <div class="header__bottom-right">
               <nav class="nav">
                <router-link to="/faq" class="nav__link">faq</router-link>
-               <!-- <router-link to="/about" class="nav__link">О нас</router-link> -->
+               <router-link to="/about" class="nav__link">О нас</router-link>
                <router-link to="/contact" class="nav__link">контакты</router-link>
               </nav>
               <button type="button" class="header__btn btn btn_primary" @click="scrollTo">
@@ -186,7 +186,7 @@
             <button type="button" class="btn-burger js-menu"><span>Menu</span></button>
           </div>
         </div>
-        <div class="header-mob__drop">
+        <div class="header-mob__drop is-active">
           <div class="header-mob__drop-in inner">
             <nav class="header-mob__nav">
               <a href="#" class="header-mob__nav-link is-active">Главная</a>
