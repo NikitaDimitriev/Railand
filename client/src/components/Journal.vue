@@ -106,7 +106,7 @@ export default {
     };
   },
   mounted() {
-    this.getArticles();
+    // this.getArticles();
   },
   methods: {
     getArticles() {

@@ -68,14 +68,14 @@
               <!-- BEGIN slideshow -->
               <div class="slideshow">
                 <div class="slideshow__preview">
-                  <img :src="mainPhoto || 'http://rl-property.ru/upload/'+this.object.mainPhoto" width="730" height="450" alt="">
+                  <img :src="mainPhoto || 'http://rl-property.com/'+this.object.mainPhoto" width="730" height="450" alt="">
                 </div>
                 <div class="slideshow__thumbs">
                   <button type="button" class="slideshow__arrow-left">prev</button>
                   <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
                     <div class="thumbs-list__item " v-for="(photo, index) of 4" :key="index" :class="{'is-active' : activePhoto === index}" @click="clicked = true, setPhoto(index) ">
-                      <img :src="'http://rl-property.ru/upload/'+object.photo[index]" width="160" height="100" alt="">
+                      <img :src="'http://rl-property.com/'+object.photo[index]" width="160" height="100" alt="">
                     </div>
                     <!-- <div class="thumbs-list__item ">
                       <img :src="'http://rl-property.ru/upload/'+object.photo[1]" width="160" height="100" alt="">
@@ -184,9 +184,9 @@ export default {
       setPhoto(index){
         this.activePhoto = index;
         if(!this.clicked){
-          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.mainPhoto;
+          this.mainPhoto = 'http://rl-property.com/upload/'+this.object.mainPhoto;
         }else if(this.clicked){
-          this.mainPhoto = 'http://rl-property.ru/upload/'+this.object.photo[index];
+          this.mainPhoto = 'http://rl-property.com/upload/'+this.object.photo[index];
         }
       },
       scrollTo() {

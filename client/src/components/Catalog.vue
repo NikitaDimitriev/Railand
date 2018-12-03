@@ -312,7 +312,7 @@
                       <div class="card__slider">
                         <div class="card__slider-item">
                           <img
-                            :src="'http://rl-property.ru/upload/'+object.mainPhoto"
+                            :src="'http://rl-property.com/'+object.mainPhoto"
                             alt="аппартамены"
                           >
                         </div>
