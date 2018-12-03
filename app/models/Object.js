@@ -15,8 +15,8 @@ module.exports = mongoose.model('Object', {
     areaOfPool:{type:String},
     rooms: {type: String},
     coordinat:{
-        x:String,
-        y:String
+        x:Number,
+        y:Number
     },
     location:{type:String},
     descriptionRu:{type:String},
@@ -33,5 +33,7 @@ module.exports = mongoose.model('Object', {
     },
     property:{type:Array},
     sales:{type:String},
-    rent:{type:String}
+    rent:{type:String},
+    stage: {type:String},
+    infrastructure: {type: Array}
 })

@@ -9,6 +9,7 @@ exports.getObjectsPaginationRent = getObjectsPaginationRent;
 exports.getObjectById = getObjectById;
 exports.getInfoSales = getInfoSales;
 exports.getInfoRent = getInfoRent;
+exports.getFilter = getFilter;
 
 const fs = require("fs");
 const request = require('request');
@@ -34,6 +35,15 @@ async function create(dump, dumpPhoto) {
                 let photo = [];
                 let sales = false;
                 let rent = false;
+                let mapPosition = {
+                    x: 0,
+                    y:0
+                }
+            if(data["Map position"]){
+                mapPosition.x = parseFloat(data["Map position"].substring(0, data["Map position"].indexOf(",")));
+                mapPosition.y = parseFloat(data["Map position"].substring(data["Map position"].indexOf(",")+2));
+                console.log(mapPosition);
+            }
             if(data["PRICES"]){
                 for (let j = 0; j < data["PRICES"].length; j++) {
                     if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
@@ -73,7 +83,7 @@ async function create(dump, dumpPhoto) {
                 floor: data["Number of storeys"].substring(0, data["Number of storeys"].indexOf(".")),
                 descriptionRu: data["Description Ru"],
                 descriptionEn: data["Description En"],
-                locationId: data["Location"],
+                location: data["Location"],
                 typeOfObject: data["Property type"],
                 address: data["Address"],
                 mainPhoto: data["Main photo"],
@@ -85,7 +95,10 @@ async function create(dump, dumpPhoto) {
                     currencySales: currencySales,
                     priceRent: formatPrice(priceRent),
                     currencyRent: currencyRent
-                }
+                },
+                coordinat: mapPosition,
+                stage: data["Stage"],
+                infrastructure: data.Infrastructure.VALUE
             });
             console.log("create");
         }
@@ -227,4 +240,70 @@ async function getObjectById(req, res) {
     } catch (error) {
         console.log(error);
     }
+}
+
+async function getFilter(req, res) {
+    try {
+        let types = req.body.filter.type;
+        let searchSales = true;
+        let searchRent = false;
+        if(types === 'sales'){
+            searchSales = true
+        }else{
+            searchRent = true
+        }
+        let objects = await Apertment.find({sales: searchSales, rent: searchRent});
+        let result = [];
+        let resultTemp = {};
+        for (let i = 0; i < objects.length; i++) {
+            resultTemp = objects[i];
+            if(req.body.filter.location !== 'all'){
+                objects[i].location === req.body.filter.location ? null : resultTemp = false;
+            };
+            if(req.body.filter.rooms !== 'all'){
+                if(req.body.filter.rooms === '4+'){
+                    parseInt(resultTemp.rooms) > 3 ? null : resultTemp = false;
+                }else{
+                    objects[i].rooms === req.body.filter.rooms ? null : resultTemp = false;
+                }
+            }
+            if(req.body.filter.statusOfObject !== 'all'){
+                objects[i].stage === req.body.filter.statusOfObject ? null : resultTemp = false
+            }
+            if(req.body.filter.priceBegin){
+                console.log(req.body.filter.priceBegin, objects[i].price.priceSales.replace(/\./g,''))
+                parseInt(objects[i].price.priceSales.replace(/\./g,'')) > parseInt(req.body.filter.priceBegin) ? null : resultTemp = false;
+            }
+            if(req.body.filter.priceEnd){
+                parseInt(objects[i].price.priceSales.replace(/\./g,'')) < parseInt(req.body.filter.priceEnd) ? null : resultTemp = false;
+            }
+            let check = await checkType(req.body.filter.typeOfObject, objects[i].typeOfObject);
+            if(!check) resultTemp = false;
+
+            if(resultTemp){
+                result.push(resultTemp);
+            }
+        }
+        res.json(result).end();
+    } catch (error) {
+        console.log(error);
+    }    
+}
+
+async function checkType(types, object) {
+    let check = true;
+    if (types.villa) {
+        console.log("here")
+        object === "villa" ? null : check = false;
+    }else if (types.apartment) {
+        object === "apartment" ? null : check = false;
+    }
+    else if (types.house) {
+        object === "house" ? null : check = false;
+    }
+    else if (types.land) {
+        object === "land" ? null : check = false;
+    }
+    console.log(check)
+    return check;
 }
