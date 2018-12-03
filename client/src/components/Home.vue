@@ -76,7 +76,7 @@
             <router-link :to="`/catalog/${object._id}`">
               <div class="aitem">
                 <div class="aitem__pic">
-                  <img :src="'http://rl-property.ru/upload/'+object.mainPhoto" width="255" height="300" alt="">
+                  <img :src="'http://rl-property.com/'+object.mainPhoto" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
                   <div class="aitem__title"> {{object.titleRu || "Апартаменты с видом на море в Ката"}} </div>
