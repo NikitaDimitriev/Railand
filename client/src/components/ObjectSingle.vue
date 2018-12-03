@@ -184,9 +184,9 @@ export default {
       setPhoto(index){
         this.activePhoto = index;
         if(!this.clicked){
-          this.mainPhoto = 'http://rl-property.com/upload/'+this.object.mainPhoto;
+          this.mainPhoto = 'http://rl-property.com/'+this.object.mainPhoto;
         }else if(this.clicked){
-          this.mainPhoto = 'http://rl-property.com/upload/'+this.object.photo[index];
+          this.mainPhoto = 'http://rl-property.com/'+this.object.photo[index];
         }
       },
       scrollTo() {
