@@ -30,7 +30,7 @@ async function sendMail(req, res) {
             var mailOptions = {
                 from: 'welcome@rl-property.com',
                 // to: 'nikitadimitriev000@gmail.com',
-                to: ['marketing@rl-property.com'],
+                to: 'marketing@rl-property.com',
                 subject: 'Заявка на аренду',
                 html: `    <ul>
                                 <li>Расположение: ${req.body.filter.location}</li>
@@ -73,7 +73,7 @@ async function sendMail(req, res) {
             var mailOptions = {
                 from: 'welcome@rl-property.com',
                 // to: 'nikitadimitriev000@gmail.com',
-                to: ['marketing@rl-property.com'],
+                to: 'marketing@rl-property.com',
                 subject: 'Заявка',
                 html: `<ul>
                             <li>Расположение: ${req.body.filter.location}</li>
