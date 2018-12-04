@@ -8,10 +8,10 @@
       <!-- BEGIN catalog-promo -->
       <section class="catalog-promo" style="background-image: url(../../static/about-form.jpg)">
         <div class="catalog-promo__in inner">
-          <h2 class="catalog-promo__title">Более 700 обьектов в базе</h2>
+          <h2 class="catalog-promo__title">Лучшие объекты в нашем каталоге</h2>
           <div
             class="catalog-promo__subtitle"
-          >Чтобы изучить весь каталог, потребуется примерно 48 часов.
+          >Найдите лучшие объекты недвижимости для покупки либо аренды либо оставьте свою заявку и менеджер подберет варианты специально для вас.
             <br>Оставьте заявку, и менеджер быстро подберет варианты.
           </div>
           <button type="button" class="catalog-promo__btn btn" @click="scrollTo">

@@ -4,6 +4,7 @@ exports.sendMail = sendMail;
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
+    port: 25,
     auth: {
         user: 'welcome@rl-property.com',
         pass: 'W4b7z9mx'
