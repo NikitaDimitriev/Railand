@@ -35,5 +35,6 @@ module.exports = mongoose.model('Object', {
     sales:{type:String},
     rent:{type:String},
     stage: {type:String},
-    infrastructure: {type: Array}
+    infrastructure: {type: Array},
+    features: {type: Array}
 })

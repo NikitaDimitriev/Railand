@@ -89,6 +89,21 @@
                   </div>
                 </div>
               </div>
+              <div class="icons">
+                <p style="font-size: 20px">Включено в стоймость:</p>
+                <div class="icons_block">
+                <img src="../../static/pool.svg" width="50" height="50" v-if="object.features.includes('pool')">
+                <img src="../../static/security.svg" width="50" height="50" v-if="object.features.includes('security')">
+                <img src="../../static/balcony.svg" width="50" height="50" v-if="object.features.includes('balcony')">
+                <img src="../../static/terace.svg" width="50" height="50" v-if="object.features.includes('terrace')">
+                <img src="../../static/wifi.svg" width="50" height="50" v-if="object.features.includes('wifi')">
+                <img src="../../static/tv.svg" width="50" height="50" v-if="object.features.includes('tv')">
+                <img src="../../static/condition.svg" width="50" height="50" v-if="object.features.includes('conditioning')">
+                <img src="../../static/householdappliances.svg" width="50" height="50" v-if="object.features.includes('householdappliances')">
+                <img src="../../static/furniture.svg" width="50" height="50" v-if="object.features.includes('furniture')">
+                <img src="../../static/parking.svg" width="50" height="50" v-if="object.features.includes('parking')">
+                </div>
+              </div>
               <!-- END slideshow -->
               <div class="columns">
                 <div class="columns__left">
@@ -204,4 +219,9 @@ export default {
 };
 </script>
 <style>
+.icons_block{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 </style>

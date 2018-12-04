@@ -98,7 +98,8 @@ async function create(dump, dumpPhoto) {
                 },
                 coordinat: mapPosition,
                 stage: data["Stage"],
-                infrastructure: data.Infrastructure.VALUE
+                infrastructure: data.Infrastructure.VALUE,
+                features: data["Property features"].VALUE
             });
             console.log("create");
         }

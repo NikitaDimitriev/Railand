@@ -197,6 +197,29 @@
                         </select>
                       </div>
                     </div>
+                    <div class="aside__col" v-if="tab1">
+                      <el-date-picker
+                      style="max-width: 272px"
+                        v-model="dateRange"
+                        type="daterange"
+                        start-placeholder="From"
+                        end-placeholder="To">
+                      </el-date-picker>
+                    </div>
+                    <div class="aside__col">
+                      <div class="select-l" v-if="tab1">
+                        <select class="select-l__el" v-model="filter.statusOfObject">
+                          <option value="all">Количество гостей</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7+">7+</option>
+                        </select>
+                      </div>
+                    </div>
                     <!-- <div class="aside__col">
                           <div class="select-l" v-if="tab0">
                             <select class="select-l__el" v-model="filter.target">
@@ -385,7 +408,8 @@ export default {
       },
       activeVilla: false,
       activeApartment: false,
-      activeHouse: false
+      activeHouse: false,
+      dateRange: ''
     };
   },
   methods: {

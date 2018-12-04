@@ -7,7 +7,8 @@ import * as VueGoogleMaps from "vue2-google-maps";
 import axios from 'axios';
 import VueCarousel from 'vue-carousel';
 import VueScrollTo from 'vue-scrollto';
-
+import elementLocale from 'element-ui/lib/locale/lang/en';
+Vue.use(Element, { locale: elementLocale });
 
 Vue.use(VueScrollTo);
 Vue.config.productionTip = false
@@ -25,7 +26,7 @@ Vue.use(VueScrollTo, {
   x: false,
   y: true
 })
-Vue.use(Element);
+// Vue.use(Element);
 Vue.prototype.$axios = axios
 Vue.use(VueGoogleMaps, {
   load: {
