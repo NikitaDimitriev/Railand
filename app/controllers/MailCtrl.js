@@ -5,15 +5,15 @@ exports.sendMail = sendMail;
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'marketing@rl-property.com',
-        pass: 'z9M54yWG'
+        user: 'welcome@rl-property.com',
+        pass: 'W4b7z9mx'
     }
 });
 
 async function sendMail(req, res) {
     try {
         if (req.body.filter.type === 'rent') {
-            let types = JSON.stringify(req.body.filter.typeOfObject);
+            let types = req.body.filter.typeOfObject;
             let listOfTypes = "";
             if(types.villa){
                 listOfTypes = "Вилла"
@@ -28,8 +28,9 @@ async function sendMail(req, res) {
                 listOfTypes = listOfTypes + " Земельный участок"
             }
             var mailOptions = {
-                from: 'marketing@rl-property.com',
-                to: ['raisa@rl-property.com', 'rent@rl-property.com'],
+                from: 'welcome@rl-property.com',
+                // to: 'nikitadimitriev000@gmail.com',
+                to: ['marketing@rl-property.com', 'raisa@rl-property.com', 'rent@rl-property.com'],
                 subject: 'Заявка на аренду',
                 html: `    <ul>
                                 <li>Расположение: ${req.body.filter.location}</li>
@@ -39,8 +40,10 @@ async function sendMail(req, res) {
                             </ul>`
             };
         } else {
-            let types = JSON.stringify(req.body.filter.typeOfObject);
+            let types = req.body.filter.typeOfObject;
             let listOfTypes = "";
+            let target = "";
+            let statusOfObject = "";
             if(types.villa){
                 listOfTypes = "Вилла"
             }
@@ -53,17 +56,32 @@ async function sendMail(req, res) {
             if (types.land) {
                 listOfTypes = listOfTypes + " Земельный участок"
             }
+            if(req.body.filter.target === 'personal'){
+                target = "Личное использование"
+            }else if(req.body.filter.target === 'business'){
+                target = "Инвестиции"
+            }else{
+                target = "Все";
+            }
+            if(req.body.filter.statusOfObject === 'underconstruction'){
+                statusOfObject = "Строитество";
+            }else if(req.body.filter.statusOfObject === 'complete'){
+                statusOfObject = "Вторичный рынок";
+            }else{
+                statusOfObject = "Все";
+            }
             var mailOptions = {
-                from: 'marketing@rl-property.com',
-                to: ['raisa@rl-property.com', 'sales@rl-property.com'],
+                from: 'welcome@rl-property.com',
+                to: 'nikitadimitriev000@gmail.com',
+                // to: ['marketing@rl-property.com','raisa@rl-property.com', 'sales@rl-property.com'],
                 subject: 'Заявка',
                 html: `<ul>
                             <li>Расположение: ${req.body.filter.location}</li>
                             <li>Количество спален: ${req.body.filter.rooms}</li>
                             <li>Тип обьекта: ${listOfTypes}</li>
                             <li>Стоимость: от ${req.body.filter.priceBegin}  до ${req.body.filter.priceEnd}</li>
-                            <li>Цель: ${req.body.filter.target}</li>
-                            <li>Статус обьекта: ${req.body.filter.statusOfObject}</li>
+                            <li>Цель: ${target}</li>
+                            <li>Статус обьекта: ${statusOfObject}</li>
                         </ul>`
             };
         }
