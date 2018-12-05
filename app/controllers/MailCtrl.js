@@ -107,8 +107,8 @@ async function sendMailReserv(req, res){
         console.log(req.body); 
         var mailOptions = {
             from: 'welcome@rl-property.com',
-            to: 'nikitadimitriev000@gmail.com',
-            // to: 'marketing@rl-property.com',
+            // to: 'nikitadimitriev000@gmail.com',
+            to: 'marketing@rl-property.com',
             subject: 'Бронь!',
             html: `<ul>
                         <li>Даты: ${req.body.data.date[0]} - ${req.body.data.date[1]}</li>
