@@ -352,7 +352,7 @@
                       </div>
                       <div class="card__footer">
                         <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
-                        <router-link :to="`/catalog/${object._id}`">
+                        <router-link :to="`/catalog/${filter.type}/${object._id}`">
                           <button type="button" class="card__btn btn btn_primary">Смотреть</button>
                         </router-link>
                       </div>
