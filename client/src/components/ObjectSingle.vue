@@ -32,7 +32,7 @@
                       >{{"Сдан в эксплуатацию"}}</dd>
                     </dl>
                   </div>
-                  <div class="aside__col">
+                  <div class="aside__col" v-if="$route.params.type === 'rent'">
                     <el-date-picker
                       style="max-width: 272px"
                       v-model="dateRange"
@@ -40,7 +40,7 @@
                       start-placeholder="From"
                       end-placeholder="To"></el-date-picker>
                   </div>
-                  <div class="aside__col">
+                  <div class="aside__col" v-if="$route.params.type === 'rent'">
                     <div class="select-l">
                       <select class="select-l__el" v-model="countOfGuest">
                         <option value="all">Количество гостей</option>
@@ -313,7 +313,7 @@ export default {
       if(this.$route.params.type === 'rent'){
         return "По запросу";
       }else{
-        return this.object.price.priceSales;
+        return this.scrollToobject.price.priceSales;
       }
     },
     getObjectById() {
