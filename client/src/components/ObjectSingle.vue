@@ -313,7 +313,7 @@ export default {
       if(this.$route.params.type === 'rent'){
         return "По запросу";
       }else{
-        return this.scrollToobject.price.priceSales;
+        return this.object.price.priceSales;
       }
     },
     getObjectById() {
