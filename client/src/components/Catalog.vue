@@ -8,10 +8,10 @@
       <!-- BEGIN catalog-promo -->
       <section class="catalog-promo" style="background-image: url(../../static/about-form.jpg)">
         <div class="catalog-promo__in inner">
-          <h2 class="catalog-promo__title">Более 700 обьектов в базе</h2>
+          <h2 class="catalog-promo__title">Лучшие объекты в нашем каталоге</h2>
           <div
             class="catalog-promo__subtitle"
-          >Чтобы изучить весь каталог, потребуется примерно 48 часов.
+          >Найдите лучшие объекты недвижимости для покупки либо аренды либо оставьте свою заявку и менеджер подберет варианты специально для вас.
             <br>Оставьте заявку, и менеджер быстро подберет варианты.
           </div>
           <button type="button" class="catalog-promo__btn btn" @click="scrollTo">
@@ -70,8 +70,7 @@
                     <span
                       class="objects__link"
                       @click="activeVilla, getVillas() "
-                      :class="{'is-active': activeVilla}"
-                    >Вилла</span>
+                      :class="{'is-active': activeVilla}">Вилла</span>
                     <span
                       class="objects__link"
                       @click="activeApartment, getApartments()"
@@ -194,29 +193,6 @@
                           <option value="all">Статус объекта</option>
                           <option value="underconstruction">Строительство</option>
                           <option value="secondarymarket">Сдано в эксплуатацию</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="aside__col" v-if="tab1">
-                      <el-date-picker
-                      style="max-width: 272px"
-                        v-model="dateRange"
-                        type="daterange"
-                        start-placeholder="From"
-                        end-placeholder="To">
-                      </el-date-picker>
-                    </div>
-                    <div class="aside__col">
-                      <div class="select-l" v-if="tab1">
-                        <select class="select-l__el" v-model="filter.statusOfObject">
-                          <option value="all">Количество гостей</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7+">7+</option>
                         </select>
                       </div>
                     </div>

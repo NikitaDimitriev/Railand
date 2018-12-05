@@ -60,6 +60,7 @@ app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);
 app.get('/api/get-article-by-id', ArticlesCtrl.getArticleById);
 
 app.post('/api/send-order-mail', MailCtrl.sendMail);
+app.post('/api/send-reserv-mail', MailCtrl.sendMailReserv);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);

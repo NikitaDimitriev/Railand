@@ -85,7 +85,7 @@ export default new Router({
       component: Journal
     },
     {
-      path: '/catalog/:id',
+      path: '/catalog/:type/:id',
       name: 'ObjectSingle',
       component: ObjectSingle
     },

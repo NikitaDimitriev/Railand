@@ -240,7 +240,8 @@
           </div>
           <div class="order-form__right">
             <div class="order-form__title">
-              <span>48 ЧАСОВ</span> <br /> НА ИЗУЧЕНИЕ ВСЕГО <br /> КАТАЛОГА </div>
+              <span>Самые лучшие объекты в нашем каталоге</span> 
+              </div>
             <div class="order-form__txt">
               <p>Заполните эту заявку — все поля формы, — выбрав подходящие вам параметры. <br/>Укажите ваши контактные данные. <br/>В течение 20 минут после того, как вы отправите заявку, специалисты Rайland её рассмотрят. <br/>Менеджер свяжется с вами для уточнения деталей. И мы сразу же приступим к поиску подходящих объектов в нашей базе недвижимости на Пхукете. </p>
             </div>
@@ -335,7 +336,8 @@
           </div>
           <div class="order-form__right">
             <div class="order-form__title">
-              <span>48 ЧАСОВ</span> <br /> НА ИЗУЧЕНИЕ ВСЕГО <br /> КАТАЛОГА </div>
+              <span>Самые лучшие объекты в нашем каталоге</span>
+            </div>
             <div class="order-form__txt">
               <p>Заполните эту заявку — все поля формы, — выбрав подходящие вам параметры. <br/>Укажите ваши контактные данные. <br/>В течение 20 минут после того, как вы отправите заявку, специалисты Rайland её рассмотрят. <br/>Менеджер свяжется с вами для уточнения деталей. И мы сразу же приступим к поиску подходящих объектов в нашей базе недвижимости на Пхукете. </p>
             </div>
@@ -481,7 +483,7 @@ export default {
         });
     },
     searchByFilter() {
-      this.$axios.post("http://rl-property.com/api/send-order-mail", { filter: this.filter }).then(response=>{
+      this.$axios.post("http://localhost:80/api/send-order-mail", { filter: this.filter }).then(response=>{
         console.log(response);
       })
       this.$router.push({ path: "/catalog", query: { filter: this.filter } });
