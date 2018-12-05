@@ -1,8 +1,8 @@
 <template>
-    <div class="object_single">
-        <Menu/>
-        <div class="out">
-            <section class="cards">
+  <div class="object_single">
+    <Menu/>
+    <div class="out">
+      <section class="cards">
         <div class="cards__in inner">
           <!-- BEGIN cards-main -->
           <div class="cards__main">
@@ -16,34 +16,74 @@
                   <div class="options__body">
                     <dl class="options-list">
                       <dt class="options-list__title">Цена объекта:</dt>
-                      <dd class="options-list__description">&#3647; {{object.price.priceSales}}</dd>
+                      <dd class="options-list__description">&#3647; {{setPrice()}}</dd>
                       <dt class="options-list__title">Цена за м2</dt>
                       <dd class="options-list__description">от {{makePriceForMetr()}} &#3647;</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
-                      <dd class="options-list__description" v-if="object.stage !== 'none'">{{object.stage === "underconstruction" ? "На этапе строительства" : "Вторичный рынок"}}</dd>
-                      <dd class="options-list__description" v-if="object.stage === 'none'">{{"Сдан в эксплуатацию"}}</dd>
+                      <dd
+                        class="options-list__description"
+                        v-if="object.stage !== 'none'"
+                      >{{object.stage === "underconstruction" ? "На этапе строительства" : "Вторичный рынок"}}</dd>
+                      <dd
+                        class="options-list__description"
+                        v-if="object.stage === 'none'"
+                      >{{"Сдан в эксплуатацию"}}</dd>
                     </dl>
                   </div>
-                  <div class="options__bottom">
-                    <button type="button" class="options__btn btn" @click="scrollTo"><span>Отправить запрос</span></button>
+                  <div class="aside__col">
+                    <el-date-picker
+                      style="max-width: 272px"
+                      v-model="dateRange"
+                      type="daterange"
+                      start-placeholder="From"
+                      end-placeholder="To"></el-date-picker>
+                  </div>
+                  <div class="aside__col">
+                    <div class="select-l">
+                      <select class="select-l__el" v-model="countOfGuest">
+                        <option value="all">Количество гостей</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7+">7+</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="options__bottom" v-if="$route.params.type !== 'rent'">
+                    <button type="button" class="options__btn btn" @click="scrollTo">
+                      <span>Отправить запрос</span>
+                    </button>
+                  </div>
+                  <div class="options__bottom" v-if="$route.params.type === 'rent'">
+                    <button type="button" class="options__btn btn" @click="order()">
+                      <span>Забронировать</span>
+                    </button>
                   </div>
                 </div>
                 <div class="small-map">
                   <div class="small-map__title">Объект на карте:</div>
-                  <div class="aside__toggle js-toggle"> Объекты на карте:</div>
+                  <div class="aside__toggle js-toggle">Объекты на карте:</div>
                   <div class="small-map__container">
-                    <GmapMap style="width: 100%; height: 500px;" :zoom="12" :center="{lat: object.coordinat.x, lng: object.coordinat.y}">
+                    <GmapMap
+                      style="width: 100%; height: 500px;"
+                      :zoom="12"
+                      :center="{lat: object.coordinat.x, lng: object.coordinat.y}"
+                    >
                       <!-- <GmapMarker v-for="(marker, index) in markers"
                         :key="index"
                         :position="marker.position"
-                        /> -->
+                      />-->
                       <GmapMarker
                         :position="{
                           lat: object.coordinat.x,
                           lng: object.coordinat.y,
-                        }"/>
+                        }"
+                      />
                     </GmapMap>
                   </div>
                 </div>
@@ -52,13 +92,19 @@
             <!-- END cards-aside -->
             <!-- BEGIN cards-body -->
             <div class="cards__body card-main">
-              <h2 class="card-main__title title-large"><span>{{object.titleRu}}</span></h2>
+              <h2 class="card-main__title title-large">
+                <span>{{object.titleRu}}</span>
+              </h2>
               <!-- BEGIN topper -->
               <div class="topper">
                 <ul class="topper__breadcrumb breadcrumb">
-                  <li class="breadcrumb__item"><router-link to="/">главная</router-link></li>
+                  <li class="breadcrumb__item">
+                    <router-link to="/">главная</router-link>
+                  </li>
                   <li class="breadcrumb__separator">/</li>
-                  <li class="breadcrumb__item"><router-link to="/catalog">каталог</router-link></li>
+                  <li class="breadcrumb__item">
+                    <router-link to="/catalog">каталог</router-link>
+                  </li>
                   <!-- <li class="breadcrumb__separator">/</li> -->
                   <!-- <li class="breadcrumb__item"><span>карточка комплекса</span></li> -->
                 </ul>
@@ -68,14 +114,30 @@
               <!-- BEGIN slideshow -->
               <div class="slideshow">
                 <div class="slideshow__preview">
-                  <img :src="mainPhoto || 'http://rl-property.com/'+this.object.mainPhoto" width="730" height="450" alt="">
+                  <img
+                    :src="mainPhoto || 'http://rl-property.com/'+this.object.mainPhoto"
+                    width="730"
+                    height="450"
+                    alt
+                  >
                 </div>
                 <div class="slideshow__thumbs">
                   <button type="button" class="slideshow__arrow-left">prev</button>
                   <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
-                    <div class="thumbs-list__item " v-for="(photo, index) of 4" :key="index" :class="{'is-active' : activePhoto === index}" @click="clicked = true, setPhoto(index) ">
-                      <img :src="'http://rl-property.com/'+object.photo[index]" width="160" height="100" alt="">
+                    <div
+                      class="thumbs-list__item"
+                      v-for="(photo, index) of 4"
+                      :key="index"
+                      :class="{'is-active' : activePhoto === index}"
+                      @click="clicked = true, setPhoto(index) "
+                    >
+                      <img
+                        :src="'http://rl-property.com/'+object.photo[index]"
+                        width="160"
+                        height="100"
+                        alt
+                      >
                     </div>
                     <!-- <div class="thumbs-list__item ">
                       <img :src="'http://rl-property.ru/upload/'+object.photo[1]" width="160" height="100" alt="">
@@ -85,23 +147,73 @@
                     </div>
                     <div class="thumbs-list__item ">
                       <img :src="'http://rl-property.ru/upload/'+object.photo[3]" width="160" height="100" alt="">
-                    </div> -->
+                    </div>-->
                   </div>
                 </div>
               </div>
               <div class="icons">
                 <p style="font-size: 20px">Включено в стоймость:</p>
                 <div class="icons_block">
-                <img src="../../static/pool.svg" width="50" height="50" v-if="object.features.includes('pool')">
-                <img src="../../static/security.svg" width="50" height="50" v-if="object.features.includes('security')">
-                <img src="../../static/balcony.svg" width="50" height="50" v-if="object.features.includes('balcony')">
-                <img src="../../static/terace.svg" width="50" height="50" v-if="object.features.includes('terrace')">
-                <img src="../../static/wifi.svg" width="50" height="50" v-if="object.features.includes('wifi')">
-                <img src="../../static/tv.svg" width="50" height="50" v-if="object.features.includes('tv')">
-                <img src="../../static/condition.svg" width="50" height="50" v-if="object.features.includes('conditioning')">
-                <img src="../../static/householdappliances.svg" width="50" height="50" v-if="object.features.includes('householdappliances')">
-                <img src="../../static/furniture.svg" width="50" height="50" v-if="object.features.includes('furniture')">
-                <img src="../../static/parking.svg" width="50" height="50" v-if="object.features.includes('parking')">
+                  <img
+                    src="../../static/pool.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('pool')"
+                  >
+                  <img
+                    src="../../static/security.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('security')"
+                  >
+                  <img
+                    src="../../static/balcony.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('balcony')"
+                  >
+                  <img
+                    src="../../static/terace.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('terrace')"
+                  >
+                  <img
+                    src="../../static/wifi.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('wifi')"
+                  >
+                  <img
+                    src="../../static/tv.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('tv')"
+                  >
+                  <img
+                    src="../../static/condition.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('conditioning')"
+                  >
+                  <img
+                    src="../../static/householdappliances.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('householdappliances')"
+                  >
+                  <img
+                    src="../../static/furniture.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('furniture')"
+                  >
+                  <img
+                    src="../../static/parking.svg"
+                    width="50"
+                    height="50"
+                    v-if="object.features.includes('parking')"
+                  >
                 </div>
               </div>
               <!-- END slideshow -->
@@ -149,10 +261,17 @@
                   </div>
                   <h4 class="columns__title">Описание:</h4>
                   <div class="columns__content-wrp">
-                    <div class="columns__content js-collapse-content" :class="{'is-short': isShort}">
-                      {{object.descriptionRu}}  
-                    </div>
-                    <button type="button" class="columns__btn-more btn-more js-collapse-link" @click="isShort = !isShort"><span>Больше описания</span></button>
+                    <div
+                      class="columns__content js-collapse-content"
+                      :class="{'is-short': isShort}"
+                    >{{object.descriptionRu}}</div>
+                    <button
+                      type="button"
+                      class="columns__btn-more btn-more js-collapse-link"
+                      @click="isShort = !isShort"
+                    >
+                      <span>Больше описания</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -162,9 +281,9 @@
           <!-- END cards-main -->
         </div>
       </section>
-        </div>
-        <Footer/>
     </div>
+    <Footer/>
+  </div>
 </template>
 <script>
 import Menu from "./shared/Menu";
@@ -175,51 +294,83 @@ export default {
     Menu,
     Footer
   },
-  data(){
-    return{
-      object:{},
+  data() {
+    return {
+      object: {},
       isShort: true,
       activePhoto: 0,
       clicked: false,
-      mainPhoto: ''
-    }
+      mainPhoto: "",
+      dateRange: "",
+      countOfGuest: "all"
+    };
   },
-  mounted(){
+  mounted() {
     this.getObjectById();
   },
-  methods:{
-      getObjectById(){
-          let id = this.$route.params.id;
-          console.log(id);
-          this.$axios.get(`http://rl-property.com/api/get-object-by-id/${id}`).then(response=>{
-            this.object = response.data;
-            console.log(this.object);
-          })
-      },
-      setPhoto(index){
-        this.activePhoto = index;
-        if(!this.clicked){
-          this.mainPhoto = 'http://rl-property.com/'+this.object.mainPhoto;
-        }else if(this.clicked){
-          this.mainPhoto = 'http://rl-property.com/'+this.object.photo[index];
-        }
-      },
-      scrollTo() {
-        this.$router.push({path: '/',hash:"#order"})
-      },
-      makePriceForMetr(){
-        let metrPrice = Math.floor(parseInt(this.object.price.priceSales.replace(/\./g,'')) / this.object.area);
-        metrPrice = metrPrice.toString().split("").reverse();
-        metrPrice.splice(3, 0, ".").reverse().join();
-        metrPrice = metrPrice.reverse().join("");
-        console.log(metrPrice);
-        return metrPrice;
+  methods: {
+    setPrice(){
+      if(this.$route.params.type === 'rent'){
+        return "По запросу";
+      }else{
+        return object.price.priceSales;
       }
+    },
+    getObjectById() {
+      let id = this.$route.params.id;
+      console.log(this.$route.params);
+      this.$axios
+        .get(`http://rl-property.com/api/get-object-by-id/${id}`)
+        .then(response => {
+          this.object = response.data;
+          console.log(this.object);
+        });
+    },
+    setPhoto(index) {
+      this.activePhoto = index;
+      if (!this.clicked) {
+        this.mainPhoto = "http://rl-property.com/" + this.object.mainPhoto;
+      } else if (this.clicked) {
+        this.mainPhoto = "http://rl-property.com/" + this.object.photo[index];
+      }
+    },
+    scrollTo() {
+      this.$router.push({ path: "/", hash: "#order" });
+    },
+    makePriceForMetr() {
+      if(this.$route.params.type === 'rent') return;
+      let metrPrice = Math.floor(
+        parseInt(this.object.price.priceSales.replace(/\./g, "")) /
+          this.object.area
+      );
+      metrPrice = metrPrice
+        .toString()
+        .split("")
+        .reverse();
+      metrPrice
+        .splice(3, 0, ".")
+        .reverse()
+        .join();
+      metrPrice = metrPrice.reverse().join("");
+      return metrPrice;
+    },
+    order(){
+      let data = {
+        date: this.dateRange,
+        countOfGuest: this.countOfGuest,
+        nameOfObject: this.object.titleRu,
+        id: this.object._id
+      };
+      console.log(data)
+      this.$axios.post('http://rl-property.com/api/send-reserv-mail', {data}).then(response=>{
+        console.log(response);
+      })
+    }
   }
 };
 </script>
 <style>
-.icons_block{
+.icons_block {
   display: flex;
   align-items: center;
   justify-content: space-around;

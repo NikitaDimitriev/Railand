@@ -70,8 +70,7 @@
                     <span
                       class="objects__link"
                       @click="activeVilla, getVillas() "
-                      :class="{'is-active': activeVilla}"
-                    >Вилла</span>
+                      :class="{'is-active': activeVilla}">Вилла</span>
                     <span
                       class="objects__link"
                       @click="activeApartment, getApartments()"
@@ -194,29 +193,6 @@
                           <option value="all">Статус объекта</option>
                           <option value="underconstruction">Строительство</option>
                           <option value="secondarymarket">Сдано в эксплуатацию</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="aside__col" v-if="tab1">
-                      <el-date-picker
-                      style="max-width: 272px"
-                        v-model="dateRange"
-                        type="daterange"
-                        start-placeholder="From"
-                        end-placeholder="To">
-                      </el-date-picker>
-                    </div>
-                    <div class="aside__col">
-                      <div class="select-l" v-if="tab1">
-                        <select class="select-l__el" v-model="filter.statusOfObject">
-                          <option value="all">Количество гостей</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7+">7+</option>
                         </select>
                       </div>
                     </div>
@@ -352,7 +328,7 @@
                       </div>
                       <div class="card__footer">
                         <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
-                        <router-link :to="`/catalog/${object._id}`">
+                        <router-link :to="`/catalog/${filter.type}/${object._id}`">
                           <button type="button" class="card__btn btn btn_primary">Смотреть</button>
                         </router-link>
                       </div>
