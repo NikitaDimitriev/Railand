@@ -42,7 +42,7 @@
                 class="tab-links__item js-tab"
                 :class="{'is-active': tab1}"
                 data-tab="1"
-                @click="tab0 = false, tab1=true, filter.type='rent',getObjectsRent(), getInfoRent()"
+                @click="tab0 = false, tab1=true, filter.type='rent', getInfoRent(),getObjectsRent()"
               >
                 <span>Аренду</span>
               </button>
@@ -391,7 +391,7 @@ export default {
   methods: {
     filtering() {
       this.$axios
-        .post("http://rl-property.com/api/get-objects-filters", {
+        .post("http://localhost:8080/api/get-objects-filters", {
           filter: this.filter
         })
         .then(response => {
@@ -400,11 +400,11 @@ export default {
         });
     },
     setPages() {
-      this.pages = Math.floor(this.info / this.perPage);
+      this.pages = Math.ceil(this.info / this.perPage);
     },
     getInfoSales() {
       this.$axios
-        .get("http://rl-property.com/api/get-info-sales")
+        .get("http://localhost:8080/api/get-info-sales")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -412,7 +412,7 @@ export default {
     },
     getInfoRent() {
       this.$axios
-        .get("http://rl-property.com/api/get-info-rent")
+        .get("http://localhost:8080/api/get-info-rent")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -425,7 +425,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-sales/${
+          `http://localhost:8080/api/get-objects-pagination-sales/${
             this.page
           }/${this.perPage}`
         )
@@ -440,7 +440,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-rent/${
+          `http://localhost:8080/api/get-objects-pagination-rent/${
             this.page
           }/${this.perPage}`
         )
