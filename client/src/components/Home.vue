@@ -73,7 +73,7 @@
           </div>
           <ul class="alist is-active" v-if="tab0">
             <li class="alist__item" v-for="(object, index) of objectsSales" :key="index">
-            <router-link :to="`/catalog/${object._id}`">
+            <router-link :to="`/catalog/sales/${object._id}`">
               <div class="aitem">
                 <div class="aitem__pic">
                   <img :src="'http://rl-property.com/'+object.mainPhoto" width="255" height="300" alt="">
@@ -92,7 +92,7 @@
           </ul>
           <ul class="alist is-active" v-if="tab1">
             <li class="alist__item" v-for="(object, index) of objectsRent" :key="index">
-            <router-link :to="`/catalog/${object._id}`">
+            <router-link :to="`/catalog/rent/${object._id}`">
               <div class="aitem">
                 <div class="aitem__pic">
                   <img :src="'http://rl-property.com/'+object.mainPhoto" width="255" height="300" alt="">
