@@ -483,7 +483,7 @@ export default {
         });
     },
     searchByFilter() {
-      this.$axios.post("http://localhost:80/api/send-order-mail", { filter: this.filter }).then(response=>{
+      this.$axios.post("http://rl-property.com/api/send-order-mail", { filter: this.filter }).then(response=>{
         console.log(response);
       })
       this.$router.push({ path: "/catalog", query: { filter: this.filter } });

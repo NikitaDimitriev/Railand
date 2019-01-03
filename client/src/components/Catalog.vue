@@ -391,7 +391,7 @@ export default {
   methods: {
     filtering() {
       this.$axios
-        .post("http://localhost:8080/api/get-objects-filters", {
+        .post("http://rl-property.com/api/get-objects-filters", {
           filter: this.filter
         })
         .then(response => {
@@ -404,7 +404,7 @@ export default {
     },
     getInfoSales() {
       this.$axios
-        .get("http://localhost:8080/api/get-info-sales")
+        .get("http://rl-property.com/api/get-info-sales")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -412,7 +412,7 @@ export default {
     },
     getInfoRent() {
       this.$axios
-        .get("http://localhost:8080/api/get-info-rent")
+        .get("http://rl-property.com/api/get-info-rent")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -425,7 +425,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://localhost:8080/api/get-objects-pagination-sales/${
+          `http://rl-property.com/api/get-objects-pagination-sales/${
             this.page
           }/${this.perPage}`
         )
@@ -440,12 +440,12 @@ export default {
       };
       this.$axios
         .get(
-          `http://localhost:8080/api/get-objects-pagination-rent/${
+          `http://rl-property.com/api/get-objects-pagination-rent/${
             this.page
           }/${this.perPage}`
         )
         .then(response => {
-          this.objects = response.data;
+          this.objects = response.data.reverse();
         });
     },
     setFilter() {
