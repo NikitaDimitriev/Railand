@@ -42,7 +42,7 @@
                 class="tab-links__item js-tab"
                 :class="{'is-active': tab1}"
                 data-tab="1"
-                @click="tab0 = false, tab1=true, filter.type='rent',getObjectsRent(), getInfoRent()"
+                @click="tab0 = false, tab1=true, filter.type='rent', getInfoRent(),getObjectsRent()"
               >
                 <span>Аренду</span>
               </button>
@@ -400,7 +400,7 @@ export default {
         });
     },
     setPages() {
-      this.pages = Math.floor(this.info / this.perPage);
+      this.pages = Math.ceil(this.info / this.perPage);
     },
     getInfoSales() {
       this.$axios
@@ -445,7 +445,7 @@ export default {
           }/${this.perPage}`
         )
         .then(response => {
-          this.objects = response.data;
+          this.objects = response.data.reverse();
         });
     },
     setFilter() {

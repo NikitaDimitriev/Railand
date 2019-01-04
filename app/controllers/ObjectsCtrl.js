@@ -113,6 +113,82 @@ async function getPhotoArray(data){
         return data["Photo"]["VALUE"];
     }
 }
+// addApartment();
+async function addApartment() {
+    await Apertment.create({
+        titleRu: 'Laguna Cove Pool Villa',
+        titleEn: 'Laguna Cove Pool Villa',
+        area: '430',
+        distanceToBitch: '',
+        rooms: '4',
+        distanceToAiroport: '',
+        badroom: '4',
+        bathroom: '3',
+        landArea: '465',
+        lifeArea: '430',
+        areaOfPool: '',
+        floor: '',
+        descriptionRu: 'Cosy  two-storeyed  private  pool  villa  in  Laguna  Cove  is  located  in  a  walking  distance  from  BangTao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20  minutes),which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beach  club,  hotelprivate  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offers  beautiful  viewfrom  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  3  bathrooms,  one  of  them  with  bathtube.The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.  There  is  aspacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
+        descriptionEn: 'Cosy  two-storeyed  private  pool  villa  in  Laguna  Cove  is  located  in  a  walking  distance  from  BangTao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20  minutes),which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beach  club,  hotelprivate  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offers  beautiful  viewfrom  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  3  bathrooms,  one  of  them  with  bathtube.The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.  There  is  aspacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
+        location: 'bang-tao',
+        typeOfObject: 'villa',
+        address: 'Laguna Cove',
+        mainPhoto: 'photo/1.jpg',
+        sales: "false",
+        rent: "true",
+        photo:['photo/1.jpg', 'photo/8.jpg','photo/16.jpg', 'photo/23.jpg', 'photo/25.jpg'],
+        // price:{
+        //     priceSales: formatPrice(priceSales),
+        //     currencySales: currencySales,
+        //     priceRent: formatPrice(priceRent),
+        //     currencyRent: currencyRent
+        // },
+        coordinat: {
+            x: 7.784912,
+            y:98.311196
+        },
+        stage: '1',
+        infrastructure: '',
+        features: ''
+    });
+    await Apertment.create({
+        titleRu: 'Laguna Vista Pool Villa',
+        titleEn: 'Laguna Vista Pool Villa',
+        area: '450',
+        distanceToBitch: '',
+        rooms: '4',
+        distanceToAiroport: '',
+        badroom: '4',
+        bathroom: '3',
+        landArea: '576',
+        lifeArea: '450',
+        areaOfPool: '',
+        floor: '',
+        descriptionRu: 'Comfortable two-storeyed  private  pool  villa  in  Laguna  Vista  is  located  in  a  walking  distance  fromBang  Tao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20minutes),  which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beachclub,  hotel  private  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offersbeautiful  view  from  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  4  bathrooms,  one  of  themwith  bathtube.  The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.There  is  a  spacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
+        descriptionEn: 'Comfortable two-storeyed  private  pool  villa  in  Laguna  Vista  is  located  in  a  walking  distance  fromBang  Tao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20minutes),  which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beachclub,  hotel  private  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offersbeautiful  view  from  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  4  bathrooms,  one  of  themwith  bathtube.  The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.There  is  a  spacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
+        location: 'bang-tao',
+        typeOfObject: 'villa',
+        address: 'Laguna Cove',
+        mainPhoto: 'photo/1(1).jpg',
+        sales: "false",
+        rent: "true",
+        photo:['photo/1(1).jpg', 'photo/2.jpg','photo/6.jpg', 'photo/9.jpg', 'photo/11.jpg'],
+        // price:{
+        //     priceSales: formatPrice(priceSales),
+        //     currencySales: currencySales,
+        //     priceRent: formatPrice(priceRent),
+        //     currencyRent: currencyRent
+        // },
+        coordinat: {
+            x: 7.784912,
+            y:98.311196
+        },
+        stage: '1',
+        infrastructure: '',
+        features: ''
+    });
+    console.log('created')
+}
 
 function formatPrice(value) {
     let val = (value/1).toFixed(2).replace('.', ',')
@@ -213,7 +289,7 @@ async function getObjectsPaginationSales(req, res) {
             perPage: parseInt(req.params.perPage)
         }
         console.log(paginationData);
-        let objects = await Apertment.find({sales: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        let objects = await Apertment.find({sales: "true"}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -226,8 +302,8 @@ async function getObjectsPaginationRent(req, res) {
             page: parseInt(req.params.page),
             perPage: parseInt(req.params.perPage)
         }
-        console.log(paginationData);
-        let objects = await Apertment.find({rent: true}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        let objects = await Apertment.find({rent: "true"});
+        console.log(objects);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
