@@ -152,7 +152,7 @@
                 </div>
               </div>
               <div class="icons">
-                <p style="font-size: 20px">Включено в стоймость:</p>
+                <p style="font-size: 20px">Включено в стоимость:</p>
                 <div class="icons_block">
                   <img
                     src="../../static/pool.svg"
