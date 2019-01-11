@@ -11,8 +11,8 @@ const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 const MailCtrl = require('./app/controllers/MailCtrl');
 
-const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
-// const db = 'mongodb://localhost:27017/RailandDB';
+// const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
+const db = 'mongodb://localhost:27017/RailandDB';
 
 mongoose.connect(db, function(err, db) {
 	if (err) {
@@ -22,7 +22,7 @@ mongoose.connect(db, function(err, db) {
   	}
 });
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
