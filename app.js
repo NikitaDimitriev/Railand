@@ -24,9 +24,11 @@ mongoose.connect(db, function(err, db) {
 
 const port = process.env.PORT || 8080;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended:true, limit:'50mb'}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(serveStatic(__dirname + "/client/dist"));
 app.use(express.static(__dirname + '/upload'))
@@ -53,7 +55,9 @@ app.get('/api/get-objects-pagination-rent/:page/:perPage', ObjectCtrl.getObjects
 app.get('/api/get-object-by-id/:id', ObjectCtrl.getObjectById);
 app.get('/api/get-info-sales', ObjectCtrl.getInfoSales);
 app.get('/api/get-info-rent', ObjectCtrl.getInfoRent);
-app.post('/api/get-objects-filters', ObjectCtrl.getFilter)
+app.post('/api/get-objects-filters', ObjectCtrl.getFilter);
+app.get('/api/get-objects', ObjectCtrl.getObjects);
+app.delete('/api/delete-object/:id', ObjectCtrl.deleteObject);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);

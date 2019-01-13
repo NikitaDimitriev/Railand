@@ -4,51 +4,225 @@
     <div class="work_area">
       <el-tabs value="first" class="create_tab">
         <el-tab-pane label="Create" name="first">
-          <el-input
-            placeholder="Название объекта"
-            v-model="nameOfObject"
-            clearable
-            class="input_articles"
-          ></el-input>
-          <el-input placeholder="Этажей" v-model="floor" clearable class="input_articles"></el-input>
-          <el-input placeholder="Комнат" v-model="rooms" clearable class="input_articles"></el-input>
-          <el-input placeholder="Цена" v-model="price" clearable class="input_articles"></el-input>
-          <el-input placeholder="Badroom" v-model="badroom" clearable class="input_articles"></el-input>
-          <el-input placeholder="Bathroom" v-model="bathroom" clearable class="input_articles"></el-input>
-          <el-input
-            placeholder="Distanсe to bitch"
-            v-model="distanсeToBitch"
-            clearable
-            class="input_articles"
-          ></el-input>
-          <el-input
-            placeholder="Distance to airoport"
-            v-model="distanсeToAiroport"
-            clearable
-            class="input_articles"
-          ></el-input>
-          <el-input placeholder="Area" v-model="area" clearable class="input_articles"></el-input>
-          <el-input placeholder="Land area" v-model="landArea" clearable class="input_articles"></el-input>
-          <el-input placeholder="Life area" v-model="lifeArea" clearable class="input_articles"></el-input>
-          <el-input
-            placeholder="Area of pool"
-            v-model="areaOfPool"
-            clearable
-            class="input_articles"
-          ></el-input>
-
-          <br>
-          <label for="mainImage">Main Image:</label>
-          <input type="file" @change="onFileChanged" name="mainImage">
-          <el-button type="primary" @click="create()">Create</el-button>
-          <el-carousel height="300px" :autoplay="false" trigger="click" indicator-position="outside" arrow="always">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <h3>{{ item }}</h3>
+          <el-carousel
+            height="600px"
+            :autoplay="false"
+            trigger="click"
+            indicator-position="outside"
+            arrow="always"
+          >
+            <el-carousel-item>
+              <div class="content">
+                <h3>Главная информация</h3>
+                <el-input
+                  placeholder="Название объекта RU"
+                  v-model="newObj.nameOfObjectRU"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Название объекта EN"
+                  v-model="newObj.nameOfObjectEN"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Цена ฿"
+                  v-model="newObj.price"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-select
+                  v-model="newObj.typeOfObject"
+                  placeholder="Тип объекта"
+                  class="input_articles"
+                >
+                  <el-option
+                    v-for="item in optionsType"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+                <el-select v-model="newObj.location" placeholder="Локация" class="input_articles">
+                  <el-option
+                    v-for="item in optionsLocation"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+                <div v-if="!image">
+                  <input type="file" @change="onFileChange">
+                </div>
+                <div v-else>
+                  <img :src="image" class="preloadImage">
+                  <!-- <button @click="removeImage">Remove image</button> -->
+                </div>
+              </div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div class="content">
+                <h3>Описание</h3>
+                <el-input
+                  type="textarea"
+                  :rows="2"
+                  placeholder="Описание RU"
+                  v-model="newObj.descriptionRU"
+                ></el-input>
+                <el-input
+                  type="textarea"
+                  :rows="2"
+                  placeholder="Описание EN"
+                  v-model="newObj.descriptionEN"
+                ></el-input>
+                <el-input
+                  placeholder="Расположение"
+                  v-model="newObj.address"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-select
+                  v-model="newObj.stage"
+                  placeholder="Стадия готовности"
+                  class="input_articles"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select>
+                <el-input
+                  placeholder="Расположение на карте х"
+                  v-model="newObj.coordinat.x"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Расположение на карте у"
+                  v-model="newObj.coordinat.y"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+              </div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div class="content">
+                <h3>Информация об объекте</h3>
+                <el-input
+                  placeholder="Этажей"
+                  v-model="newObj.floor"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Комнат"
+                  v-model="newObj.rooms"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Цена"
+                  v-model="newObj.price"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Badroom"
+                  v-model="newObj.badroom"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Bathroom"
+                  v-model="newObj.bathroom"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Distanсe to bitch"
+                  v-model="newObj.distanсeToBitch"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Distance to airoport"
+                  v-model="newObj.distanсeToAiroport"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input placeholder="Area" v-model="newObj.area" clearable class="input_articles"></el-input>
+                <el-input
+                  placeholder="Land area"
+                  v-model="newObj.landArea"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Life area"
+                  v-model="newObj.lifeArea"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input
+                  placeholder="Area of pool"
+                  v-model="newObj.areaOfPool"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+              </div>
+            </el-carousel-item>
+            <el-carousel-item>
+              <div class="content">
+                <h3>Фото</h3>
+                <input type="file" multiple @change="onPhotoChange">
+                <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
+              </div>
             </el-carousel-item>
           </el-carousel>
         </el-tab-pane>
         <el-tab-pane label="Update" name="second"></el-tab-pane>
-        <el-tab-pane label="Delete" name="third"></el-tab-pane>
+        <el-tab-pane label="Delete" name="third">
+          <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+            <li class="cards__item" v-for="(object, index) of objects" :key="index">
+              <div class="card">
+                <div class="card__top">
+                  <div class="price-wrp">
+                    <!-- <div
+                    class="price price__wh"
+                    style="font-size: 20px"
+                    >'THB' {{object.price.priceSales ? object.price.priceSales : "По запросу"}}</div>-->
+                  </div>
+                  <div class="card__slider">
+                    <div class="card__slider-item">
+                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__body">
+                    <h3 class="card__title">{{object.titleRu}}</h3>
+                    <ul class="card__l">
+                      <li>Жилая площадь: {{object.lifeArea}}</li>
+                      <li>Спален: {{object.badroom}}</li>
+                      <li>До пляжа: {{object.distanceToBitch}}</li>
+                    </ul>
+                  </div>
+                  <div class="card__footer">
+                    <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
+                    <button
+                      type="button"
+                      class="card__btn btn btn_danger"
+                      @click="deleteObject(object.id)"
+                    >Удалить</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -61,45 +235,171 @@ export default {
   },
   data() {
     return {
-      nameOfObject: "",
-      floor: "",
-      badroom: "",
-      bathroom: "",
-      distanсeToBitch: "",
-      distanсeToAiroport: "",
-      area: "",
-      landArea: "",
-      lifeArea: "",
-      areaOfPool: "",
-      price: "",
-      rooms: "",
-      selectedFile: null
+      objects: [],
+      newObj: {
+        nameOfObjectRU: "",
+        nameOfObjectEN: "",
+        floor: "",
+        badroom: "",
+        bathroom: "",
+        distanсeToBitch: "",
+        distanсeToAiroport: "",
+        area: "",
+        landArea: "",
+        lifeArea: "",
+        areaOfPool: "",
+        price: "",
+        rooms: "",
+        descriptionRU: "",
+        descriptionEN: "",
+        address: "",
+        stage: "",
+        typeOfObject: "",
+        coordinat: {
+          x: "",
+          y: ""
+        },
+        location: ""
+      },
+      image: "",
+      photos: [],
+      options: [
+        {
+          value: "underconstruction",
+          label: "На этапе строительства"
+        },
+        {
+          value: "secondarymarket",
+          label: "Вторичный рынок"
+        },
+        {
+          value: "none",
+          label: "Сдан в эксплуатацию"
+        }
+      ],
+      optionsType: [
+        {
+          value: "rent",
+          label: "Аренда"
+        },
+        {
+          value: "sales",
+          label: "Продажа"
+        },
+        {
+          value: "all",
+          label: "Оба типа"
+        }
+      ],
+      optionsLocation: [
+        {
+          value: "bang-tao",
+          label: "BANG TAO"
+        },
+        {
+          value: "laguna",
+          label: "LAGUNA"
+        },
+        {
+          value: "nai-thon",
+          label: "NAI THON"
+        },
+        {
+          value: "maikhao",
+          label: "MAIKHAO"
+        },
+        {
+          value: "nai-harn",
+          label: "NAI HARN"
+        },
+        {
+          value: "rawai",
+          label: "RAWAI"
+        },
+        {
+          value: "surin",
+          label: "SURIN"
+        },
+        {
+          value: "kamala",
+          label: "KAMALA"
+        },
+        {
+          value: "patong",
+          label: "PATONG"
+        },
+        {
+          value: "kata",
+          label: "KATA"
+        },
+        {
+          value: "cape-yamu",
+          label: "CAPE YAMU"
+        }
+      ]
     };
   },
   methods: {
-    onFileChanged(event) {
-      this.selectedFile = event.target.files[0];
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    onPhotoChange(e) {
+      console.log(e.target.files);
+      for (let i = 0; i < e.target.files.length; i++) {
+        this.createPhoto(e.target.files[i]);
+        console.log(this.photos);
+      }
+    },
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = e => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    createPhoto(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = e => {
+        vm.image = e.target.result;
+        this.photos.push(vm.image);
+      };
+      reader.readAsDataURL(file);
     },
     create() {
-      let data = {
-        title: this.nameOfObject,
-        floor: this.floor,
-        badroom: this.badroom,
-        bathroom: this.bathroom,
-        distanсeToBitch: this.distanсeToBitch,
-        distanсeToAiroport: this.distanceToAiroport,
-        area: this.area,
-        landArea: this.landArea,
-        lifeArea: this.lifeArea,
-        areaOfPool: this.areaOfPool,
-        price: this.price
-      };
+      let data = this.newObj;
+      data.image = this.image;
+      data.photo = this.photos;
       this.$axios
         .post("http://localhost:8080/api/create-object", data)
         .then(response => {
           console.log(response);
         });
+    },
+    getObjects() {
+      this.$axios
+        .get("http://localhost:8080/api/get-objects")
+        .then(response => {
+          this.objects = response.data.reverse();
+        });
+    },
+    deleteObject(id) {
+      this.$axios
+        .delete("http://localhost:8080/api/delete-object/"+id)
+        .then(response => {
+          console.log(response);
+        });
     }
+  },
+  mounted() {
+    this.getObjects();
   }
 };
 </script>
@@ -113,11 +413,21 @@ export default {
   display: inline-block;
   width: 30%;
 }
+.el-carousel__item .content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px 100px;
+}
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
 }
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+.preloadImage {
+  width: 300px;
+  height: 150px;
 }
 </style>

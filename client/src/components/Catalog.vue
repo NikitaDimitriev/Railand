@@ -404,7 +404,7 @@ export default {
     },
     getInfoSales() {
       this.$axios
-        .get("http://rl-property.com/api/get-info-sales")
+        .get("http://localhost:8080/api/get-info-sales")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -425,12 +425,12 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-sales/${
+          `http://localhost:8080/api/get-objects-pagination-sales/${
             this.page
           }/${this.perPage}`
         )
         .then(response => {
-          this.objects = response.data;
+          this.objects = response.data.reverse();
         });
     },
     getObjectsRent() {
@@ -440,7 +440,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-rent/${
+          `http://localhost:8080/api/get-objects-pagination-rent/${
             this.page
           }/${this.perPage}`
         )

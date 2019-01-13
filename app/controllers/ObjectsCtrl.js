@@ -10,9 +10,12 @@ exports.getObjectById = getObjectById;
 exports.getInfoSales = getInfoSales;
 exports.getInfoRent = getInfoRent;
 exports.getFilter = getFilter;
+exports.getObjects = getObjects;
+exports.deleteObject = deleteObject;
 
 const fs = require("fs");
 const request = require('request');
+const ba64 = require('ba64');
 const file = require('./dump.json');
 const filePhoto = require('./dumpPhoto.json');
 // let json = fs.readFileSync(file);
@@ -23,43 +26,50 @@ console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
 let dumpPhoto = newDataJsonPhoto.property;
 // create(dump, dumpPhoto);
+async function deleteObject(req, res) {
+    let removed = await Apertment.remove({
+        id: ObjectId(req.params.id)
+    })
+    console.log(removed);
+    res.json(removed).end();
+}
 async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
             const data = dump[i];
             const dataPhoto = dumpPhoto[i];
-                let priceSales = '';
-                let currencySales = '';
-                let priceRent = '';
-                let currencyRent = '';
-                let photo = [];
-                let sales = false;
-                let rent = false;
-                let mapPosition = {
-                    x: 0,
-                    y:0
-                }
-            if(data["Map position"]){
+            let priceSales = '';
+            let currencySales = '';
+            let priceRent = '';
+            let currencyRent = '';
+            let photo = [];
+            let sales = false;
+            let rent = false;
+            let mapPosition = {
+                x: 0,
+                y: 0
+            }
+            if (data["Map position"]) {
                 mapPosition.x = parseFloat(data["Map position"].substring(0, data["Map position"].indexOf(",")));
-                mapPosition.y = parseFloat(data["Map position"].substring(data["Map position"].indexOf(",")+2));
+                mapPosition.y = parseFloat(data["Map position"].substring(data["Map position"].indexOf(",") + 2));
                 console.log(mapPosition);
             }
-            if(data["PRICES"]){
+            if (data["PRICES"]) {
                 for (let j = 0; j < data["PRICES"].length; j++) {
-                    if(data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0){
+                    if (data["PRICES"][j].rental_type === 'sales' && data["PRICES"][j].price > 0) {
                         priceSales = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
                         currencySales = data["PRICES"][j].currency;
                         sales = true
-                    }else if(data["PRICES"][j].rental_type === 'rent' && data["PRICES"][j].price > 0){
+                    } else if (data["PRICES"][j].rental_type === 'rent' && data["PRICES"][j].price > 0) {
                         priceRent = data["PRICES"][j].price.substring(0, data["PRICES"][j].price.indexOf("."));
                         currencyRent = data["PRICES"][j].currency;
                         rent = true
                     }
                 }
             };
-            if(dataPhoto.Photo.VALUE){
+            if (dataPhoto.Photo.VALUE) {
                 for (let j = 0; j < dataPhoto.Photo.VALUE.length; j++) {
-                    if(dataPhoto.Photo.VALUE[j].includes("iblock")){
+                    if (dataPhoto.Photo.VALUE[j].includes("iblock")) {
                         photo.push(dataPhoto.Photo.VALUE[j])
                     }
                 }
@@ -72,7 +82,7 @@ async function create(dump, dumpPhoto) {
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
                 area: area.substring(0, area.indexOf(".")),
-                distanceToBitch: toBitch.substring(0, toBitch.indexOf(".")+2),
+                distanceToBitch: toBitch.substring(0, toBitch.indexOf(".") + 2),
                 rooms: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
                 distanceToAiroport: toAiroport.substring(0, toAiroport.indexOf(".")),
                 badroom: data["Number of bedrooms"].substring(0, data["Number of bedrooms"].indexOf(".")),
@@ -89,8 +99,8 @@ async function create(dump, dumpPhoto) {
                 mainPhoto: data["Main photo"],
                 sales: sales,
                 rent: rent,
-                photo:photo,
-                price:{
+                photo: photo,
+                price: {
                     priceSales: formatPrice(priceSales),
                     currencySales: currencySales,
                     priceRent: formatPrice(priceRent),
@@ -108,8 +118,8 @@ async function create(dump, dumpPhoto) {
     }
 }
 // getMainPhoto()
-async function getPhotoArray(data){
-    if(data["Photo"]){
+async function getPhotoArray(data) {
+    if (data["Photo"]) {
         return data["Photo"]["VALUE"];
     }
 }
@@ -136,7 +146,7 @@ async function addApartment() {
         mainPhoto: 'photo/1.jpg',
         sales: "false",
         rent: "true",
-        photo:['photo/1.jpg', 'photo/8.jpg','photo/16.jpg', 'photo/23.jpg', 'photo/25.jpg'],
+        photo: ['photo/1.jpg', 'photo/8.jpg', 'photo/16.jpg', 'photo/23.jpg', 'photo/25.jpg'],
         // price:{
         //     priceSales: formatPrice(priceSales),
         //     currencySales: currencySales,
@@ -145,7 +155,7 @@ async function addApartment() {
         // },
         coordinat: {
             x: 7.784912,
-            y:98.311196
+            y: 98.311196
         },
         stage: '1',
         infrastructure: '',
@@ -172,7 +182,7 @@ async function addApartment() {
         mainPhoto: 'photo/1(1).jpg',
         sales: "false",
         rent: "true",
-        photo:['photo/1(1).jpg', 'photo/2.jpg','photo/6.jpg', 'photo/9.jpg', 'photo/11.jpg'],
+        photo: ['photo/1(1).jpg', 'photo/2.jpg', 'photo/6.jpg', 'photo/9.jpg', 'photo/11.jpg'],
         // price:{
         //     priceSales: formatPrice(priceSales),
         //     currencySales: currencySales,
@@ -181,7 +191,7 @@ async function addApartment() {
         // },
         coordinat: {
             x: 7.784912,
-            y:98.311196
+            y: 98.311196
         },
         stage: '1',
         infrastructure: '',
@@ -191,7 +201,7 @@ async function addApartment() {
 }
 
 function formatPrice(value) {
-    let val = (value/1).toFixed(2).replace('.', ',')
+    let val = (value / 1).toFixed(2).replace('.', ',')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").slice(0, -1).slice(0, -2)
 }
 async function getMainPhoto() {
@@ -206,9 +216,9 @@ async function getMainPhoto() {
 }
 
 function getImage(image) {
-        let url = makeid();
-        request.get("http://rl-property.ru/upload/" + image).pipe(fs.createWriteStream('./app/upload/' + url + '.jpg'));
-        return './app/upload/' + url + '.jpg';
+    let url = makeid();
+    request.get("http://rl-property.ru/upload/" + image).pipe(fs.createWriteStream('./app/upload/' + url + '.jpg'));
+    return './app/upload/' + url + '.jpg';
 }
 
 function makeid() {
@@ -223,7 +233,7 @@ function makeid() {
 
 async function getInfoSales(req, res) {
     try {
-        let info = await Apertment.find({sales: true}).countDocuments();
+        let info = await Apertment.find({ sales: true }).countDocuments();
         console.log(info);
         res.json(info).end();
     } catch (error) {
@@ -233,7 +243,7 @@ async function getInfoSales(req, res) {
 
 async function getInfoRent(req, res) {
     try {
-        let info = await Apertment.find({rent: true}).countDocuments();
+        let info = await Apertment.find({ rent: true }).countDocuments();
         console.log(info);
         res.json(info).end();
     } catch (error) {
@@ -242,11 +252,41 @@ async function getInfoRent(req, res) {
 }
 
 async function createObject(req, res) {
-    console.log(req.body);
+    let photo = [];
+    let rent = '';
+    let sales = '';
+    if (req.body.typeOfObject === 'all') {
+        rent = 'true';
+        sales = 'true';
+    } else if (req.body.typeOfObject === 'rent') {
+        rent = 'true';
+        sales = 'false';
+    } else if (req.body.typeOfObject === 'sales') {
+        rent = 'false';
+        sales = 'true';
+    }
+    let imageName = makeid();
+    let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+    ba64.writeImage('upload/photo/' + imageName, req.body.image, function(err){
+        if (err) throw err;
+       
+        console.log("Image saved successfully");
+       
+      });
+      if(req.body.photo){
+          for (let i = 0; i < req.body.photo.length; i++) {
+            let photoName = makeid();
+            let extention = req.body.photo[i].substring("data:image/".length, req.body.photo[i].indexOf(";base64"))
+            ba64.writeImage('upload/photo/' + photoName, req.body.photo[i], function(err){
+                if (err) throw err;
+            });
+            photo.push('photo/'+photoName+'.'+extention)
+          }
+      }
     try {
         let create = await Apertment.create({
-            title: req.body.title,
-            price: req.body.price,
+            titleRu: req.body.nameOfObjectRU,
+            titleEn: req.body.nameOfObjectEN,
             area: req.body.area,
             distanceToBitch: req.body.distanceToBitch,
             rooms: req.body.rooms,
@@ -256,7 +296,23 @@ async function createObject(req, res) {
             landArea: req.body.landArea,
             lifeArea: req.body.lifeArea,
             areaOfPool: req.body.areaOfPool,
-            floor: req.body.floor
+            floor: req.body.floor,
+            descriptionEn: req.body.descriptionEN,
+            descriptionRu: req.body.descriptionRU,
+            sales,
+            rent,
+            stage: req.body.stage,
+            price:{
+                priceSales: req.body.price
+            },
+            coordinat:{
+                x: req.body.coordinat.x,
+                y: req.body.coordinat.y
+            },
+            address: req.body.address,
+            location: req.body.location,
+            mainPhoto: 'photo/'+imageName+'.'+extention,
+            photo:photo
         })
         res.json(create).end();
     } catch (error) {
@@ -266,7 +322,16 @@ async function createObject(req, res) {
 
 async function getObjectsSales(req, res) {
     try {
-        let objects = await Apertment.find({sales:true}).limit(5).skip(50);
+        let objects = await Apertment.find({ sales: true }).limit(5).skip(50);
+        res.json(objects).end();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getObjects(req, res) {
+    try {
+        let objects = await Apertment.find()
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -275,7 +340,7 @@ async function getObjectsSales(req, res) {
 
 async function getObjectsRent(req, res) {
     try {
-        let objects = await Apertment.find({rent:true}).limit(5).skip(10);
+        let objects = await Apertment.find({ rent: true }).limit(5).skip(10);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -289,7 +354,7 @@ async function getObjectsPaginationSales(req, res) {
             perPage: parseInt(req.params.perPage)
         }
         console.log(paginationData);
-        let objects = await Apertment.find({sales: "true"}).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        let objects = await Apertment.find({ sales: "true" }).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -302,7 +367,7 @@ async function getObjectsPaginationRent(req, res) {
             page: parseInt(req.params.page),
             perPage: parseInt(req.params.perPage)
         }
-        let objects = await Apertment.find({rent: "true"});
+        let objects = await Apertment.find({ rent: "true" });
         console.log(objects);
         res.json(objects).end();
     } catch (error) {
@@ -324,47 +389,47 @@ async function getFilter(req, res) {
         let types = req.body.filter.type;
         let searchSales = true;
         let searchRent = false;
-        if(types === 'sales'){
+        if (types === 'sales') {
             searchSales = true
-        }else{
+        } else {
             searchRent = true
         }
-        let objects = await Apertment.find({sales: searchSales, rent: searchRent});
+        let objects = await Apertment.find({ sales: searchSales, rent: searchRent });
         let result = [];
         let resultTemp = {};
         for (let i = 0; i < objects.length; i++) {
             resultTemp = objects[i];
-            if(req.body.filter.location !== 'all'){
+            if (req.body.filter.location !== 'all') {
                 objects[i].location === req.body.filter.location ? null : resultTemp = false;
             };
-            if(req.body.filter.rooms !== 'all'){
-                if(req.body.filter.rooms === '4+'){
+            if (req.body.filter.rooms !== 'all') {
+                if (req.body.filter.rooms === '4+') {
                     parseInt(resultTemp.rooms) > 3 ? null : resultTemp = false;
-                }else{
+                } else {
                     objects[i].rooms === req.body.filter.rooms ? null : resultTemp = false;
                 }
             }
-            if(req.body.filter.statusOfObject !== 'all'){
+            if (req.body.filter.statusOfObject !== 'all') {
                 objects[i].stage === req.body.filter.statusOfObject ? null : resultTemp = false
             }
-            if(req.body.filter.priceBegin){
-                console.log(req.body.filter.priceBegin, objects[i].price.priceSales.replace(/\./g,''))
-                parseInt(objects[i].price.priceSales.replace(/\./g,'')) > parseInt(req.body.filter.priceBegin) ? null : resultTemp = false;
+            if (req.body.filter.priceBegin) {
+                console.log(req.body.filter.priceBegin, objects[i].price.priceSales.replace(/\./g, ''))
+                parseInt(objects[i].price.priceSales.replace(/\./g, '')) > parseInt(req.body.filter.priceBegin) ? null : resultTemp = false;
             }
-            if(req.body.filter.priceEnd){
-                parseInt(objects[i].price.priceSales.replace(/\./g,'')) < parseInt(req.body.filter.priceEnd) ? null : resultTemp = false;
+            if (req.body.filter.priceEnd) {
+                parseInt(objects[i].price.priceSales.replace(/\./g, '')) < parseInt(req.body.filter.priceEnd) ? null : resultTemp = false;
             }
             let check = await checkType(req.body.filter.typeOfObject, objects[i].typeOfObject);
-            if(!check) resultTemp = false;
+            if (!check) resultTemp = false;
 
-            if(resultTemp){
+            if (resultTemp) {
                 result.push(resultTemp);
             }
         }
         res.json(result).end();
     } catch (error) {
         console.log(error);
-    }    
+    }
 }
 
 async function checkType(types, object) {
@@ -372,7 +437,7 @@ async function checkType(types, object) {
     if (types.villa) {
         console.log("here")
         object === "villa" ? null : check = false;
-    }else if (types.apartment) {
+    } else if (types.apartment) {
         object === "apartment" ? null : check = false;
     }
     else if (types.house) {

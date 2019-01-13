@@ -31,4 +31,4 @@ _tmp
 node_modules
 bower_components
 build
-upload/iblock
+upload
