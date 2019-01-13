@@ -27,8 +27,9 @@ let dump = newDataJson.property;
 let dumpPhoto = newDataJsonPhoto.property;
 // create(dump, dumpPhoto);
 async function deleteObject(req, res) {
+    console.log(req.params.id)
     let removed = await Apertment.remove({
-        id: ObjectId(req.params.id)
+        _id: ObjectId(req.params.id)
     })
     console.log(removed);
     res.json(removed).end();

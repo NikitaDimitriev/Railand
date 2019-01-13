@@ -189,12 +189,6 @@
             <li class="cards__item" v-for="(object, index) of objects" :key="index">
               <div class="card">
                 <div class="card__top">
-                  <div class="price-wrp">
-                    <!-- <div
-                    class="price price__wh"
-                    style="font-size: 20px"
-                    >'THB' {{object.price.priceSales ? object.price.priceSales : "По запросу"}}</div>-->
-                  </div>
                   <div class="card__slider">
                     <div class="card__slider-item">
                       <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
@@ -215,7 +209,7 @@
                     <button
                       type="button"
                       class="card__btn btn btn_danger"
-                      @click="deleteObject(object.id)"
+                      @click="deleteObject(object._id)"
                     >Удалить</button>
                   </div>
                 </div>
@@ -378,23 +372,24 @@ export default {
       data.image = this.image;
       data.photo = this.photos;
       this.$axios
-        .post("http://localhost:8080/api/create-object", data)
+        .post("http://rl-property.com/api/create-object", data)
         .then(response => {
           console.log(response);
         });
     },
     getObjects() {
       this.$axios
-        .get("http://localhost:8080/api/get-objects")
+        .get("http://rl-property.com/api/get-objects")
         .then(response => {
           this.objects = response.data.reverse();
         });
     },
     deleteObject(id) {
       this.$axios
-        .delete("http://localhost:8080/api/delete-object/"+id)
+        .delete("http://rl-property.com/api/delete-object/"+id)
         .then(response => {
           console.log(response);
+          this.getObjects();
         });
     }
   },
