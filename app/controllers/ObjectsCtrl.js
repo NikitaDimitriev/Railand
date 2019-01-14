@@ -12,6 +12,7 @@ exports.getInfoRent = getInfoRent;
 exports.getFilter = getFilter;
 exports.getObjects = getObjects;
 exports.deleteObject = deleteObject;
+exports.updateObject = updateObject;
 
 const fs = require("fs");
 const request = require('request');
@@ -125,81 +126,6 @@ async function getPhotoArray(data) {
     }
 }
 // addApartment();
-async function addApartment() {
-    await Apertment.create({
-        titleRu: 'Laguna Cove Pool Villa',
-        titleEn: 'Laguna Cove Pool Villa',
-        area: '430',
-        distanceToBitch: '',
-        rooms: '4',
-        distanceToAiroport: '',
-        badroom: '4',
-        bathroom: '3',
-        landArea: '465',
-        lifeArea: '430',
-        areaOfPool: '',
-        floor: '',
-        descriptionRu: 'Cosy  two-storeyed  private  pool  villa  in  Laguna  Cove  is  located  in  a  walking  distance  from  BangTao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20  minutes),which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beach  club,  hotelprivate  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offers  beautiful  viewfrom  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  3  bathrooms,  one  of  them  with  bathtube.The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.  There  is  aspacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
-        descriptionEn: 'Cosy  two-storeyed  private  pool  villa  in  Laguna  Cove  is  located  in  a  walking  distance  from  BangTao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20  minutes),which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beach  club,  hotelprivate  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offers  beautiful  viewfrom  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  3  bathrooms,  one  of  them  with  bathtube.The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.  There  is  aspacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
-        location: 'bang-tao',
-        typeOfObject: 'villa',
-        address: 'Laguna Cove',
-        mainPhoto: 'photo/1.jpg',
-        sales: "false",
-        rent: "true",
-        photo: ['photo/1.jpg', 'photo/8.jpg', 'photo/16.jpg', 'photo/23.jpg', 'photo/25.jpg'],
-        // price:{
-        //     priceSales: formatPrice(priceSales),
-        //     currencySales: currencySales,
-        //     priceRent: formatPrice(priceRent),
-        //     currencyRent: currencyRent
-        // },
-        coordinat: {
-            x: 7.784912,
-            y: 98.311196
-        },
-        stage: '1',
-        infrastructure: '',
-        features: ''
-    });
-    await Apertment.create({
-        titleRu: 'Laguna Vista Pool Villa',
-        titleEn: 'Laguna Vista Pool Villa',
-        area: '450',
-        distanceToBitch: '',
-        rooms: '4',
-        distanceToAiroport: '',
-        badroom: '4',
-        bathroom: '3',
-        landArea: '576',
-        lifeArea: '450',
-        areaOfPool: '',
-        floor: '',
-        descriptionRu: 'Comfortable two-storeyed  private  pool  villa  in  Laguna  Vista  is  located  in  a  walking  distance  fromBang  Tao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20minutes),  which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beachclub,  hotel  private  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offersbeautiful  view  from  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  4  bathrooms,  one  of  themwith  bathtube.  The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.There  is  a  spacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
-        descriptionEn: 'Comfortable two-storeyed  private  pool  villa  in  Laguna  Vista  is  located  in  a  walking  distance  fromBang  Tao  Beach.  Laguna  Property  provides  its  guests  with  free  shuttle  bus  service  (every  20minutes),  which  takes  you  to  Bang  Tao  beach,  canal  shops,  restaurants,  gym,  golf  club,  beachclub,  hotel  private  beaches  and  other  facilities.  The  Villa is  nestled  near  the  lake  and  offersbeautiful  view  from  the  most  of  the  rooms.  Villa  has  4  bedrooms  and  4  bathrooms,  one  of  themwith  bathtube.  The  property  is  fully  furnished  and  equipped  with  all  necessary  kitchen  utilities.There  is  a  spacious  properly  furnished  sunbathing  terrace  by  the  pool,  patio  and  covered  sala.',
-        location: 'bang-tao',
-        typeOfObject: 'villa',
-        address: 'Laguna Cove',
-        mainPhoto: 'photo/1(1).jpg',
-        sales: "false",
-        rent: "true",
-        photo: ['photo/1(1).jpg', 'photo/2.jpg', 'photo/6.jpg', 'photo/9.jpg', 'photo/11.jpg'],
-        // price:{
-        //     priceSales: formatPrice(priceSales),
-        //     currencySales: currencySales,
-        //     priceRent: formatPrice(priceRent),
-        //     currencyRent: currencyRent
-        // },
-        coordinat: {
-            x: 7.784912,
-            y: 98.311196
-        },
-        stage: '1',
-        infrastructure: '',
-        features: ''
-    });
-    console.log('created')
-}
 
 function formatPrice(value) {
     let val = (value / 1).toFixed(2).replace('.', ',')
@@ -268,22 +194,22 @@ async function createObject(req, res) {
     }
     let imageName = makeid();
     let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
-    ba64.writeImage('upload/photo/' + imageName, req.body.image, function(err){
+    ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
         if (err) throw err;
-       
+
         console.log("Image saved successfully");
-       
-      });
-      if(req.body.photo){
-          for (let i = 0; i < req.body.photo.length; i++) {
+
+    });
+    if (req.body.photo) {
+        for (let i = 0; i < req.body.photo.length; i++) {
             let photoName = makeid();
             let extention = req.body.photo[i].substring("data:image/".length, req.body.photo[i].indexOf(";base64"))
-            ba64.writeImage('upload/photo/' + photoName, req.body.photo[i], function(err){
+            ba64.writeImage('upload/photo/' + photoName, req.body.photo[i], function (err) {
                 if (err) throw err;
             });
-            photo.push('photo/'+photoName+'.'+extention)
-          }
-      }
+            photo.push('photo/' + photoName + '.' + extention)
+        }
+    }
     try {
         let create = await Apertment.create({
             titleRu: req.body.nameOfObjectRU,
@@ -303,17 +229,93 @@ async function createObject(req, res) {
             sales,
             rent,
             stage: req.body.stage,
-            price:{
+            price: {
                 priceSales: req.body.price
             },
-            coordinat:{
+            coordinat: {
                 x: req.body.coordinat.x,
                 y: req.body.coordinat.y
             },
             address: req.body.address,
             location: req.body.location,
-            mainPhoto: 'photo/'+imageName+'.'+extention,
-            photo:photo
+            mainPhoto: 'photo/' + imageName + '.' + extention,
+            photo: photo
+        })
+        res.json(create).end();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function updateObject(req, res) {
+    let photo = [];
+    let rent = '';
+    let sales = '';
+    let price = '';
+    if (req.body.typeOfObject === 'all') {
+        rent = 'true';
+        sales = 'true';
+    } else if (req.body.typeOfObject === 'rent') {
+        rent = 'true';
+        sales = 'false';
+    } else if (req.body.typeOfObject === 'sales') {
+        rent = 'false';
+        sales = 'true';
+    }
+    if(!req.body.price){
+        price = ""
+    }else{
+        price = req.body.price.priceSales;
+    }
+    // let imageName = makeid();
+    // let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+    // ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
+    //     if (err) throw err;
+
+    //     console.log("Image saved successfully");
+
+    // });
+    // if (req.body.photo) {
+    //     for (let i = 0; i < req.body.photo.length; i++) {
+    //         let photoName = makeid();
+    //         let extention = req.body.photo[i].substring("data:image/".length, req.body.photo[i].indexOf(";base64"))
+    //         ba64.writeImage('upload/photo/' + photoName, req.body.photo[i], function (err) {
+    //             if (err) throw err;
+    //         });
+    //         photo.push('photo/' + photoName + '.' + extention)
+    //     }
+    // }
+    try {
+        console.log(req.body._id);
+        let create = await Apertment.update({ _id: ObjectId(req.body._id) }, {
+            $set: {
+                titleRu: req.body.nameOfObjectRU,
+                titleEn: req.body.nameOfObjectEN,
+                area: req.body.area,
+                distanceToBitch: req.body.distanceToBitch,
+                rooms: req.body.rooms,
+                distanceToAiroport: req.body.distanceToAiroport,
+                badroom: req.body.badroom,
+                bathroom: req.body.bathroom,
+                landArea: req.body.landArea,
+                lifeArea: req.body.lifeArea,
+                areaOfPool: req.body.areaOfPool,
+                floor: req.body.floor,
+                descriptionEn: req.body.descriptionEN,
+                descriptionRu: req.body.descriptionRU,
+                sales,
+                rent,
+                stage: req.body.stage,
+                price: {
+                    priceSales: price
+                },
+                coordinat: {
+                    x: req.body.coordinat.x,
+                    y: req.body.coordinat.y
+                },
+                address: req.body.address,
+                location: req.body.location
+            }
         })
         res.json(create).end();
     } catch (error) {

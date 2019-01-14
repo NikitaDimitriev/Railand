@@ -58,6 +58,7 @@ app.get('/api/get-info-rent', ObjectCtrl.getInfoRent);
 app.post('/api/get-objects-filters', ObjectCtrl.getFilter);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
 app.delete('/api/delete-object/:id', ObjectCtrl.deleteObject);
+app.put('/api/update-object', ObjectCtrl.updateObject);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);
