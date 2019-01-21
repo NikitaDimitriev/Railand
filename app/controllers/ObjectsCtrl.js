@@ -212,8 +212,8 @@ async function createObject(req, res) {
     }
     try {
         let create = await Apertment.create({
-            titleRu: req.body.nameOfObjectRU,
-            titleEn: req.body.nameOfObjectEN,
+            titleRu: req.body.titleRu,
+            titleEn: req.body.titleEu,
             area: req.body.area,
             distanceToBitch: req.body.distanceToBitch,
             rooms: req.body.rooms,
@@ -224,8 +224,8 @@ async function createObject(req, res) {
             lifeArea: req.body.lifeArea,
             areaOfPool: req.body.areaOfPool,
             floor: req.body.floor,
-            descriptionEn: req.body.descriptionEN,
-            descriptionRu: req.body.descriptionRU,
+            descriptionEn: req.body.descriptionEn,
+            descriptionRu: req.body.descriptionRu,
             sales,
             rent,
             stage: req.body.stage,
@@ -239,7 +239,14 @@ async function createObject(req, res) {
             address: req.body.address,
             location: req.body.location,
             mainPhoto: 'photo/' + imageName + '.' + extention,
-            photo: photo
+            photo: photo,
+            typeOfObject: req.body.type,
+            adminInfo: {
+                owner: req.body.owner,
+                ownerContacts: req.body.ownerContacts,
+                address: req.body.address,
+                comments: req.body.comments
+            }
         })
         res.json(create).end();
     } catch (error) {
@@ -262,9 +269,9 @@ async function updateObject(req, res) {
         rent = 'false';
         sales = 'true';
     }
-    if(!req.body.price){
+    if (!req.body.price) {
         price = ""
-    }else{
+    } else {
         price = req.body.price.priceSales;
     }
     // let imageName = makeid();
@@ -289,8 +296,8 @@ async function updateObject(req, res) {
         console.log(req.body._id);
         let create = await Apertment.update({ _id: ObjectId(req.body._id) }, {
             $set: {
-                titleRu: req.body.nameOfObjectRU,
-                titleEn: req.body.nameOfObjectEN,
+                titleRu: req.body.titleRu,
+                titleEn: req.body.titleRu,
                 area: req.body.area,
                 distanceToBitch: req.body.distanceToBitch,
                 rooms: req.body.rooms,
@@ -301,8 +308,8 @@ async function updateObject(req, res) {
                 lifeArea: req.body.lifeArea,
                 areaOfPool: req.body.areaOfPool,
                 floor: req.body.floor,
-                descriptionEn: req.body.descriptionEN,
-                descriptionRu: req.body.descriptionRU,
+                descriptionEn: req.body.descriptionEn,
+                descriptionRu: req.body.descriptionRu,
                 sales,
                 rent,
                 stage: req.body.stage,
@@ -314,7 +321,17 @@ async function updateObject(req, res) {
                     y: req.body.coordinat.y
                 },
                 address: req.body.address,
-                location: req.body.location
+                location: req.body.location,
+                topOfList: req.body.topOfList,
+                active: req.body.active,
+                typeOfObject: req.body.type,
+                adminInfo: {
+                    owner: req.body.owner,
+                    ownerContacts: req.body.ownerContacts,
+                    address: req.body.address,
+                    comments: req.body.comments
+                },
+                video: req.body.video
             }
         })
         res.json(create).end();
@@ -325,7 +342,7 @@ async function updateObject(req, res) {
 
 async function getObjectsSales(req, res) {
     try {
-        let objects = await Apertment.find({ sales: true }).limit(5).skip(50);
+        let objects = await Apertment.find({ sales: "true", topOfList: true });
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -334,7 +351,7 @@ async function getObjectsSales(req, res) {
 
 async function getObjects(req, res) {
     try {
-        let objects = await Apertment.find()
+        let objects = await Apertment.find({ active: true })
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -343,7 +360,7 @@ async function getObjects(req, res) {
 
 async function getObjectsRent(req, res) {
     try {
-        let objects = await Apertment.find({ rent: true }).limit(5).skip(10);
+        let objects = await Apertment.find({ rent: "true", topOfList: true });
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -357,7 +374,7 @@ async function getObjectsPaginationSales(req, res) {
             perPage: parseInt(req.params.perPage)
         }
         console.log(paginationData);
-        let objects = await Apertment.find({ sales: "true" }).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
+        let objects = await Apertment.find({ sales: "true", active: true }).limit(paginationData.perPage).skip(paginationData.perPage * paginationData.page);
         res.json(objects).end();
     } catch (error) {
         console.log(error);
@@ -370,7 +387,7 @@ async function getObjectsPaginationRent(req, res) {
             page: parseInt(req.params.page),
             perPage: parseInt(req.params.perPage)
         }
-        let objects = await Apertment.find({ rent: "true" });
+        let objects = await Apertment.find({ rent: "true", active: true });
         console.log(objects);
         res.json(objects).end();
     } catch (error) {
