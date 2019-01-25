@@ -959,7 +959,7 @@ export default {
       data.image = this.image;
       data.photo = this.photos;
       this.$axios
-        .post("http://rl-property.com/api/create-object", data)
+        .post("http://localhost:8080/api/create-object", data)
         .then(response => {
           this.$message({
             type: "success",

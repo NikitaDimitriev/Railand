@@ -201,15 +201,20 @@ async function createObject(req, res) {
         rent = 'false';
         sales = 'true';
     }
+    let imageName='';
+    let extention='';
     if(req.body.image){
-        let imageName = makeid();
-        let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+        imageName = makeid();
+        extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
         ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
             if (err) throw err;
     
             console.log("Image saved successfully");
     
         });
+    }else{
+        imageName = 'default';
+        extention = 'jpg';
     }
     if (req.body.photo) {
         for (let i = 0; i < req.body.photo.length; i++) {
