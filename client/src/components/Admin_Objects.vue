@@ -55,7 +55,7 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-                <el-select v-model="newObj.type" placeholder="Type" class="input_articles">
+                <el-select v-model="newObj.type" placeholder="Property type" class="input_articles">
                   <el-option
                     v-for="item in types"
                     :key="item.value"
@@ -222,9 +222,7 @@
           <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
-          <el-input placeholder="search..." v-model="search" v-if="!updatePanel">
-
-          </el-input>
+          <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
           <ul
             class="cards__list cards__list-tab js-content is-active"
             data-tab="0"
@@ -344,7 +342,11 @@
                       :value="item.value"
                     ></el-option>
                   </el-select>
-                  <el-select v-model="updatedObject.type" placeholder="Property type" class="input_articles">
+                  <el-select
+                    v-model="updatedObject.type"
+                    placeholder="Property type"
+                    class="input_articles"
+                  >
                     <el-option
                       v-for="item in types"
                       :key="item.value"
@@ -706,6 +708,74 @@ export default {
         {
           value: "cape-yamu",
           label: "CAPE YAMU"
+        },
+        {
+          value: "layan",
+          label: "Layan"
+        },
+        {
+          value: "cherngtalay",
+          label: "Cherngtalay"
+        },
+        {
+          value: "thalang",
+          label: "Thalang"
+        },
+        {
+          value: "nai-yang",
+          label: "Nai Yang"
+        },
+        {
+          value: "natai",
+          label: "Natai"
+        },
+        {
+          value: "maikhao",
+          label: "Maikhao"
+        },
+        {
+          value: "kalim",
+          label: "Kalim"
+        },
+        {
+          value: "karon",
+          label: "Karon"
+        },
+        {
+          value: "maikhao",
+          label: "Maikhao"
+        },
+        {
+          value: "cape-panwa",
+          label: "Cape Panwa"
+        },
+        {
+          value: "cape-yamu",
+          label: "Cape Yamu"
+        },
+        {
+          value: "koh-kaew",
+          label: "Koh Kaew"
+        },
+        {
+          value: "ao-po",
+          label: "Ao Po"
+        },
+        {
+          value: "paklok",
+          label: "Paklok"
+        },
+        {
+          value: "kathu",
+          label: "Kathu"
+        },
+        {
+          value: "phuket-town",
+          label: "Phuket Town"
+        },
+        {
+          value: "chalong",
+          label: "Chalong"
         }
       ],
       updatePanel: false,
@@ -728,24 +798,28 @@ export default {
           label: "Land"
         }
       ],
-      search:"",
-      searched:[]
+      search: "",
+      searched: []
     };
   },
-  watch:{
-    search(v){
-      if(v){
+  watch: {
+    search(v) {
+      if (v) {
         this.searching();
       }
     }
   },
   methods: {
-    searching(){
+    searching() {
       this.searched = [];
-      for(let i=0;i<this.objects.length;i++){
-      console.log(this.objects[i])
-        if(this.objects[i].titleRu.toLowerCase().includes(this.search.toLowerCase())){
-          this.searched.push(this.objects[i])
+      for (let i = 0; i < this.objects.length; i++) {
+        console.log(this.objects[i]);
+        if (
+          this.objects[i].titleRu
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        ) {
+          this.searched.push(this.objects[i]);
         }
       }
     },
@@ -848,6 +922,41 @@ export default {
             type: "success",
             message: `Object was created`
           });
+          (this.newObj = {
+            nameOfObjectRU: "",
+            nameOfObjectEN: "",
+            floor: "",
+            badroom: "",
+            bathroom: "",
+            distanсeToBitch: "",
+            distanсeToAiroport: "",
+            area: "",
+            landArea: "",
+            lifeArea: "",
+            areaOfPool: "",
+            price: "",
+            code: "",
+            descriptionRU: "",
+            descriptionEN: "",
+            address: "",
+            stage: "",
+            typeOfObject: "",
+            coordinat: {
+              x: "",
+              y: ""
+            },
+            location: "",
+            type: "",
+            adminInfo: {
+              owner: "",
+              ownerContacts: "",
+              address: "",
+              comments: ""
+            },
+            video: ""
+          }),
+            (this.image = ""),
+            (this.photos = []);
         });
     },
     getObjects() {
@@ -871,8 +980,8 @@ export default {
   },
   mounted() {
     this.getObjects();
-    if(!localStorage.getItem('auth')){
-      this.$router.push({ path: "/admin"});
+    if (!localStorage.getItem("auth")) {
+      this.$router.push({ path: "/admin" });
     }
   }
 };
