@@ -365,7 +365,7 @@
                     ></el-option>
                   </el-select>
                   <el-select
-                    v-model="updatedObject.type"
+                    v-model="typeObjectUpdate"
                     placeholder="Property type"
                     class="input_articles"
                   >
@@ -645,6 +645,7 @@ export default {
   },
   data() {
     return {
+      typeObjectUpdate:'',
       objects: [],
       newObj: {
         nameOfObjectRU: "",
@@ -880,7 +881,7 @@ export default {
         .get(`http://rl-property.com/api/get-object-by-id/${id}`)
         .then(response => {
           this.updatedObject = Object.assign({}, response.data);
-          this.updatedObject.type = response.data.typeOfObject;
+          this.typeObjectUpdate = response.data.typeOfObject;
           if (
             this.updatedObject.sales === "true" &&
             this.updatedObject.rent === "true"
@@ -897,9 +898,6 @@ export default {
           if (this.updatedObject.stage === "1") {
             this.updatedObject.stage = "none";
           }
-          // if(!this.updateObject.price){
-          //   this.updateObject.price.priceSales = "";
-          // }
           this.image = this.updatedObject.mainPhoto;
           this.photos = this.updatedObject.photo;
           console.log(this.image, this.photos);
@@ -918,6 +916,7 @@ export default {
       let data = this.updatedObject;
       data.image = this.updatedObject.mainPhoto;
       data.photo = this.updatedObject.photo;
+      data.type = this.typeObjectUpdate;
       console.log(data);
       this.$axios
         .put("http://rl-property.com/api/update-object", data)
