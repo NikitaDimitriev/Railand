@@ -201,7 +201,7 @@ async function createObject(req, res) {
         rent = 'false';
         sales = 'true';
     }
-    if(req.body.mainPhoto){
+    if(req.body.image){
         let imageName = makeid();
         let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
         ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
