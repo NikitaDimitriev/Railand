@@ -22,7 +22,7 @@ mongoose.connect(db, function(err, db) {
   	}
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
