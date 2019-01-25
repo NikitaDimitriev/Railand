@@ -200,7 +200,7 @@
                   class="input_articles"
                 ></el-input>
                 <el-input
-                  placeholder="Adress"
+                  placeholder="Address"
                   v-model="newObj.adminInfo.address"
                   clearable
                   class="input_articles"
