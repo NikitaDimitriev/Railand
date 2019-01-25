@@ -62,7 +62,7 @@
                   ></el-option>
                 </el-select>
                 <el-checkbox v-model="newObj.topOfList">Set to top</el-checkbox>
-                  <el-checkbox v-model="newObj.active">Active</el-checkbox>
+                <el-checkbox v-model="newObj.active">Active</el-checkbox>
                 <div v-if="!image" style="font-size: 18px; margin-top: 45px">
                   <label for="image" class="fileInput">Add main photo</label>
                   <input type="file" @change="onFileChange" id="image" style="visibility: hidden">
@@ -237,14 +237,19 @@
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
-          <!-- <el-select v-model="newObj.type" placeholder="Property type" class="input_articles">
-                  <el-option
-                    v-for="item in [{label:"Active", },{}]"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select> -->
+          <el-select
+            v-model="searchActive"
+            placeholder="Property type"
+            class="input_articles"
+            @change="searching()"
+          >
+            <el-option
+              v-for="item in [{label:'Active', value:true},{label:'Non Active', value:false}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
           <ul
             class="cards__list cards__list-tab js-content is-active"
             data-tab="0"
@@ -645,7 +650,8 @@ export default {
   },
   data() {
     return {
-      typeObjectUpdate:'',
+      searchActive: null,
+      typeObjectUpdate: "",
       objects: [],
       newObj: {
         nameOfObjectRU: "",
@@ -837,7 +843,7 @@ export default {
       search: "",
       searched: [],
       generedCode: 1111,
-      price: ''
+      price: ""
     };
   },
   watch: {
@@ -846,9 +852,9 @@ export default {
         this.searching();
       }
     },
-    price(v){
-      this.price = parseFloat(this.price).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-      console.log(this.price)
+    price(v) {
+      this.price = parseFloat(this.price).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+      console.log(this.price);
     }
   },
   methods: {
@@ -863,14 +869,24 @@ export default {
     },
     searching() {
       this.searched = [];
-      for (let i = 0; i < this.objects.length; i++) {
-        console.log(this.objects[i]);
-        if (
-          this.objects[i].titleRu
-            .toLowerCase()
-            .includes(this.search.toLowerCase())
-        ) {
-          this.searched.push(this.objects[i]);
+      if (this.search) {
+        for (let i = 0; i < this.objects.length; i++) {
+          console.log(this.objects[i]);
+          if (
+            this.objects[i].titleRu
+              .toLowerCase()
+              .includes(this.search.toLowerCase())
+          ) {
+            this.searched.push(this.objects[i]);
+          }
+        }
+      }
+      if (this.searchActive && !this.searched.length) {
+        for (let i = 0; i < this.objects.length; i++) {
+          console.log(this.objects[i]);
+          if (this.objects[i].acrive === this.searchActive) {
+            this.searched.push(this.objects[i]);
+          }
         }
       }
     },

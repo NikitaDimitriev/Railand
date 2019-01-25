@@ -372,7 +372,7 @@ async function getObjectsSales(req, res) {
 
 async function getObjects(req, res) {
     try {
-        let objects = await Apertment.find({ active: true })
+        let objects = await Apertment.find({ })
         res.json(objects).end();
     } catch (error) {
         console.log(error);
