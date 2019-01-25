@@ -237,6 +237,14 @@
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
+          <!-- <el-select v-model="newObj.type" placeholder="Property type" class="input_articles">
+                  <el-option
+                    v-for="item in [{label:"Active", },{}]"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  ></el-option>
+                </el-select> -->
           <ul
             class="cards__list cards__list-tab js-content is-active"
             data-tab="0"

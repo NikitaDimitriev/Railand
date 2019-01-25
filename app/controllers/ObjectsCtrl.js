@@ -228,8 +228,8 @@ async function createObject(req, res) {
     }
     try {
         let create = await Apertment.create({
-            titleRu: req.body.titleRu,
-            titleEn: req.body.titleEu,
+            titleRu: req.body.nameOfObjectRU,
+            titleEn: req.body.nameOfObjectEN,
             area: req.body.area,
             distanceToBitch: req.body.distanceToBitch,
             rooms: req.body.rooms,
@@ -240,8 +240,8 @@ async function createObject(req, res) {
             lifeArea: req.body.lifeArea,
             areaOfPool: req.body.areaOfPool,
             floor: req.body.floor,
-            descriptionEn: req.body.descriptionEn,
-            descriptionRu: req.body.descriptionRu,
+            descriptionEn: req.body.descriptionEN,
+            descriptionRu: req.body.descriptionRU,
             sales,
             rent,
             stage: req.body.stage,
