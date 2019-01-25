@@ -255,7 +255,12 @@
             data-tab="0"
             v-if="!updatePanel"
           >
-            <li class="cards__item" v-for="(object, index) of objects" :key="index" v-if="!search">
+            <li
+              class="cards__item"
+              v-for="(object, index) of objects"
+              :key="index"
+              v-if="!searched.length"
+            >
               <div class="card">
                 <div class="card__top">
                   <div class="card__slider">
@@ -283,7 +288,12 @@
                 </div>
               </div>
             </li>
-            <li class="cards__item" v-for="(object, index) of searched" :key="index" v-if="search">
+            <li
+              class="cards__item"
+              v-for="(object, index) of searched"
+              :key="index"
+              v-if="searched"
+            >
               <div class="card">
                 <div class="card__top">
                   <div class="card__slider">
@@ -578,8 +588,26 @@
         </el-tab-pane>
         <el-tab-pane label="Delete" name="third">
           <el-input placeholder="search..." v-model="search"></el-input>
+          <el-select
+            v-model="searchActive"
+            placeholder="Property type"
+            class="input_articles"
+            @change="searching()"
+          >
+            <el-option
+              v-for="item in [{label:'Active', value:true},{label:'Non Active', value:false}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
           <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
-            <li class="cards__item" v-for="(object, index) of objects" :key="index" v-if="!search">
+            <li
+              class="cards__item"
+              v-for="(object, index) of objects"
+              :key="index"
+              v-if="!searched.length"
+            >
               <div class="card">
                 <div class="card__top">
                   <div class="card__slider">
@@ -608,7 +636,12 @@
                 </div>
               </div>
             </li>
-            <li class="cards__item" v-for="(object, index) of searched" :key="index" v-if="search">
+            <li
+              class="cards__item"
+              v-for="(object, index) of searched"
+              :key="index"
+              v-if="searched"
+            >
               <div class="card">
                 <div class="card__top">
                   <div class="card__slider">
@@ -871,7 +904,6 @@ export default {
       this.searched = [];
       if (this.search) {
         for (let i = 0; i < this.objects.length; i++) {
-          console.log(this.objects[i]);
           if (
             this.objects[i].titleRu
               .toLowerCase()
@@ -881,11 +913,16 @@ export default {
           }
         }
       }
-      if (this.searchActive && !this.searched.length) {
+      if (this.searchActive !== null && !this.searched.length) {
         for (let i = 0; i < this.objects.length; i++) {
-          console.log(this.objects[i]);
-          if (this.objects[i].acrive === this.searchActive) {
+          if (this.objects[i].active === this.searchActive) {
             this.searched.push(this.objects[i]);
+          }
+        }
+      } else if (this.searchActive !== null && this.searched.length) {
+        for (let i = 0; i < this.searched.length; i++) {
+          if (this.searched[i].active === this.searchActive) {
+            this.searched.push(this.searched[i]);
           }
         }
       }
