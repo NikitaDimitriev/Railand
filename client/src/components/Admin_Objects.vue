@@ -28,12 +28,10 @@
                 ></el-input>
                 <el-input
                   placeholder="Price ฿"
-                  v-model="newObj.price"
+                  v-model="price"
                   clearable
                   class="input_articles"
-                  pattern="[0-9]*"
-                  data-grouplength="3"
-                  data-delimiter=","
+                  type="number"
                 ></el-input>
                 <el-select
                   v-model="newObj.typeOfObject"
@@ -63,9 +61,11 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-                <div v-if="!image" style="font-size: 18px">
-                  <label for="image">Main Photo</label>
-                  <input type="file" @change="onFileChange" name="image">
+                <el-checkbox v-model="newObj.topOfList">Set to top</el-checkbox>
+                  <el-checkbox v-model="newObj.active">Active</el-checkbox>
+                <div v-if="!image" style="font-size: 18px; margin-top: 45px">
+                  <label for="image" class="fileInput">Add main photo</label>
+                  <input type="file" @change="onFileChange" id="image" style="visibility: hidden">
                 </div>
                 <div v-else>
                   <img :src="image" class="preloadImage">
@@ -187,7 +187,21 @@
             <el-carousel-item>
               <div class="content">
                 <h3>Photo</h3>
-                <input type="file" multiple @change="onPhotoChange">
+                <div v-if="!photos.length">
+                  <label for="newFile" class="fileInput">Add photo</label>
+                  <input
+                    type="file"
+                    multiple
+                    @change="onPhotoChange"
+                    id="newFile"
+                    style="visibility: hidden"
+                  >
+                </div>
+                <div v-if="photos">
+                  <div v-for="(photo, index) in photos" :key="index" class="imageContent">
+                    <img :src="photo" @click="removePhoto(index)" class="preloadImage">
+                  </div>
+                </div>
               </div>
             </el-carousel-item>
             <el-carousel-item>
@@ -316,7 +330,7 @@
                     clearable
                     class="input_articles"
                     v-if="updatedObject.typeOfObject !== 'rent'"
-                    type="number"
+                    @change="formatPrice(updatedObject.price.priceSales)"
                   ></el-input>
                   <el-select
                     v-model="updatedObject.typeOfObject"
@@ -357,11 +371,16 @@
                   <el-checkbox v-model="updatedObject.topOfList">Set to top</el-checkbox>
                   <el-checkbox v-model="updatedObject.active">Active</el-checkbox>
                   <div v-if="!image" style="font-size:18px">
-                    <label for="image">Main Photo</label>
-                    <input type="file" @change="onFileChange" name="image">
+                    <label for="imageUpdate" class="fileInput">Add main photo</label>
+                    <input
+                      type="file"
+                      @change="onFileChange"
+                      id="imageUpdate"
+                      style="visibility: hidden"
+                    >
                   </div>
                   <div v-else>
-                    <img :src="image" class="preloadImage">
+                    <img :src="`http://rl-property.com/${image}`" class="preloadImage">
                     <button @click="removeImage">Remove image</button>
                   </div>
                 </div>
@@ -487,7 +506,25 @@
               <el-carousel-item>
                 <div class="content">
                   <h3>Photo</h3>
-                  <input type="file" multiple @change="onPhotoChange">
+                  <div v-if="!photos.length">
+                    <label for="newFile" class="fileInput">Add photo</label>
+                    <input
+                      type="file"
+                      multiple
+                      @change="onPhotoChange"
+                      id="newFile"
+                      style="visibility: hidden"
+                    >
+                  </div>
+                  <div v-if="photos">
+                    <div v-for="(photo, index) in photos" :key="index" class="imageContent">
+                      <img
+                        :src="`http://rl-property.com/${photo}`"
+                        @click="removePhoto(index)"
+                        class="preloadImage"
+                      >
+                    </div>
+                  </div>
                   <el-button
                     type="primary"
                     @click="updateObject(updatedObject)"
@@ -632,7 +669,9 @@ export default {
           address: "",
           comments: ""
         },
-        video: ""
+        video: "",
+        topOfList: false,
+        active: true
       },
       image: "",
       photos: [],
@@ -787,7 +826,9 @@ export default {
         }
       ],
       search: "",
-      searched: []
+      searched: [],
+      generedCode: 1111,
+      price: ''
     };
   },
   watch: {
@@ -795,9 +836,22 @@ export default {
       if (v) {
         this.searching();
       }
+    },
+    price(v){
+      this.price = parseFloat(this.price).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      console.log(this.price)
     }
   },
   methods: {
+    formatPrice(value) {
+      let val = (value / 1).toFixed(2).replace(".", ",");
+      val
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        .slice(0, -1)
+        .slice(0, -2);
+      this.newObj.price = val;
+    },
     searching() {
       this.searched = [];
       for (let i = 0; i < this.objects.length; i++) {
@@ -812,6 +866,7 @@ export default {
       }
     },
     update(id) {
+      this.image = "";
       this.updatePanel = true;
       this.$axios
         .get(`http://rl-property.com/api/get-object-by-id/${id}`)
@@ -837,11 +892,11 @@ export default {
           // if(!this.updateObject.price){
           //   this.updateObject.price.priceSales = "";
           // }
-          this.image = updatedObject.mainPhoto;
-          this.photos = updatedObject.photo;
+          this.image = this.updatedObject.mainPhoto;
+          this.photos = this.updatedObject.photo;
           console.log(this.image, this.photos);
-          this.axios
-            .get(`http://localohost:8080/${this.updatedObject.mainPhoto}`)
+          this.$axios
+            .get(`http://rl-property.com/${this.updatedObject.mainPhoto}`)
             .then(response => {
               console.log(response);
             });
@@ -904,7 +959,7 @@ export default {
       data.image = this.image;
       data.photo = this.photos;
       this.$axios
-        .post("http://rl-property.com/api/create-object", data)
+        .post("http://localhost:8080/api/create-object", data)
         .then(response => {
           this.$message({
             type: "success",
@@ -952,6 +1007,9 @@ export default {
         .get("http://rl-property.com/api/get-objects")
         .then(response => {
           this.objects = response.data.reverse();
+          console.log(this.objects.length);
+          this.generedCode += this.objects.length;
+          console.log(this.generedCode);
         });
     },
     deleteObject(id) {
@@ -1000,5 +1058,22 @@ export default {
 .preloadImage {
   width: 300px;
   height: 150px;
+}
+
+.fileInput {
+  text-align: center;
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 45px;
+}
+.imageContent {
+  display: inline-flex;
+  justify-content: flex-start;
+}
+.imageContent img {
+  display: inline;
 }
 </style>

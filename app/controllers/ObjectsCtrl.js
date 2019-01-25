@@ -35,6 +35,15 @@ async function deleteObject(req, res) {
     console.log(removed);
     res.json(removed).end();
 }
+// createArticle();
+// async function createArticle() {
+//     let article = 1111;
+//     const objects = await Apertment.find({});
+//     for (let i = 0; i < objects.length; i++) {
+//         await Apertment.update({_id: objects[i]._id},{$set:{code:article}});
+//         article++;
+//     }
+// }
 async function create(dump, dumpPhoto) {
     try {
         for (let i = 0; i < dump.length; i++) {
@@ -192,14 +201,16 @@ async function createObject(req, res) {
         rent = 'false';
         sales = 'true';
     }
-    let imageName = makeid();
-    let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
-    ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
-        if (err) throw err;
-
-        console.log("Image saved successfully");
-
-    });
+    if(req.body.mainPhoto){
+        let imageName = makeid();
+        let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+        ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
+            if (err) throw err;
+    
+            console.log("Image saved successfully");
+    
+        });
+    }
     if (req.body.photo) {
         for (let i = 0; i < req.body.photo.length; i++) {
             let photoName = makeid();
@@ -246,7 +257,11 @@ async function createObject(req, res) {
                 ownerContacts: req.body.ownerContacts,
                 address: req.body.address,
                 comments: req.body.comments
-            }
+            },
+            code: req.body.code,
+            video: req.body.video,
+            topOfList: req.body.topOfList,
+            active: req.body.active
         })
         res.json(create).end();
     } catch (error) {
@@ -331,7 +346,8 @@ async function updateObject(req, res) {
                     address: req.body.address,
                     comments: req.body.comments
                 },
-                video: req.body.video
+                video: req.body.video,
+                code: req.body.code
             }
         })
         res.json(create).end();

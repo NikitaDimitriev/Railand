@@ -39,7 +39,7 @@ module.exports = mongoose.model('Object', {
     features: { type: Array },
     topOfList: { type: Boolean, default: false },
     active: { type: Boolean, default: true },
-    code: {type: String},
+    code: {type: Number},
     video: {type: String},
     adminInfo:{
         owner:{type: String},
