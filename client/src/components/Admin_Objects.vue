@@ -678,10 +678,6 @@ export default {
           label: "NAI THON"
         },
         {
-          value: "maikhao",
-          label: "MAIKHAO"
-        },
-        {
           value: "nai-harn",
           label: "NAI HARN"
         },
@@ -704,10 +700,6 @@ export default {
         {
           value: "kata",
           label: "KATA"
-        },
-        {
-          value: "cape-yamu",
-          label: "CAPE YAMU"
         },
         {
           value: "layan",
@@ -740,10 +732,6 @@ export default {
         {
           value: "karon",
           label: "Karon"
-        },
-        {
-          value: "maikhao",
-          label: "Maikhao"
         },
         {
           value: "cape-panwa",
