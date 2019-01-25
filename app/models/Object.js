@@ -6,7 +6,7 @@ module.exports = mongoose.model('Object', {
     price: { type: String, require: true },
     area: { type: String, require: true },
     distanceToBitch: { type: String },
-    distanceToAiroport: { type: String },
+    distanсeToAiroport: { type: String },
     floor: { type: String },
     badroom: { type: String },
     bathroom: { type: String },

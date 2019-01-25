@@ -37,7 +37,7 @@
                 ></el-input>
                 <el-select
                   v-model="newObj.typeOfObject"
-                  placeholder="Type of object"
+                  placeholder="Sale/Rent"
                   class="input_articles"
                 >
                   <el-option
@@ -128,20 +128,20 @@
               <div class="content">
                 <h3>About object</h3>
                 <el-input
-                  placeholder="Floor"
+                  placeholder="Number of floors"
                   v-model="newObj.floor"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input placeholder="Code" v-model="newObj.code" clearable class="input_articles"></el-input>
                 <el-input
-                  placeholder="Badroom count"
+                  placeholder="Number of bedrooms"
                   v-model="newObj.badroom"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
-                  placeholder="Bathroom count"
+                  placeholder="number of bathroom"
                   v-model="newObj.bathroom"
                   clearable
                   class="input_articles"
@@ -153,7 +153,7 @@
                   class="input_articles"
                 ></el-input>
                 <el-input
-                  placeholder="Distance to airoport"
+                  placeholder="Distance to airport"
                   v-model="newObj.distanсeToAiroport"
                   clearable
                   class="input_articles"
@@ -171,7 +171,7 @@
                   class="input_articles"
                 ></el-input>
                 <el-input
-                  placeholder="Life area"
+                  placeholder="Living area"
                   v-model="newObj.lifeArea"
                   clearable
                   class="input_articles"
@@ -188,7 +188,6 @@
               <div class="content">
                 <h3>Photo</h3>
                 <input type="file" multiple @change="onPhotoChange">
-                <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
               </div>
             </el-carousel-item>
             <el-carousel-item>
@@ -220,6 +219,7 @@
               </div>
             </el-carousel-item>
           </el-carousel>
+          <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel">
@@ -243,7 +243,7 @@
                   <div class="card__body">
                     <h3 class="card__title">{{object.titleRu}}</h3>
                     <ul class="card__l">
-                      <li>Life area: {{object.lifeArea}}</li>
+                      <li>Living area: {{object.lifeArea}}</li>
                       <li>Badroom: {{object.badroom}}</li>
                       <li>Distance to beach: {{object.distanceToBitch}}</li>
                     </ul>
@@ -271,7 +271,7 @@
                   <div class="card__body">
                     <h3 class="card__title">{{object.titleRu}}</h3>
                     <ul class="card__l">
-                      <li>Life area: {{object.lifeArea}}</li>
+                      <li>Living area: {{object.lifeArea}}</li>
                       <li>Badroom: {{object.badroom}}</li>
                       <li>Distance to beach: {{object.distanceToBitch}}</li>
                     </ul>
@@ -344,7 +344,7 @@
                       :value="item.value"
                     ></el-option>
                   </el-select>
-                  <el-select v-model="updatedObject.type" placeholder="Type" class="input_articles">
+                  <el-select v-model="updatedObject.type" placeholder="Property type" class="input_articles">
                     <el-option
                       v-for="item in types"
                       :key="item.value"
@@ -421,7 +421,7 @@
                 <div class="content">
                   <h3>About object</h3>
                   <el-input
-                    placeholder="Floor"
+                    placeholder="Number of floors"
                     v-model="updatedObject.floor"
                     clearable
                     class="input_articles"
@@ -433,13 +433,13 @@
                     class="input_articles"
                   ></el-input>
                   <el-input
-                    placeholder="Badroom count"
+                    placeholder="Number of bedrooms"
                     v-model="updatedObject.badroom"
                     clearable
                     class="input_articles"
                   ></el-input>
                   <el-input
-                    placeholder="Bathroom count"
+                    placeholder="number of bathroom"
                     v-model="updatedObject.bathroom"
                     clearable
                     class="input_articles"
@@ -451,7 +451,7 @@
                     class="input_articles"
                   ></el-input>
                   <el-input
-                    placeholder="Distance to airoport"
+                    placeholder="Distance to airport"
                     v-model="updatedObject.distanсeToAiroport"
                     clearable
                     class="input_articles"
@@ -469,7 +469,7 @@
                     class="input_articles"
                   ></el-input>
                   <el-input
-                    placeholder="Life area"
+                    placeholder="living area"
                     v-model="updatedObject.lifeArea"
                     clearable
                     class="input_articles"
@@ -540,7 +540,7 @@
                   <div class="card__body">
                     <h3 class="card__title">{{object.titleRu}}</h3>
                     <ul class="card__l">
-                      <li>Life area: {{object.lifeArea}}</li>
+                      <li>Living area: {{object.lifeArea}}</li>
                       <li>Badroom: {{object.badroom}}</li>
                       <li>Distance to beatch: {{object.distanceToBitch}}</li>
                     </ul>
@@ -569,7 +569,7 @@
                   <div class="card__body">
                     <h3 class="card__title">{{object.titleRu}}</h3>
                     <ul class="card__l">
-                      <li>Life area: {{object.lifeArea}}</li>
+                      <li>Living area: {{object.lifeArea}}</li>
                       <li>Badroom: {{object.badroom}}</li>
                       <li>Distance to beach: {{object.distanceToBitch}}</li>
                     </ul>
@@ -637,29 +637,29 @@ export default {
       options: [
         {
           value: "underconstruction",
-          label: "На этапе строительства"
+          label: " Under construction"
         },
         {
           value: "secondarymarket",
-          label: "Вторичный рынок"
+          label: "Resale"
         },
         {
           value: "none",
-          label: "Сдан в эксплуатацию"
+          label: "Completed"
         }
       ],
       optionsType: [
         {
           value: "rent",
-          label: "Аренда"
+          label: "Rent"
         },
         {
           value: "sales",
-          label: "Продажа"
+          label: "Sale"
         },
         {
           value: "all",
-          label: "Оба типа"
+          label: "Sale/Rent"
         }
       ],
       optionsLocation: [
@@ -717,11 +717,15 @@ export default {
         },
         {
           value: "apartment",
-          label: "Apartment"
+          label: "Apartments"
         },
         {
           value: "house",
-          label: "Taunhouse"
+          label: "Townhouse"
+        },
+        {
+          value: "land",
+          label: "Land"
         }
       ],
       search:"",

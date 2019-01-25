@@ -217,7 +217,7 @@ async function createObject(req, res) {
             area: req.body.area,
             distanceToBitch: req.body.distanceToBitch,
             rooms: req.body.rooms,
-            distanceToAiroport: req.body.distanceToAiroport,
+            distanсeToAiroport: req.body.distanсeToAiroport,
             badroom: req.body.badroom,
             bathroom: req.body.bathroom,
             landArea: req.body.landArea,
