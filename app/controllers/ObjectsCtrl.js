@@ -240,6 +240,7 @@ async function createObject(req, res) {
             lifeArea: req.body.lifeArea,
             areaOfPool: req.body.areaOfPool,
             floor: req.body.floor,
+            currentFloor: req.body.currentFloor,
             descriptionEn: req.body.descriptionEN,
             descriptionRu: req.body.descriptionRU,
             sales,
@@ -258,10 +259,10 @@ async function createObject(req, res) {
             photo: photo,
             typeOfObject: req.body.type,
             adminInfo: {
-                owner: req.body.owner,
-                ownerContacts: req.body.ownerContacts,
-                address: req.body.address,
-                comments: req.body.comments
+                owner: req.body.adminInfo.owner,
+                ownerContacts: req.body.adminInfo.ownerContacts,
+                address: req.body.adminInfo.address,
+                comments: req.body.adminInfo.comments
             },
             code: req.body.code,
             video: req.body.video,
@@ -294,14 +295,19 @@ async function updateObject(req, res) {
     } else {
         price = req.body.price.priceSales;
     }
-    // let imageName = makeid();
-    // let extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
-    // ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
-    //     if (err) throw err;
-
-    //     console.log("Image saved successfully");
-
-    // });
+    let imageName='';
+    if(req.body.image.includes('photo/') || req.body.image.includes('iblock/')){
+        imageName = req.body.image
+    }else{
+         imageName = 'photo/'+makeid();
+         extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+        ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
+            if (err) throw err;
+    
+            console.log("Image saved successfully");
+            imageName+'.'+extention;
+        });
+    }
     // if (req.body.photo) {
     //     for (let i = 0; i < req.body.photo.length; i++) {
     //         let photoName = makeid();
@@ -330,6 +336,7 @@ async function updateObject(req, res) {
                 floor: req.body.floor,
                 descriptionEn: req.body.descriptionEn,
                 descriptionRu: req.body.descriptionRu,
+                mainPhoto: imageName,
                 sales,
                 rent,
                 stage: req.body.stage,

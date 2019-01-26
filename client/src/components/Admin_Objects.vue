@@ -26,13 +26,7 @@
                   clearable
                   class="input_articles"
                 ></el-input>
-                <el-input
-                  placeholder="Price ฿"
-                  v-model="price"
-                  clearable
-                  class="input_articles"
-                  type="number"
-                ></el-input>
+                <el-input placeholder="Price ฿" v-model="price" clearable class="input_articles"></el-input>
                 <el-select
                   v-model="newObj.typeOfObject"
                   placeholder="Sale/Rent"
@@ -133,7 +127,13 @@
                   clearable
                   class="input_articles"
                 ></el-input>
-                <el-input placeholder="Code" v-model="newObj.code" clearable class="input_articles"></el-input>
+                <el-input
+                  placeholder="Floor"
+                  v-model="newObj.currentFloor"
+                  clearable
+                  class="input_articles"
+                ></el-input>
+                <el-input placeholder="Code" v-model="generedCode" clearable class="input_articles"></el-input>
                 <el-input
                   placeholder="Number of bedrooms"
                   v-model="newObj.badroom"
@@ -201,6 +201,13 @@
                   <div v-for="(photo, index) in photos" :key="index" class="imageContent">
                     <img :src="photo" @click="removePhoto(index)" class="preloadImage">
                   </div>
+
+                  <el-button
+                    v-if="photos.length"
+                    type="primary"
+                    @click="removePhotos"
+                    class="input_articles"
+                  >Remove photos</el-button>
                 </div>
               </div>
             </el-carousel-item>
@@ -238,13 +245,28 @@
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
           <el-select
+          v-if="!updatePanel"
             v-model="searchActive"
-            placeholder="Property type"
+            placeholder="Active filter"
             class="input_articles"
             @change="searching()"
           >
             <el-option
-              v-for="item in [{label:'Active', value:true},{label:'Non Active', value:false}]"
+              v-for="item in [{label:'Active filter', value:null},{label:'Active', value:true},{label:'Non Active', value:false}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-select
+          v-if="!updatePanel"
+            v-model="searchRentType"
+            placeholder="Sales/Rent filter"
+            class="input_articles"
+            @change="searching()"
+          >
+            <el-option
+              v-for="item in [{label:'Sales/Rent filter', value:'all'},{label:'Sales', value:'sales'},{label:'Rent', value:'rent'}]"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -471,6 +493,12 @@
                     class="input_articles"
                   ></el-input>
                   <el-input
+                    placeholder="Floor"
+                    v-model="updatedObject.currentFloor"
+                    clearable
+                    class="input_articles"
+                  ></el-input>
+                  <el-input
                     placeholder="code"
                     v-model="updatedObject.code"
                     clearable
@@ -541,18 +569,15 @@
                   </div>
                   <div v-if="photos">
                     <div v-for="(photo, index) in photos" :key="index" class="imageContent">
-                      <img
-                        :src="`http://rl-property.com/${photo}`"
-                        @click="removePhoto(index)"
-                        class="preloadImage"
-                      >
+                      <img :src="`http://rl-property.com/${photo}`" class="preloadImage">
                     </div>
                   </div>
                   <el-button
+                    v-if="photos.length"
                     type="primary"
-                    @click="updateObject(updatedObject)"
+                    @click="removePhotos"
                     class="input_articles"
-                  >Update</el-button>
+                  >Remove photos</el-button>
                 </div>
               </el-carousel-item>
               <el-carousel-item>
@@ -584,10 +609,41 @@
                 </div>
               </el-carousel-item>
             </el-carousel>
+            <el-button
+              type="primary"
+              @click="updateObject(updatedObject)"
+              class="input_articles"
+            >Update</el-button>
           </div>
         </el-tab-pane>
         <el-tab-pane label="Delete" name="third">
           <el-input placeholder="search..." v-model="search"></el-input>
+          <el-select
+            v-model="searchActive"
+            placeholder="Active filter"
+            class="input_articles"
+            @change="searching()"
+          >
+            <el-option
+              v-for="item in [{label:'Active filter', value:null},{label:'Active', value:true},{label:'Non Active', value:false}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-select
+            v-model="searchRentType"
+            placeholder="Sales/Rent filter"
+            class="input_articles"
+            @change="searching()"
+          >
+            <el-option
+              v-for="item in [{label:'Sales/Rent filter', value:'all'},{label:'Sales', value:'sales'},{label:'Rent', value:'rent'}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
           <el-select
             v-model="searchActive"
             placeholder="Property type"
@@ -684,12 +740,14 @@ export default {
   data() {
     return {
       searchActive: null,
+      searchRentType: "all",
       typeObjectUpdate: "",
       objects: [],
       newObj: {
         nameOfObjectRU: "",
         nameOfObjectEN: "",
         floor: "",
+        currentFloor: "",
         badroom: "",
         bathroom: "",
         distanсeToBitch: "",
@@ -881,28 +939,13 @@ export default {
   },
   watch: {
     search(v) {
-      if (v) {
-        this.searching();
-      }
-    },
-    price(v) {
-      this.price = parseFloat(this.price).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-      console.log(this.price);
+      this.searching();
     }
   },
   methods: {
-    formatPrice(value) {
-      let val = (value / 1).toFixed(2).replace(".", ",");
-      val
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        .slice(0, -1)
-        .slice(0, -2);
-      this.newObj.price = val;
-    },
     searching() {
       this.searched = [];
-      if (this.search) {
+      if (this.search.length) {
         for (let i = 0; i < this.objects.length; i++) {
           if (
             this.objects[i].titleRu
@@ -925,6 +968,37 @@ export default {
             this.searched.push(this.searched[i]);
           }
         }
+      }
+      if (this.searchRentType === "sales" && !this.searched.length) {
+        console.log("search");
+        for (let i = 0; i < this.objects.length; i++) {
+          if (
+            this.objects[i].sales === "true" &&
+            this.objects[i].rent === "false"
+          ) {
+            this.searched.push(this.objects[i]);
+          }
+        }
+        console.log(this.searched);
+      }
+      if (this.searchRentType === "rent" && !this.searched.length) {
+        console.log("search");
+        for (let i = 0; i < this.objects.length; i++) {
+          if (
+            this.objects[i].sales === "false" &&
+            this.objects[i].rent === "rent"
+          ) {
+            this.searched.push(this.objects[i]);
+          }
+        }
+        console.log(this.searched);
+      }
+            if (this.searchRentType === "all"&& !this.searched.length) {
+        console.log('search')
+        for (let i = 0; i < this.objects.length; i++) {
+            this.searched.push(this.objects[i]);
+        }
+        console.log(this.searched)
       }
     },
     update(id) {
@@ -965,10 +1039,14 @@ export default {
     removeImage() {
       this.image = "";
     },
+    removePhotos() {
+      this.photos = [];
+    },
     updateObject(object) {
       let data = this.updatedObject;
-      data.image = this.updatedObject.mainPhoto;
-      data.photo = this.updatedObject.photo;
+      data.image = this.image;
+      console.log(this.photos)
+      data.photo = this.photos;
       data.type = this.typeObjectUpdate;
       console.log(data);
       this.$axios
@@ -1018,6 +1096,7 @@ export default {
       let data = this.newObj;
       data.image = this.image;
       data.photo = this.photos;
+      data.code = this.generedCode;
       this.$axios
         .post("http://rl-property.com/api/create-object", data)
         .then(response => {
@@ -1056,11 +1135,14 @@ export default {
               address: "",
               comments: ""
             },
-            video: ""
+            video: "",
+            currentFloor: ""
           }),
             (this.image = ""),
-            (this.photos = []);
+            (this.photos = []),
+            (this.price = "");
         });
+      this.getObjects();
     },
     getObjects() {
       this.$axios

@@ -46,5 +46,6 @@ module.exports = mongoose.model('Object', {
         ownerContacts:{type: String},
         address:{type: String},
         comments:{type: String}
-      }
+      },
+      currentFloor:{type: String}
 })
