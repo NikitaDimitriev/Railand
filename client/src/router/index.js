@@ -18,6 +18,7 @@ import Kata from '@/components/Kata'
 import Botanica from '@/components/Botanica'
 import RPM from '@/components/RPM'
 import Personal_Area from '@/components/Personal_Area'
+import Complex from '@/components/Complex';
 
 Vue.use(Router)
 
@@ -113,6 +114,11 @@ export default new Router({
       path: '/personal-area',
       name: 'Personal_Area',
       component: Personal_Area
+    },
+    {
+      path: '/admin/complex',
+      name: 'Complex',
+      component: Complex
     }
   ],
   scrollBehavior (to, from, savedPosition) {

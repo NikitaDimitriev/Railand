@@ -10,9 +10,10 @@ const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 const MailCtrl = require('./app/controllers/MailCtrl');
+const Complex = require('./app/controllers/Complex');
 
-const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
-// const db = 'mongodb://localhost:27017/RailandDB';
+// const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
+const db = 'mongodb://localhost:27017/RailandDB';
 
 mongoose.connect(db, function(err, db) {
 	if (err) {
@@ -59,6 +60,8 @@ app.post('/api/get-objects-filters', ObjectCtrl.getFilter);
 app.get('/api/get-objects', ObjectCtrl.getObjects);
 app.delete('/api/delete-object/:id', ObjectCtrl.deleteObject);
 app.put('/api/update-object', ObjectCtrl.updateObject);
+
+app.post('/api/create-object', Complex.createComplex);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);
