@@ -13,33 +13,20 @@
           >
             <el-carousel-item>
               <div class="content">
-                <h3>Main info</h3>
+                <h3>Main info Complex</h3>
                 <el-input
                   placeholder="Title RU"
-                  v-model="newObj.nameOfObjectRU"
+                  v-model="newComplex.nameOfObjectRU"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
                   placeholder="Title EN"
-                  v-model="newObj.nameOfObjectEN"
+                  v-model="newComplex.nameOfObjectEN"
                   clearable
                   class="input_articles"
                 ></el-input>
-                <el-input placeholder="Price ฿" v-model="price" clearable class="input_articles"></el-input>
-                <el-select
-                  v-model="newObj.typeOfObject"
-                  placeholder="Sale/Rent"
-                  class="input_articles"
-                >
-                  <el-option
-                    v-for="item in optionsType"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>
-                <el-select v-model="newObj.location" placeholder="Location" class="input_articles">
+                <el-select v-model="newComplex.location" placeholder="Location" class="input_articles">
                   <el-option
                     v-for="item in optionsLocation"
                     :key="item.value"
@@ -47,7 +34,7 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-                <el-select v-model="newObj.type" placeholder="Property type" class="input_articles">
+                <el-select v-model="newComplex.type" placeholder="Property type" class="input_articles">
                   <el-option
                     v-for="item in types"
                     :key="item.value"
@@ -55,8 +42,7 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-                <el-checkbox v-model="newObj.topOfList">Set to top</el-checkbox>
-                <el-checkbox v-model="newObj.active">Active</el-checkbox>
+                <el-checkbox v-model="newComplex.active">Active</el-checkbox>
                 <div v-if="!image" style="font-size: 18px; margin-top: 45px">
                   <label for="image" class="fileInput">Add main photo</label>
                   <input type="file" @change="onFileChange" id="image" style="visibility: hidden">
@@ -74,45 +60,37 @@
                   type="textarea"
                   :rows="2"
                   placeholder="Description RU"
-                  v-model="newObj.descriptionRU"
+                  v-model="newComplex.descriptionRU"
                 ></el-input>
                 <el-input
                   type="textarea"
                   :rows="2"
                   placeholder="Description EN"
-                  v-model="newObj.descriptionEN"
+                  v-model="newComplex.descriptionEN"
                 ></el-input>
                 <el-input
                   placeholder="Address"
-                  v-model="newObj.address"
+                  v-model="newComplex.address"
                   clearable
                   class="input_articles"
                 ></el-input>
-                <el-select v-model="newObj.stage" placeholder="Stage" class="input_articles">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>
                 <el-input
                   placeholder="Position at map х"
-                  v-model="newObj.coordinat.x"
+                  v-model="newComplex.coordinat.x"
                   clearable
                   class="input_articles"
                   type="number"
                 ></el-input>
                 <el-input
                   placeholder="Position at map у"
-                  v-model="newObj.coordinat.y"
+                  v-model="newComplex.coordinat.y"
                   clearable
                   class="input_articles"
                   type="number"
                 ></el-input>
                 <el-input
                   placeholder="Video link"
-                  v-model="newObj.video"
+                  v-model="newComplex.video"
                   clearable
                   class="input_articles"
                 ></el-input>
@@ -121,64 +99,16 @@
             <el-carousel-item>
               <div class="content">
                 <h3>About object</h3>
-                <el-input
-                  placeholder="Number of floors"
-                  v-model="newObj.floor"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="Floor"
-                  v-model="newObj.currentFloor"
-                  clearable
-                  class="input_articles"
-                ></el-input>
                 <el-input placeholder="Code" v-model="generedCode" clearable class="input_articles"></el-input>
                 <el-input
-                  placeholder="Number of bedrooms"
-                  v-model="newObj.badroom"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="number of bathroom"
-                  v-model="newObj.bathroom"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
                   placeholder="Distance to beach"
-                  v-model="newObj.distanсeToBitch"
+                  v-model="newComplex.distanсeToBitch"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
                   placeholder="Distance to airport"
-                  v-model="newObj.distanсeToAiroport"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="Total area"
-                  v-model="newObj.area"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="Land area"
-                  v-model="newObj.landArea"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="Living area"
-                  v-model="newObj.lifeArea"
-                  clearable
-                  class="input_articles"
-                ></el-input>
-                <el-input
-                  placeholder="Pool area"
-                  v-model="newObj.areaOfPool"
+                  v-model="newComplex.distanсeToAiroport"
                   clearable
                   class="input_articles"
                 ></el-input>
@@ -216,33 +146,33 @@
                 <h3>Admin info</h3>
                 <el-input
                   placeholder="Owner"
-                  v-model="newObj.adminInfo.owner"
+                  v-model="newComplex.adminInfo.owner"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
                   placeholder="Address"
-                  v-model="newObj.adminInfo.address"
+                  v-model="newComplex.adminInfo.address"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
                   placeholder="Owner contacts"
-                  v-model="newObj.adminInfo.ownerContacts"
+                  v-model="newComplex.adminInfo.ownerContacts"
                   clearable
                   class="input_articles"
                 ></el-input>
                 <el-input
                   type="textarea"
                   placeholder="Comments"
-                  v-model="newObj.adminInfo.comments"
+                  v-model="newComplex.adminInfo.comments"
                 ></el-input>
               </div>
             </el-carousel-item>
           </el-carousel>
           <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
         </el-tab-pane>
-        <!-- <el-tab-pane label="Update" name="second" @click="removeImage()">
+        <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
           <el-select
           v-if="!updatePanel"
@@ -253,20 +183,6 @@
           >
             <el-option
               v-for="item in [{label:'Active filter', value:null},{label:'Active', value:true},{label:'Non Active', value:false}]"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-          <el-select
-          v-if="!updatePanel"
-            v-model="searchRentType"
-            placeholder="Sales/Rent filter"
-            class="input_articles"
-            @change="searching()"
-          >
-            <el-option
-              v-for="item in [{label:'Sales/Rent filter', value:'all'},{label:'Sales', value:'sales'},{label:'Rent', value:'rent'}]"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -355,7 +271,7 @@
               <el-carousel-item>
                 <div class="content">
                   <h3>
-                    <i class="fa fa-arrow-left" @click="updatePanel = false"></i> Main info
+                    <i class="fa fa-arrow-left" @click="updatePanel = false"></i> Main info Complex
                   </h3>
                   <el-input
                     placeholder="Title RU"
@@ -369,26 +285,6 @@
                     clearable
                     class="input_articles"
                   ></el-input>
-                  <el-input
-                    placeholder="Price ฿"
-                    v-model="updatedObject.price.priceSales"
-                    clearable
-                    class="input_articles"
-                    v-if="updatedObject.typeOfObject !== 'rent'"
-                    @change="formatPrice(updatedObject.price.priceSales)"
-                  ></el-input>
-                  <el-select
-                    v-model="updatedObject.typeOfObject"
-                    placeholder="Type of Object"
-                    class="input_articles"
-                  >
-                    <el-option
-                      v-for="item in optionsType"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
-                  </el-select>
                   <el-select
                     v-model="updatedObject.location"
                     placeholder="Location"
@@ -413,7 +309,6 @@
                       :value="item.value"
                     ></el-option>
                   </el-select>
-                  <el-checkbox v-model="updatedObject.topOfList">Set to top</el-checkbox>
                   <el-checkbox v-model="updatedObject.active">Active</el-checkbox>
                   <div v-if="!image" style="font-size:18px">
                     <label for="imageUpdate" class="fileInput">Add main photo</label>
@@ -451,18 +346,6 @@
                     clearable
                     class="input_articles"
                   ></el-input>
-                  <el-select
-                    v-model="updatedObject.stage"
-                    placeholder="Stage"
-                    class="input_articles"
-                  >
-                    <el-option
-                      v-for="item in options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    ></el-option>
-                  </el-select>
                   <el-input
                     placeholder="Position at map х"
                     v-model="updatedObject.coordinat.x"
@@ -485,37 +368,14 @@
               </el-carousel-item>
               <el-carousel-item>
                 <div class="content">
-                  <h3>About object</h3>
-                  <el-input
-                    placeholder="Number of floors"
-                    v-model="updatedObject.floor"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="Floor"
-                    v-model="updatedObject.currentFloor"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
+                  <h3>About complex</h3>
                   <el-input
                     placeholder="code"
                     v-model="updatedObject.code"
                     clearable
                     class="input_articles"
                   ></el-input>
-                  <el-input
-                    placeholder="Number of bedrooms"
-                    v-model="updatedObject.badroom"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="number of bathroom"
-                    v-model="updatedObject.bathroom"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
+
                   <el-input
                     placeholder="Distance to beach"
                     v-model="updatedObject.distanсeToBitch"
@@ -525,30 +385,6 @@
                   <el-input
                     placeholder="Distance to airport"
                     v-model="updatedObject.distanсeToAiroport"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="Total area"
-                    v-model="updatedObject.area"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="Land area"
-                    v-model="updatedObject.landArea"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="living area"
-                    v-model="updatedObject.lifeArea"
-                    clearable
-                    class="input_articles"
-                  ></el-input>
-                  <el-input
-                    placeholder="Pool area"
-                    v-model="updatedObject.areaOfPool"
                     clearable
                     class="input_articles"
                   ></el-input>
@@ -615,7 +451,7 @@
               class="input_articles"
             >Update</el-button>
           </div>
-        </el-tab-pane> -->
+        </el-tab-pane>
         <el-tab-pane label="Delete" name="third">
           <el-input placeholder="search..." v-model="search"></el-input>
           <el-select
@@ -743,7 +579,7 @@ export default {
       searchRentType: "all",
       typeObjectUpdate: "",
       objects: [],
-      newObj: {
+      newComplex: {
         nameOfObjectRU: "",
         nameOfObjectEN: "",
         floor: "",
@@ -1009,31 +845,9 @@ export default {
         .then(response => {
           this.updatedObject = Object.assign({}, response.data);
           this.typeObjectUpdate = response.data.typeOfObject;
-          if (
-            this.updatedObject.sales === "true" &&
-            this.updatedObject.rent === "true"
-          ) {
-            this.updatedObject.typeOfObject = "all";
-          } else if (
-            this.updatedObject.sales === "true" &&
-            this.updatedObject.rent === "false"
-          ) {
-            this.updatedObject.typeOfObject = "sales";
-          } else {
-            this.updatedObject.typeOfObject = "rent";
-          }
-          if (this.updatedObject.stage === "1") {
-            this.updatedObject.stage = "none";
-          }
           this.image = this.updatedObject.mainPhoto;
           this.photos = this.updatedObject.photo;
           console.log(this.image, this.photos);
-          this.$axios
-            .get(`http://rl-property.com/${this.updatedObject.mainPhoto}`)
-            .then(response => {
-              console.log(response);
-            });
-          console.log(this.updatedObject, this.image);
         });
     },
     removeImage() {
@@ -1054,7 +868,7 @@ export default {
         .then(response => {
           this.$message({
             type: "success",
-            message: `Object was updated`
+            message: `Complex was updated`
           });
         });
     },
@@ -1093,7 +907,7 @@ export default {
       reader.readAsDataURL(file);
     },
     create() {
-      let data = this.newObj;
+      let data = this.newComplex;
       data.image = this.image;
       data.photo = this.photos;
       data.code = this.generedCode;
@@ -1104,7 +918,7 @@ export default {
             type: "success",
             message: `Object was created`
           });
-          (this.newObj = {
+          (this.newComplex = {
             nameOfObjectRU: "",
             nameOfObjectEN: "",
             floor: "",

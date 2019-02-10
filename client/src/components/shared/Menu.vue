@@ -59,7 +59,7 @@
               <nav class="nav">
                 <router-link to="/" class="nav__link">Главная</router-link>
                 <router-link to="/catalog" class="nav__link">недвижимость</router-link>
-                <!-- <router-link to="/cooperation" class="nav__link">Владельцам</router-link> -->
+                <router-link to="/cooperation" class="nav__link">Владельцам</router-link>
                 <router-link to="/live-in-phuket" class="nav__link">жизнь на Пхукете</router-link>
               </nav>
             </div>
@@ -183,10 +183,10 @@
                 <li class="tselect-mob__item">+ 66 81 737 1687</li>
               </ul>
             </div>
-            <button type="button" class="btn-burger js-menu"><span>Menu</span></button>
+            <button type="button" class="btn-burger js-menu" :class="activeMenu ? 'is-active': null" @click="activeMenu=!activeMenu"><span>Menu</span></button>
           </div>
         </div>
-        <div class="header-mob__drop is-active">
+        <div class="header-mob__drop" :class="activeMenu ? 'activeMenu': null">
           <div class="header-mob__drop-in inner">
             <nav class="header-mob__nav">
               <a href="#" class="header-mob__nav-link is-active">Главная</a>
@@ -256,7 +256,8 @@ export default {
       passwordCheck: "",
       loginEmail: "",
       loginPassword: "",
-      user: false
+      user: false,
+      activeMenu: false
     };
   },
   mounted() {
@@ -339,5 +340,8 @@ export default {
 }
 .header-inner {
   padding: 10px 125px;
+}
+.activeMenu{
+  transform: translate(0, 0);
 }
 </style>

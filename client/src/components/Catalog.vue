@@ -70,7 +70,8 @@
                     <span
                       class="objects__link"
                       @click="activeVilla, getVillas() "
-                      :class="{'is-active': activeVilla}">Вилла</span>
+                      :class="{'is-active': activeVilla}"
+                    >Вилла</span>
                     <span
                       class="objects__link"
                       @click="activeApartment, getApartments()"
@@ -81,7 +82,7 @@
                       @click="activeHouse, getHouses()"
                       :class="{'is-active': activeHouse}"
                     >Таунхаус</span>
-                    <!-- <span class="objects__link">Комплексы</span> -->
+                    <span class="objects__link" @click="getComplex()">Комплексы</span>
                   </div>
                 </div>
                 <div class="search">
@@ -298,7 +299,11 @@
                   >50</span>
                 </div>
               </div>
-              <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+              <ul
+                class="cards__list cards__list-tab js-content is-active"
+                data-tab="0"
+                v-if="!complexList"
+              >
                 <li class="cards__item" v-for="(object, index) of objects" :key="index">
                   <div class="card">
                     <div class="card__top">
@@ -310,10 +315,7 @@
                       </div>
                       <div class="card__slider">
                         <div class="card__slider-item">
-                          <img
-                            :src="'http://rl-property.com/'+object.mainPhoto"
-                            alt="аппартамены"
-                          >
+                          <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
                         </div>
                       </div>
                     </div>
@@ -329,6 +331,39 @@
                       <div class="card__footer">
                         <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
                         <router-link :to="`/catalog/${filter.type}/${object._id}`">
+                          <button type="button" class="card__btn btn btn_primary">Смотреть</button>
+                        </router-link>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                class="cards__list cards__list-tab js-content is-active"
+                data-tab="0"
+                v-if="complexList"
+              >
+                <li class="cards__item" v-for="(object, index) of complex" :key="index">
+                  <div class="card">
+                    <div class="card__top">
+                      <div class="card__slider">
+                        <div class="card__slider-item">
+                          <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card__content">
+                      <div class="card__body">
+                        <h3 class="card__title">{{object.titleRu}}</h3>
+                        <ul class="card__l">
+                          <!-- <li>Жилая площадь: {{object.lifeArea}}</li>
+                          <li>Спален: {{object.badroom}}</li> -->
+                          <li>До пляжа: {{object.distanceToBitch}}</li>
+                        </ul>
+                      </div>
+                      <div class="card__footer">
+                        <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
+                        <router-link :to="`/complex/${object._id}`">
                           <button type="button" class="card__btn btn btn_primary">Смотреть</button>
                         </router-link>
                       </div>
@@ -385,10 +420,21 @@ export default {
       activeVilla: false,
       activeApartment: false,
       activeHouse: false,
-      dateRange: ''
+      dateRange: "",
+      complex: [],
+      complexList: false
     };
   },
   methods: {
+    getComplex() {
+      this.$axios
+        .get("http://rl-property.com/api/get-complex")
+        .then(response => {
+          this.complex = response.data;
+          this.complexList = true;
+          console.log(this.complex);
+        });
+    },
     filtering() {
       this.$axios
         .post("http://rl-property.com/api/get-objects-filters", {
@@ -396,6 +442,7 @@ export default {
         })
         .then(response => {
           this.objects = response.data;
+          this.complexList = false;
           console.log(response);
         });
     },
@@ -408,6 +455,7 @@ export default {
         .then(response => {
           this.info = response.data;
           this.setPages();
+          this.complexList = false;
         });
     },
     getInfoRent() {
@@ -416,6 +464,7 @@ export default {
         .then(response => {
           this.info = response.data;
           this.setPages();
+          this.complexList = false;
         });
     },
     getObjectsSales() {
@@ -431,6 +480,7 @@ export default {
         )
         .then(response => {
           this.objects = response.data.reverse();
+          this.complexList = false;
         });
     },
     getObjectsRent() {
@@ -446,6 +496,7 @@ export default {
         )
         .then(response => {
           this.objects = response.data.reverse();
+          this.complexList = false;
         });
     },
     setFilter() {

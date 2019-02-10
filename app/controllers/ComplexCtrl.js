@@ -1,9 +1,9 @@
-const Apertment = require('../models/Object');
+const Complex = require('../models/Complex');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.createComplex = createComplex;
-// exports.getObjectsSales = getObjectsSales;
-// exports.getObjectsRent = getObjectsRent;
+exports.getComplex = getComplex;
+exports.getComplexById = getComplexById;
 // exports.getObjectsPaginationSales = getObjectsPaginationSales;
 // exports.getObjectsPaginationRent = getObjectsPaginationRent;
 // exports.getObjectById = getObjectById;
@@ -11,8 +11,8 @@ exports.createComplex = createComplex;
 // exports.getInfoRent = getInfoRent;
 // exports.getFilter = getFilter;
 // exports.getObjects = getObjects;
-// exports.deleteObject = deleteObject;
-// exports.updateObject = updateObject;
+exports.deleteComplex = deleteComplex;
+exports.updateComplex = updateComplex;
 
 const fs = require("fs");
 const request = require('request');
@@ -27,9 +27,9 @@ console.log(newDataJsonPhoto.property[0]['Main photo']);
 let dump = newDataJson.property;
 let dumpPhoto = newDataJsonPhoto.property;
 // create(dump, dumpPhoto);
-async function deleteObject(req, res) {
+async function deleteComplex(req, res) {
     console.log(req.params.id)
-    let removed = await Apertment.remove({
+    let removed = await Complex.remove({
         _id: ObjectId(req.params.id)
     })
     console.log(removed);
@@ -89,7 +89,7 @@ async function create(dump, dumpPhoto) {
             let indoor = data["Indoor area"] || '';
             let toBitch = data["Distance to the beach"] || '';
             let toAiroport = data["Distance to the airport"] || '';
-            await Apertment.create({
+            await Complex.create({
                 titleRu: data["Title Ru"],
                 titleEn: data["Title En"],
                 area: area.substring(0, area.indexOf(".")),
@@ -215,14 +215,11 @@ async function createComplex(req, res) {
         }
     }
     try {
-        let create = await Apertment.create({
+        let create = await Complex.create({
             titleRu: req.body.nameOfObjectRU,
             titleEn: req.body.nameOfObjectEN,
-            area: req.body.area,
             distanceToBitch: req.body.distanceToBitch,
             distanсeToAiroport: req.body.distanсeToAiroport,
-            landArea: req.body.landArea,
-            lifeArea: req.body.lifeArea,
             descriptionEn: req.body.descriptionEN,
             descriptionRu: req.body.descriptionRU,
             coordinat: {
@@ -250,26 +247,8 @@ async function createComplex(req, res) {
     }
 }
 
-async function updateObject(req, res) {
+async function updateComplex(req, res) {
     let photo = [];
-    let rent = '';
-    let sales = '';
-    let price = '';
-    if (req.body.typeOfObject === 'all') {
-        rent = 'true';
-        sales = 'true';
-    } else if (req.body.typeOfObject === 'rent') {
-        rent = 'true';
-        sales = 'false';
-    } else if (req.body.typeOfObject === 'sales') {
-        rent = 'false';
-        sales = 'true';
-    }
-    if (!req.body.price) {
-        price = ""
-    } else {
-        price = req.body.price.priceSales;
-    }
     let imageName='';
     if(req.body.image.includes('photo/') || req.body.image.includes('iblock/')){
         imageName = req.body.image
@@ -295,36 +274,21 @@ async function updateObject(req, res) {
     // }
     try {
         console.log(req.body._id);
-        let create = await Apertment.update({ _id: ObjectId(req.body._id) }, {
+        let create = await Complex.update({ _id: ObjectId(req.body._id) }, {
             $set: {
                 titleRu: req.body.titleRu,
                 titleEn: req.body.titleRu,
-                area: req.body.area,
                 distanceToBitch: req.body.distanceToBitch,
-                rooms: req.body.rooms,
                 distanceToAiroport: req.body.distanceToAiroport,
-                badroom: req.body.badroom,
-                bathroom: req.body.bathroom,
-                landArea: req.body.landArea,
-                lifeArea: req.body.lifeArea,
-                areaOfPool: req.body.areaOfPool,
-                floor: req.body.floor,
                 descriptionEn: req.body.descriptionEn,
                 descriptionRu: req.body.descriptionRu,
                 mainPhoto: imageName,
-                sales,
-                rent,
-                stage: req.body.stage,
-                price: {
-                    priceSales: price
-                },
                 coordinat: {
                     x: req.body.coordinat.x,
                     y: req.body.coordinat.y
                 },
                 address: req.body.address,
                 location: req.body.location,
-                topOfList: req.body.topOfList,
                 active: req.body.active,
                 typeOfObject: req.body.type,
                 adminInfo: {
@@ -343,10 +307,10 @@ async function updateObject(req, res) {
     }
 }
 
-async function getObjectsSales(req, res) {
+async function getComplex(req, res) {
     try {
-        let objects = await Apertment.find({ sales: "true", topOfList: true });
-        res.json(objects).end();
+        let complex = await Complex.find({});
+        res.json(complex).end();
     } catch (error) {
         console.log(error);
     }
@@ -398,9 +362,9 @@ async function getObjectsPaginationRent(req, res) {
     }
 }
 
-async function getObjectById(req, res) {
+async function getComplexById(req, res) {
     try {
-        let object = await Apertment.findOne({ _id: ObjectId(req.params.id) });
+        let object = await Complex.findOne({ _id: ObjectId(req.params.id) });
         res.json(object).end();
     } catch (error) {
         console.log(error);

@@ -13,12 +13,14 @@ import Admin_Articles from '@/components/Admin_Articles'
 import Admin_Users from '@/components/Admin_Users'
 import Admin_Reviews from '@/components/Admin_Reviews'
 import ObjectSingle from '@/components/ObjectSingle'
+import ComplexSingle from '@/components/ComplexSingle'
 import Article from '@/components/Article'
 import Kata from '@/components/Kata'
 import Botanica from '@/components/Botanica'
 import RPM from '@/components/RPM'
 import Personal_Area from '@/components/Personal_Area'
 import Complex from '@/components/Complex';
+import NotFound from '@/components/NotFound';
 
 Vue.use(Router)
 
@@ -91,6 +93,11 @@ export default new Router({
       component: ObjectSingle
     },
     {
+      path: '/complex/:id',
+      name: 'ComplexSingle',
+      component: ComplexSingle
+    },
+    {
       path: '/live-in-phuket/Botanica',
       name: 'Botanica',
       component: Botanica
@@ -119,16 +126,18 @@ export default new Router({
       path: '/admin/complex',
       name: 'Complex',
       component: Complex
-    }
+    },
+    { path: '/404', component: NotFound },
+    { path: '*', redirect: '/404' },
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
-    }else if(to.hash){
+    } else if (to.hash) {
       return {
         selector: to.hash
       };
-    } 
+    }
     else {
       return { x: 0, y: 0 }
     }

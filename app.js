@@ -3,17 +3,15 @@ const app            = express();
 const mongoose       = require('mongoose');
 const bodyParser     = require('body-parser');
 const methodOverride = require('method-override');
-const passport       = require('passport'); 
-const LocalStrategy  = require('passport-local').Strategy;
 const serveStatic    = require('serve-static');
 const AuthCtrl = require('./app/controllers/AuthCtrl');
 const ObjectCtrl = require('./app/controllers/ObjectsCtrl');
 const ArticlesCtrl = require('./app/controllers/ArticlesCtrl');
 const MailCtrl = require('./app/controllers/MailCtrl');
-const Complex = require('./app/controllers/Complex');
+const ComplexCtrl = require('./app/controllers/ComplexCtrl');
 
-// const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
-const db = 'mongodb://localhost:27017/RailandDB';
+const db = 'mongodb://admin:nikitazeus789@ds157503.mlab.com:57503/railanddb';
+// const db = 'mongodb://localhost:27017/RailandDB';
 
 mongoose.connect(db, function(err, db) {
 	if (err) {
@@ -61,7 +59,11 @@ app.get('/api/get-objects', ObjectCtrl.getObjects);
 app.delete('/api/delete-object/:id', ObjectCtrl.deleteObject);
 app.put('/api/update-object', ObjectCtrl.updateObject);
 
-app.post('/api/create-object', Complex.createComplex);
+app.post('/api/create-complex', ComplexCtrl.createComplex);
+app.get('/api/get-complex', ComplexCtrl.getComplex);
+app.get('/api/get-complex-by-id/:id', ComplexCtrl.getComplexById);
+app.put('/api/update-complex', ComplexCtrl.updateComplex);
+app.delete('/api/delete-complex/:id', ComplexCtrl.deleteComplex);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);

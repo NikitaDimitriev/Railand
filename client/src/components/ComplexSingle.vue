@@ -11,58 +11,19 @@
               <div class="aside__body">
                 <div class="options">
                   <div class="options__top">
-                    <h3 class="options__title">{{object.titleRu}}</h3>
+                    <h3 class="options__title">Rang Hill Residence</h3>
                   </div>
                   <div class="options__body">
                     <dl class="options-list">
-                      <dt class="options-list__title">Цена объекта:</dt>
-                      <dd class="options-list__description">&#3647; {{setPrice()}}</dd>
-                      <dt class="options-list__title" v-if='makePriceForMetr()'>Цена за м2</dt>
-                      <dd class="options-list__description" v-if="makePriceForMetr()">от {{makePriceForMetr()}} &#3647;</dd>
-                      <dt class="options-list__title">Расположение</dt>
-                      <dd class="options-list__description">{{object.address}}</dd>
-                      <dt class="options-list__title">Стадия готовности</dt>
-                      <dd
-                        class="options-list__description"
-                        v-if="object.stage !== 'none'"
-                      >{{object.stage === "underconstruction" ? "На этапе строительства" : "Вторичный рынок"}}</dd>
-                      <dd
-                        class="options-list__description"
-                        v-if="object.stage === 'none'"
-                      >{{"Сдан в эксплуатацию"}}</dd>
+                      <dt class="options-list__title">Район:</dt>
+                      <dd class="options-list__description">{{object.location}}</dd>
+                      <dt class="options-list__title">Тип предложения:</dt>
+                      <dd class="options-list__description">{{object.typeOfObject}}</dd>
+                      <dt class="options-list__title">Растояние до пляжа:</dt>
+                      <dd class="options-list__description">{{object.distanceToBitch}}</dd>
+                      <dt class="options-list__title">Растояние до аэропорта:</dt>
+                      <dd class="options-list__description">{{object.distanсeToAiroport}}</dd>
                     </dl>
-                  </div>
-                  <div class="aside__col" v-if="$route.params.type === 'rent'">
-                    <el-date-picker
-                      style="max-width: 272px"
-                      v-model="dateRange"
-                      type="daterange"
-                      start-placeholder="From"
-                      end-placeholder="To"></el-date-picker>
-                  </div>
-                  <div class="aside__col" v-if="$route.params.type === 'rent'">
-                    <div class="select-l">
-                      <select class="select-l__el" v-model="countOfGuest">
-                        <option value="all">Количество гостей</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7+">7+</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="options__bottom" v-if="$route.params.type !== 'rent'">
-                    <button type="button" class="options__btn btn" @click="scrollTo">
-                      <span>Отправить запрос</span>
-                    </button>
-                  </div>
-                  <div class="options__bottom" v-if="$route.params.type === 'rent'">
-                    <button type="button" class="options__btn btn" @click="order()">
-                      <span>Забронировать</span>
-                    </button>
                   </div>
                 </div>
                 <div class="small-map">
@@ -108,7 +69,7 @@
                   <!-- <li class="breadcrumb__separator">/</li> -->
                   <!-- <li class="breadcrumb__item"><span>карточка комплекса</span></li> -->
                 </ul>
-                <div class="topper__name">объект №{{object.code}}</div>
+                <div class="topper__name">комплекс №{{object.code}}</div>
               </div>
               <!-- END topper -->
               <!-- BEGIN slideshow -->
@@ -122,12 +83,12 @@
                   >
                 </div>
                 <div class="slideshow__thumbs">
-                  <button type="button" class="slideshow__arrow-left" @click="clicked = true,setPhoto(activePhoto-1)" >prev</button>
-                  <button type="button" class="slideshow__arrow-right" @click="clicked = true, setPhoto(activePhoto+1)">next</button>
+                  <button type="button" class="slideshow__arrow-left">prev</button>
+                  <button type="button" class="slideshow__arrow-right">next</button>
                   <div class="thumbs-list">
                     <div
                       class="thumbs-list__item"
-                      v-for="(photo, index) of carouselPhoto"
+                      v-for="(photo, index) of 4"
                       :key="index"
                       :class="{'is-active' : activePhoto === index}"
                       @click="clicked = true, setPhoto(index) "
@@ -139,6 +100,15 @@
                         alt
                       >
                     </div>
+                    <!-- <div class="thumbs-list__item ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[1]" width="160" height="100" alt="">
+                    </div>
+                    <div class="thumbs-list__item ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[2]" width="160" height="100" alt="">
+                    </div>
+                    <div class="thumbs-list__item ">
+                      <img :src="'http://rl-property.ru/upload/'+object.photo[3]" width="160" height="100" alt="">
+                    </div>-->
                   </div>
                 </div>
               </div>
@@ -210,46 +180,6 @@
               <!-- END slideshow -->
               <div class="columns">
                 <div class="columns__left">
-                  <div class="info-object">
-                    <div class="info-object__in">
-                      <div class="info-object__row">
-                        <div class="info-object__name">Этажность</div>
-                        <div class="info-object__val">{{object.floor}}</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Количество спален</div>
-                        <div class="info-object__val">{{object.badroom}}</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Количество ванных комнат</div>
-                        <div class="info-object__val">{{object.bathroom}}</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Растояние до пляжа</div>
-                        <div class="info-object__val">{{object.distanceToBitch}}km</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Растояние до аэропорта</div>
-                        <div class="info-object__val">{{object.distanceToAiroport}}km</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Общая площадь</div>
-                        <div class="info-object__val">{{object.area}}m2</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Площать земельного участка</div>
-                        <div class="info-object__val">{{object.landArea}}m2</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Жилая площадь</div>
-                        <div class="info-object__val">{{object.lifeArea}}m2</div>
-                      </div>
-                      <div class="info-object__row">
-                        <div class="info-object__name">Размеры басейна</div>
-                        <div class="info-object__val">{{object.areaOfPool}}</div>
-                      </div>
-                    </div>
-                  </div>
                   <h4 class="columns__title">Описание:</h4>
                   <div class="columns__content-wrp">
                     <div
@@ -292,41 +222,23 @@ export default {
       activePhoto: 0,
       clicked: false,
       mainPhoto: "",
-      dateRange: "",
-      countOfGuest: "all",
-      carouselPhoto:[],
     };
   },
   mounted() {
     this.getObjectById();
   },
   methods: {
-    setPrice(){
-      if(this.$route.params.type === 'rent'){
-        return "По запросу";
-      }else{
-        return this.object.price.priceSales;
-      }
-    },
     getObjectById() {
       let id = this.$route.params.id;
       console.log(this.$route.params);
       this.$axios
-        .get(`http://rl-property.com/api/get-object-by-id/${id}`)
+        .get(`http://rl-property.com/api/get-complex-by-id/${id}`)
         .then(response => {
           this.object = response.data;
-          this.carouselPhoto = this.object.photo;
           console.log(this.object);
         });
     },
     setPhoto(index) {
-      console.log(index)
-      if(index === -1){
-        index = this.object.photo.length-1
-      }
-      if(index>this.object.photo.length-1){
-        index=0;
-      }
       this.activePhoto = index;
       if (!this.clicked) {
         this.mainPhoto = "http://rl-property.com/" + this.object.mainPhoto;
@@ -337,36 +249,6 @@ export default {
     scrollTo() {
       this.$router.push({ path: "/", hash: "#order" });
     },
-    makePriceForMetr() {
-      if(this.$route.params.type === 'rent') return false;
-      if(!this.object.area) return false;
-      let metrPrice = Math.floor(
-        parseInt(this.object.price.priceSales.replace(/\./g, "")) /
-          this.object.area
-      );
-      metrPrice = metrPrice
-        .toString()
-        .split("")
-        .reverse();
-      metrPrice
-        .splice(3, 0, ".")
-        .reverse()
-        .join();
-      metrPrice = metrPrice.reverse().join("");
-      return metrPrice;
-    },
-    order(){
-      let data = {
-        date: this.dateRange,
-        countOfGuest: this.countOfGuest,
-        nameOfObject: this.object.titleRu,
-        id: this.object._id
-      };
-      console.log(data)
-      this.$axios.post('http://rl-property.com/api/send-reserv-mail', {data}).then(response=>{
-        console.log(response);
-      })
-    }
   }
 };
 </script>
