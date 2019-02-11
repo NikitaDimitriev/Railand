@@ -1,4 +1,5 @@
 const Complex = require('../models/Complex');
+const Apertment = require('../models/Apertment');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.createComplex = createComplex;
@@ -214,6 +215,7 @@ async function createComplex(req, res) {
             photo.push('photo/' + photoName + '.' + extention)
         }
     }
+
     try {
         let create = await Complex.create({
             titleRu: req.body.nameOfObjectRU,
@@ -239,8 +241,16 @@ async function createComplex(req, res) {
             },
             code: req.body.code,
             video: req.body.video,
-            active: req.body.active
-        })
+            active: req.body.active,
+            objects: req.body.objectsId
+        });
+        if (req.body.objectsId.length) {
+            for (let i = 0; i < req.body.objectsId.length; i++) {
+                Apertment.update({_id:ObjectId(req.body.objectsId[i])}, {$set:{
+                    complexId: create._id
+                }})
+            }
+        }
         res.json(create).end();
     } catch (error) {
         console.log(error)
@@ -364,8 +374,14 @@ async function getObjectsPaginationRent(req, res) {
 
 async function getComplexById(req, res) {
     try {
-        let object = await Complex.findOne({ _id: ObjectId(req.params.id) });
-        res.json(object).end();
+        let complex = await Complex.findOne({ _id: ObjectId(req.params.id) });
+        let objects = [];
+        for (let i = 0; i < complex.objectsId.length; i++) {
+            let find = await Apertment.find({_id:ObjectId(complex.objectsId[i])});
+            objects.push(find);
+        }
+        Object.assign(complex, objects)
+        res.json(complex).end();
     } catch (error) {
         console.log(error);
     }

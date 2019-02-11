@@ -3,17 +3,10 @@ const mongoose = require('mongoose');
 module.exports = mongoose.model('Complex', {
     titleRu: { type: String, require: true },
     titleEn: { type: String, require: true },
-    price: { type: String, require: true },
-    area: { type: String, require: true },
+   
     distanceToBitch: { type: String },
     distanсeToAiroport: { type: String },
-    floor: { type: String },
-    badroom: { type: String },
-    bathroom: { type: String },
-    landArea: { type: String },
-    lifeArea: { type: String },
-    areaOfPool: { type: String },
-    rooms: { type: String },
+    
     coordinat: {
         x: Number,
         y: Number
@@ -25,19 +18,8 @@ module.exports = mongoose.model('Complex', {
     address: { type: String },
     mainPhoto: { type: String },
     photo: { type: Array },
-    price: {
-        currencySales: { type: String },
-        priceSales: { type: String },
-        currencyRent: { type: String },
-        priceRent: { type: String }
-    },
-    property: { type: Array },
-    sales: { type: String },
-    rent: { type: String },
-    stage: { type: String },
+    
     infrastructure: { type: Array },
-    features: { type: Array },
-    topOfList: { type: Boolean, default: false },
     active: { type: Boolean, default: true },
     code: {type: Number},
     video: {type: String},
@@ -47,5 +29,7 @@ module.exports = mongoose.model('Complex', {
         address:{type: String},
         comments:{type: String}
       },
-      currentFloor:{type: String}
+      objects:{
+          type:Array
+      }
 })

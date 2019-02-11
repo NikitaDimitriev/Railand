@@ -26,7 +26,11 @@
                   clearable
                   class="input_articles"
                 ></el-input>
-                <el-select v-model="newComplex.location" placeholder="Location" class="input_articles">
+                <el-select
+                  v-model="newComplex.location"
+                  placeholder="Location"
+                  class="input_articles"
+                >
                   <el-option
                     v-for="item in optionsLocation"
                     :key="item.value"
@@ -34,7 +38,11 @@
                     :value="item.value"
                   ></el-option>
                 </el-select>
-                <el-select v-model="newComplex.type" placeholder="Property type" class="input_articles">
+                <el-select
+                  v-model="newComplex.type"
+                  placeholder="Property type"
+                  class="input_articles"
+                >
                   <el-option
                     v-for="item in types"
                     :key="item.value"
@@ -141,6 +149,87 @@
                 </div>
               </div>
             </el-carousel-item>
+            <el-carousel-item style="overflow-y:scroll">
+              <div class="content">
+                <h3>Add Object to complex</h3>
+                <el-input placeholder="search..." v-model="searchForComplex"></el-input>
+                <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+                  <li
+                    class="cards__item"
+                    v-for="(object, index) of objectsForComplex"
+                    :key="index"
+                    v-if="!searchedForComplex.length"
+                  >
+                    <div class="card">
+                      <div class="card__top">
+                        <div class="card__slider">
+                          <div class="card__slider-item">
+                            <img
+                              :src="'http://rl-property.com/'+object.mainPhoto"
+                              alt="аппартамены"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card__content">
+                        <div class="card__body">
+                          <h3 class="card__title">{{object.titleRu}}</h3>
+                          <ul class="card__l">
+                            <li>Living area: {{object.lifeArea}}</li>
+                            <li>Badroom: {{object.badroom}}</li>
+                            <li>Distance to beatch: {{object.distanceToBitch}}</li>
+                          </ul>
+                        </div>
+                        <div class="card__footer">
+                          <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
+                          <button
+                            type="button"
+                            class="card__btn btn btn_danger"
+                            @click="addObject(object._id)"
+                          >Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li
+                    class="cards__item"
+                    v-for="(object, index) of searchedForComplex"
+                    :key="index"
+                    v-if="searchedForComplex"
+                  >
+                    <div class="card">
+                      <div class="card__top">
+                        <div class="card__slider">
+                          <div class="card__slider-item">
+                            <img
+                              :src="'http://rl-property.com/'+object.mainPhoto"
+                              alt="аппартамены"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card__content">
+                        <div class="card__body">
+                          <h3 class="card__title">{{object.titleRu}}</h3>
+                          <ul class="card__l">
+                            <li>Living area: {{object.lifeArea}}</li>
+                            <li>Badroom: {{object.badroom}}</li>
+                            <li>Distance to beach: {{object.distanceToBitch}}</li>
+                          </ul>
+                        </div>
+                        <div class="card__footer">
+                          <button
+                            type="button"
+                            class="card__btn btn btn_danger"
+                            @click="deleteObject(object._id)"
+                          >Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </el-carousel-item>
             <el-carousel-item>
               <div class="content">
                 <h3>Admin info</h3>
@@ -174,20 +263,6 @@
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
-          <el-select
-          v-if="!updatePanel"
-            v-model="searchActive"
-            placeholder="Active filter"
-            class="input_articles"
-            @change="searching()"
-          >
-            <el-option
-              v-for="item in [{label:'Active filter', value:null},{label:'Active', value:true},{label:'Non Active', value:false}]"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
           <ul
             class="cards__list cards__list-tab js-content is-active"
             data-tab="0"
@@ -613,7 +688,8 @@ export default {
         },
         video: "",
         topOfList: false,
-        active: true
+        active: true,
+        objectsId: []
       },
       image: "",
       photos: [],
@@ -770,15 +846,54 @@ export default {
       search: "",
       searched: [],
       generedCode: 1111,
-      price: ""
+      price: "",
+      objectsForComplex: [],
+      searchForComplex: "",
+      searchedForComplex:[]
     };
   },
   watch: {
     search(v) {
       this.searching();
+    },
+    searchForComplex(v) {
+      this.searchingForComplex();
     }
   },
   methods: {
+    addObject(id) {
+      if (this.newComplex.objectsId.includes(id)) {
+        this.arrayRemove(this.newComplex.objectsId, id);
+      } else {
+        this.newComplex.objectsId.push(id);
+      }
+    },
+    getObjectsForComplex() {
+      this.$axios
+        .get("http://rl-property.com/api/get-objects")
+        .then(response => {
+          this.objectsForComplex = response.data.reverse();
+        });
+    },
+    arrayRemove(arr, value) {
+      return arr.filter(function(ele) {
+        return ele != value;
+      });
+    },
+    searchingForComplex() {
+      this.searchedForComplex = [];
+      if (this.searchForComplex.length) {
+        for (let i = 0; i < this.objectsForComplex.length; i++) {
+          if (
+            this.objectsForComplex[i].titleRu
+              .toLowerCase()
+              .includes(this.searchForComplex.toLowerCase())
+          ) {
+            this.searchedForComplex.push(this.objectsForComplex[i]);
+          }
+        }
+      }
+    },
     searching() {
       this.searched = [];
       if (this.search.length) {
@@ -829,12 +944,12 @@ export default {
         }
         console.log(this.searched);
       }
-            if (this.searchRentType === "all"&& !this.searched.length) {
-        console.log('search')
+      if (this.searchRentType === "all" && !this.searched.length) {
+        console.log("search");
         for (let i = 0; i < this.objects.length; i++) {
-            this.searched.push(this.objects[i]);
+          this.searched.push(this.objects[i]);
         }
-        console.log(this.searched)
+        console.log(this.searched);
       }
     },
     update(id) {
@@ -859,7 +974,7 @@ export default {
     updateObject(object) {
       let data = this.updatedObject;
       data.image = this.image;
-      console.log(this.photos)
+      console.log(this.photos);
       data.photo = this.photos;
       data.type = this.typeObjectUpdate;
       console.log(data);
@@ -982,6 +1097,7 @@ export default {
   },
   mounted() {
     this.getObjects();
+    this.getObjectsForComplex();
     if (!localStorage.getItem("auth")) {
       this.$router.push({ path: "/admin" });
     }
