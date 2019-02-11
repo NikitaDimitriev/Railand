@@ -142,7 +142,7 @@
                   </div>
                 </div>
               </div>
-              <div class="icons">
+              <!-- <div class="icons">
                 <p style="font-size: 20px">Включено в стоимость:</p>
                 <div class="icons_block">
                   <img
@@ -206,7 +206,7 @@
                     v-if="object.features.includes('parking')"
                   >
                 </div>
-              </div>
+              </div> -->
               <!-- END slideshow -->
               <div class="columns">
                 <div class="columns__left">

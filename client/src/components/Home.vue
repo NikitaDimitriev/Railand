@@ -479,7 +479,7 @@ export default {
         .get("http://rl-property.com/api/get-objects-sales")
         .then(response => {
           this.objectsSales = response.data;
-          console.log(this.objects);
+          console.log(this.objectsSales);
         });
     },
     searchByFilter() {
