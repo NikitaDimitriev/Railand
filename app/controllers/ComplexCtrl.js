@@ -1,5 +1,5 @@
 const Complex = require('../models/Complex');
-const Apertment = require('../models/Apertment');
+const Apertment = require('../models/Object');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.createComplex = createComplex;
