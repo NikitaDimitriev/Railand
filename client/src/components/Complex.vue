@@ -185,7 +185,7 @@
                           <button
                             type="button"
                             class="card__btn btn btn_danger"
-                            @click="addObject(object._id)"
+                            @click="addObject(object._id, object)"
                           >Add</button>
                         </div>
                       </div>
@@ -221,7 +221,7 @@
                           <button
                             type="button"
                             class="card__btn btn btn_danger"
-                            @click="deleteObject(object._id)"
+                            @click="deleteObject(object._id, object)"
                           >Delete</button>
                         </div>
                       </div>
@@ -260,6 +260,44 @@
             </el-carousel-item>
           </el-carousel>
           <el-button type="primary" @click="create()" class="input_articles">Create</el-button>
+                <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+                  <li
+                    class="cards__item"
+                    v-for="(object, index) of addedObjects"
+                    :key="index"
+                  >
+                    <div class="card">
+                      <div class="card__top">
+                        <div class="card__slider">
+                          <div class="card__slider-item">
+                            <img
+                              :src="'http://rl-property.com/'+object.mainPhoto"
+                              alt="аппартамены"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card__content">
+                        <div class="card__body">
+                          <h3 class="card__title">{{object.titleRu}}</h3>
+                          <ul class="card__l">
+                            <li>Living area: {{object.lifeArea}}</li>
+                            <li>Badroom: {{object.badroom}}</li>
+                            <li>Distance to beatch: {{object.distanceToBitch}}</li>
+                          </ul>
+                        </div>
+                        <div class="card__footer">
+                          <!-- <div class="price price__bl">{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '$'}} {{getPrice(object)}} </div> -->
+                          <button
+                            type="button"
+                            class="card__btn btn btn_danger"
+                            @click="addObject(object._id)"
+                          >Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
         </el-tab-pane>
         <el-tab-pane label="Update" name="second" @click="removeImage()">
           <el-input placeholder="search..." v-model="search" v-if="!updatePanel"></el-input>
@@ -848,8 +886,10 @@ export default {
       generedCode: 1111,
       price: "",
       objectsForComplex: [],
+      allObjects:[],
       searchForComplex: "",
-      searchedForComplex:[]
+      searchedForComplex:[],
+      addedObjects:[]
     };
   },
   watch: {
@@ -861,11 +901,14 @@ export default {
     }
   },
   methods: {
-    addObject(id) {
+    addObject(id, object) {
       if (this.newComplex.objectsId.includes(id)) {
         this.arrayRemove(this.newComplex.objectsId, id);
+        this.arrayRemove(this.addObject, object)
       } else {
+        console.log(object)
         this.newComplex.objectsId.push(id);
+        this.addedObjects.push(object)
       }
     },
     getObjectsForComplex() {
@@ -1065,11 +1108,13 @@ export default {
               comments: ""
             },
             video: "",
-            currentFloor: ""
+            currentFloor: "",
+            objectsId:[]
           }),
             (this.image = ""),
             (this.photos = []),
-            (this.price = "");
+            (this.price = ""),
+            (this.addObject=[]);
         });
       this.getObjects();
     },

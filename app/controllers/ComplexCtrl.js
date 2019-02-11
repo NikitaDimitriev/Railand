@@ -246,7 +246,7 @@ async function createComplex(req, res) {
         });
         if (req.body.objectsId.length) {
             for (let i = 0; i < req.body.objectsId.length; i++) {
-                Apertment.update({_id:ObjectId(req.body.objectsId[i])}, {$set:{
+               await Apertment.update({_id:ObjectId(req.body.objectsId[i])}, {$set:{
                     complexId: create._id
                 }})
             }
@@ -376,11 +376,11 @@ async function getComplexById(req, res) {
     try {
         let complex = await Complex.findOne({ _id: ObjectId(req.params.id) });
         let objects = [];
-        for (let i = 0; i < complex.objectsId.length; i++) {
-            let find = await Apertment.find({_id:ObjectId(complex.objectsId[i])});
+        for (let i = 0; i < complex.objects.length; i++) {
+            let find = await Apertment.find({_id:ObjectId(complex.objects[i])});
             objects.push(find);
         }
-        Object.assign(complex, objects)
+        complex.objects = objects;
         res.json(complex).end();
     } catch (error) {
         console.log(error);

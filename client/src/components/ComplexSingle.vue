@@ -26,7 +26,7 @@
                     </dl>
                   </div>
                 </div>
-                <div class="small-map">
+                <!-- <div class="small-map">
                   <div class="small-map__title">Объект на карте:</div>
                   <div class="aside__toggle js-toggle">Объекты на карте:</div>
                   <div class="small-map__container">
@@ -35,10 +35,6 @@
                       :zoom="12"
                       :center="{lat: object.coordinat.x, lng: object.coordinat.y}"
                     >
-                      <!-- <GmapMarker v-for="(marker, index) in markers"
-                        :key="index"
-                        :position="marker.position"
-                      />-->
                       <GmapMarker
                         :position="{
                           lat: object.coordinat.x,
@@ -47,7 +43,7 @@
                       />
                     </GmapMap>
                   </div>
-                </div>
+                </div> -->
               </div>
             </aside>
             <!-- END cards-aside -->
@@ -114,7 +110,7 @@
               </div>
               <div class="icons">
                 <p style="font-size: 20px">Включено в стоимость:</p>
-                <div class="icons_block">
+                <!-- <div class="icons_block">
                   <img
                     src="../../static/pool.svg"
                     width="50"
@@ -175,7 +171,7 @@
                     height="50"
                     v-if="object.features.includes('parking')"
                   >
-                </div>
+                </div> -->
               </div>
               <!-- END slideshow -->
               <div class="columns">
@@ -196,6 +192,41 @@
                   </div>
                 </div>
               </div>
+          <h3>Объекты в комплексе</h3>
+          <ul class="cards__list cards__list-tab js-content is-active" data-tab="0">
+            <li
+              class="cards__item"
+              v-for="(object, index) of object.objects"
+              :key="index"
+            >
+              <div class="card">
+                <div class="card__top">
+                  <div class="card__slider">
+                    <div class="card__slider-item">
+                      <img :src="'http://rl-property.com/'+object[0].mainPhoto" alt="аппартамены">
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__body">
+                    <h3 class="card__title">{{object[0].titleRu}}</h3>
+                    <ul class="card__l">
+                      <li>Living area: {{object[0].lifeArea}}</li>
+                      <li>Badroom: {{object[0].badroom}}</li>
+                      <li>Distance to beatch: {{object[0].distanceToBitch}}</li>
+                    </ul>
+                  </div>
+                  <div class="card__footer">
+                    <button
+                      type="button"
+                      class="card__btn btn btn_danger"
+                      @click="route(object[0]._id)"
+                    >Show</button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
             </div>
             <!-- END cards-body -->
           </div>
@@ -228,10 +259,14 @@ export default {
     this.getObjectById();
   },
   methods: {
-    getObjectById() {
+    route(id){
+      let pathToObject = `/catalog/sales/${id}`
+      this.$router.push({path:pathToObject})
+    },
+    async getObjectById() {
       let id = this.$route.params.id;
       console.log(this.$route.params);
-      this.$axios
+      await this.$axios
         .get(`http://rl-property.com/api/get-complex-by-id/${id}`)
         .then(response => {
           this.object = response.data;
