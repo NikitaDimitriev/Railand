@@ -165,7 +165,7 @@
                         <div class="card__slider">
                           <div class="card__slider-item">
                             <img
-                              :src="'http://localhost:8080/'+object.mainPhoto"
+                              :src="'http://rl-property.com/'+object.mainPhoto"
                               alt="аппартамены"
                             >
                           </div>
@@ -202,7 +202,7 @@
                         <div class="card__slider">
                           <div class="card__slider-item">
                             <img
-                              :src="'http://localhost:8080/'+object.mainPhoto"
+                              :src="'http://rl-property.com/'+object.mainPhoto"
                               alt="аппартамены"
                             >
                           </div>
@@ -271,7 +271,7 @@
                         <div class="card__slider">
                           <div class="card__slider-item">
                             <img
-                              :src="'http://localhost:8080/'+object.mainPhoto"
+                              :src="'http://rl-property.com/'+object.mainPhoto"
                               alt="аппартамены"
                             >
                           </div>
@@ -316,7 +316,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -349,7 +349,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -433,7 +433,7 @@
                     >
                   </div>
                   <div v-else>
-                    <img :src="`http://localhost:8080/${image}`" class="preloadImage">
+                    <img :src="`http://rl-property.com/${image}`" class="preloadImage">
                     <button @click="removeImage">Remove image</button>
                   </div>
                 </div>
@@ -518,7 +518,7 @@
                   </div>
                   <div v-if="photos">
                     <div v-for="(photo, index) in photos" :key="index" class="imageContent">
-                      <img :src="`http://localhost:8080/${photo}`" class="preloadImage">
+                      <img :src="`http://rl-property.com/${photo}`" class="preloadImage">
                     </div>
                   </div>
                   <el-button
@@ -617,7 +617,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -651,7 +651,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -913,7 +913,7 @@ export default {
     },
     getObjectsForComplex() {
       this.$axios
-        .get("http://localhost:8080/api/get-objects")
+        .get("http://rl-property.com/api/get-objects")
         .then(response => {
           this.objectsForComplex = response.data.reverse();
         });
@@ -999,7 +999,7 @@ export default {
       this.image = "";
       this.updatePanel = true;
       this.$axios
-        .get(`http://localhost:8080/api/get-complex-by-id/${id}`)
+        .get(`http://rl-property.com/api/get-complex-by-id/${id}`)
         .then(response => {
           this.updatedObject = Object.assign({}, response.data);
           this.typeObjectUpdate = response.data.typeOfObject;
@@ -1022,7 +1022,7 @@ export default {
       data.type = this.typeObjectUpdate;
       console.log(data);
       this.$axios
-        .put("http://localhost:8080/api/update-complex", data)
+        .put("http://rl-property.com/api/update-complex", data)
         .then(response => {
           this.$message({
             type: "success",
@@ -1070,7 +1070,7 @@ export default {
       data.photo = this.photos;
       data.code = this.generedCode;
       this.$axios
-        .post("http://localhost:8080/api/create-complex", data)
+        .post("http://rl-property.com/api/create-complex", data)
         .then(response => {
           this.$message({
             type: "success",
@@ -1120,7 +1120,7 @@ export default {
     },
     getObjects() {
       this.$axios
-        .get("http://localhost:8080/api/get-complex")
+        .get("http://rl-property.com/api/get-complex")
         .then(response => {
           this.objects = response.data.reverse();
           console.log(this.objects.length);
@@ -1130,7 +1130,7 @@ export default {
     },
     deleteObject(id) {
       this.$axios
-        .delete("http://localhost:8080/api/delete-complex/" + id)
+        .delete("http://rl-property.com/api/delete-complex/" + id)
         .then(response => {
           this.$message({
             type: "success",

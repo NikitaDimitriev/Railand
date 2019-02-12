@@ -113,7 +113,7 @@
       </div>
 
     <router-link to="/catalog">
-      <button type="button" class="apartments__btn btn" style="margin: 90px 45%">
+      <button type="button" class="apartments__btn btn">
         <span>Показать весь список <svg class="icon icon-arr">
             <use xlink:href="../../static/sprite.svg#icon-arr"></use>
           </svg>
@@ -497,4 +497,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.apartments__btn .btn{
+  margin: 90px 45%;
+}
+@media only screen and (max-width: 600px) {
+.apartments__btn .btn{
+  margin: unset;
+  margin-bottom: 46px;
+}
+
+}
 </style>

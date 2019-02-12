@@ -1321,9 +1321,10 @@ img {
     position: fixed;
     z-index: 20;
     top: 0;
-    left: 0;
-    right: 0;
-    background: #fff
+    /* left: 0; */
+    /* right: 0; */
+    background: #fff;
+    width: 100vw;
 }
 
 .inner {
@@ -6793,7 +6794,7 @@ img {
         max-width: 480px
     }
     .apartments__btn {
-        margin: 46px auto 0;
+        margin: 46px auto;
         display: block;
         text-align: center
     }
@@ -7223,6 +7224,9 @@ img {
 }
 
 @media only screen and (max-width:480px) {
+    .main{
+        height: unset;
+    }
     .title-primary__left {
         text-align: center;
         padding: 0

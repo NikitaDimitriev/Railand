@@ -17,8 +17,11 @@
                     <dl class="options-list">
                       <dt class="options-list__title">Цена объекта:</dt>
                       <dd class="options-list__description">&#3647; {{setPrice()}}</dd>
-                      <dt class="options-list__title" v-if='makePriceForMetr()'>Цена за м2</dt>
-                      <dd class="options-list__description" v-if="makePriceForMetr()">от {{makePriceForMetr()}} &#3647;</dd>
+                      <dt class="options-list__title" v-if="makePriceForMetr()">Цена за м2</dt>
+                      <dd
+                        class="options-list__description"
+                        v-if="makePriceForMetr()"
+                      >от {{makePriceForMetr()}} &#3647;</dd>
                       <dt class="options-list__title">Расположение</dt>
                       <dd class="options-list__description">{{object.address}}</dd>
                       <dt class="options-list__title">Стадия готовности</dt>
@@ -38,7 +41,8 @@
                       v-model="dateRange"
                       type="daterange"
                       start-placeholder="From"
-                      end-placeholder="To"></el-date-picker>
+                      end-placeholder="To"
+                    ></el-date-picker>
                   </div>
                   <div class="aside__col" v-if="$route.params.type === 'rent'">
                     <div class="select-l">
@@ -122,8 +126,16 @@
                   >
                 </div>
                 <div class="slideshow__thumbs">
-                  <button type="button" class="slideshow__arrow-left" @click="clicked = true,setPhoto(activePhoto-1)" >prev</button>
-                  <button type="button" class="slideshow__arrow-right" @click="clicked = true, setPhoto(activePhoto+1)">next</button>
+                  <button
+                    type="button"
+                    class="slideshow__arrow-left"
+                    @click="clicked = true,setPhoto(activePhoto-1)"
+                  >prev</button>
+                  <button
+                    type="button"
+                    class="slideshow__arrow-right"
+                    @click="clicked = true, setPhoto(activePhoto+1)"
+                  >next</button>
                   <div class="thumbs-list">
                     <div
                       class="thumbs-list__item"
@@ -206,7 +218,7 @@
                     v-if="object.features.includes('parking')"
                   >
                 </div>
-              </div> -->
+              </div>-->
               <!-- END slideshow -->
               <div class="columns">
                 <div class="columns__left">
@@ -268,11 +280,20 @@
                 <div class="columns__right" v-if="complex">
                   <div class="similar">
                     <div class="similar__top">{{complex.titleRu}}</div>
-                    <div class="similar__pic"><img :src="'http://localhost:8080/'+complex.mainPhoto" width="225" height="140" alt=""></div>
+                    <div class="similar__pic">
+                      <img
+                        :src="'http://rl-property.com/'+complex.mainPhoto"
+                        width="225"
+                        height="140"
+                        alt
+                      >
+                    </div>
                     <div class="similar__txt">{{complex.descriptionRu}}</div>
-                   <router-link :to="`/complex/${complex._id}`"><button type="button" class="similar__btn btn btn_primary">
-                      <span>Задать вопрос о комплексе</span>
-                    </button></router-link>
+                    <router-link :to="`/complex/${complex._id}`">
+                      <button type="button" class="similar__btn btn btn_primary">
+                        <span>Задать вопрос о комплексе</span>
+                      </button>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -304,28 +325,27 @@ export default {
       mainPhoto: "",
       dateRange: "",
       countOfGuest: "all",
-      carouselPhoto:[],
-      complex:{}
+      carouselPhoto: [],
+      complex: {}
     };
   },
   mounted() {
     this.getObjectById();
-    if(this.object.complexId){
-      this.getComplex();
-    }
   },
   methods: {
-    getComplex(){
+    getComplex() {
       this.$axios
-        .get(`http://localhost:8080/api/get-complex-by-id/${this.object.complexId}`)
+        .get(
+          `http://rl-property.com/api/get-complex-by-id/${this.object.complexId}`
+        )
         .then(response => {
           this.complex = response.data;
         });
     },
-    setPrice(){
-      if(this.$route.params.type === 'rent'){
+    setPrice() {
+      if (this.$route.params.type === "rent") {
         return "По запросу";
-      }else{
+      } else {
         return this.object.price.priceSales;
       }
     },
@@ -337,16 +357,19 @@ export default {
         .then(response => {
           this.object = response.data;
           this.carouselPhoto = this.object.photo;
+          if (this.object.complexId) {
+            this.getComplex();
+          }
           console.log(this.object);
         });
     },
     setPhoto(index) {
-      console.log(index)
-      if(index === -1){
-        index = this.object.photo.length-1
+      console.log(index);
+      if (index === -1) {
+        index = this.object.photo.length - 1;
       }
-      if(index>this.object.photo.length-1){
-        index=0;
+      if (index > this.object.photo.length - 1) {
+        index = 0;
       }
       this.activePhoto = index;
       if (!this.clicked) {
@@ -359,8 +382,8 @@ export default {
       this.$router.push({ path: "/", hash: "#order" });
     },
     makePriceForMetr() {
-      if(this.$route.params.type === 'rent') return false;
-      if(!this.object.area) return false;
+      if (this.$route.params.type === "rent") return false;
+      if (!this.object.area) return false;
       let metrPrice = Math.floor(
         parseInt(this.object.price.priceSales.replace(/\./g, "")) /
           this.object.area
@@ -376,17 +399,19 @@ export default {
       metrPrice = metrPrice.reverse().join("");
       return metrPrice;
     },
-    order(){
+    order() {
       let data = {
         date: this.dateRange,
         countOfGuest: this.countOfGuest,
         nameOfObject: this.object.titleRu,
         id: this.object._id
       };
-      console.log(data)
-      this.$axios.post('http://rl-property.com/api/send-reserv-mail', {data}).then(response=>{
-        console.log(response);
-      })
+      console.log(data);
+      this.$axios
+        .post("http://rl-property.com/api/send-reserv-mail", { data })
+        .then(response => {
+          console.log(response);
+        });
     }
   }
 };

@@ -27,7 +27,7 @@
                     comment: this.commentOfArticle
                 }
                 console.log(data);
-                this.$axios.post('http://localhost:8080/api/create-article', data).then(response=>{
+                this.$axios.post('http://rl-property.com/api/create-article', data).then(response=>{
                     console.log(response);
                 })
             }
