@@ -265,6 +265,16 @@
                     </button>
                   </div>
                 </div>
+                <div class="columns__right">
+                  <div class="similar">
+                    <div class="similar__top">Rang Hill Residence</div>
+                    <div class="similar__pic"><img src="https://via.placeholder.com/225x140" width="225" height="140" alt=""></div>
+                    <div class="similar__txt">Владельцев недвижимости комплекса ожидает ряд привилегий и вознаграждений Бесплатное участие в программе SANCTUARY CLUB предлагает следующие бонусы: - Скидки и льготы в отелях, курортах, спа и торговых галереях Banyan </div>
+                    <button type="button" class="similar__btn btn btn_primary">
+                      <span>Задать вопрос о комплексе</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- END cards-body -->
@@ -295,12 +305,23 @@ export default {
       dateRange: "",
       countOfGuest: "all",
       carouselPhoto:[],
+      complex:{}
     };
   },
   mounted() {
     this.getObjectById();
+    if(this.object.complexId){
+      this.getComplex()
+    }
   },
   methods: {
+    getComplex(){
+      this.$axios
+        .get(`http://localhost:8080/api/get-complex-by-id/${this.object.complexId}`)
+        .then(response => {
+          this.complex = response.data;
+        });
+    },
     setPrice(){
       if(this.$route.params.type === 'rent'){
         return "По запросу";

@@ -246,9 +246,10 @@ async function createComplex(req, res) {
         });
         if (req.body.objectsId.length) {
             for (let i = 0; i < req.body.objectsId.length; i++) {
-               await Apertment.update({_id:ObjectId(req.body.objectsId[i])}, {$set:{
+              let updateComplex = await Apertment.update({_id:ObjectId(req.body.objectsId[i])}, {$set:{
                     complexId: create._id
-                }})
+                }});
+                console.log(updateComplex);
             }
         }
         res.json(create).end();

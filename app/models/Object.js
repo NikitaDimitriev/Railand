@@ -48,5 +48,5 @@ module.exports = mongoose.model('Object', {
         comments:{type: String}
       },
     complexId:{type: String},
-      currentFloor:{type: String}
+    currentFloor:{type: String}
 })
