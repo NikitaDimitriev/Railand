@@ -265,14 +265,14 @@
                     </button>
                   </div>
                 </div>
-                <div class="columns__right">
+                <div class="columns__right" v-if="complex">
                   <div class="similar">
-                    <div class="similar__top">Rang Hill Residence</div>
-                    <div class="similar__pic"><img src="https://via.placeholder.com/225x140" width="225" height="140" alt=""></div>
-                    <div class="similar__txt">Владельцев недвижимости комплекса ожидает ряд привилегий и вознаграждений Бесплатное участие в программе SANCTUARY CLUB предлагает следующие бонусы: - Скидки и льготы в отелях, курортах, спа и торговых галереях Banyan </div>
-                    <button type="button" class="similar__btn btn btn_primary">
+                    <div class="similar__top">{{complex.titleRu}}</div>
+                    <div class="similar__pic"><img :src="'http://localhost:8080/'+complex.mainPhoto" width="225" height="140" alt=""></div>
+                    <div class="similar__txt">{{complex.descriptionRu}}</div>
+                   <router-link :to="`/complex/${complex._id}`"><button type="button" class="similar__btn btn btn_primary">
                       <span>Задать вопрос о комплексе</span>
-                    </button>
+                    </button></router-link>
                   </div>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export default {
   mounted() {
     this.getObjectById();
     if(this.object.complexId){
-      this.getComplex()
+      this.getComplex();
     }
   },
   methods: {
