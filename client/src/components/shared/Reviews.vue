@@ -5,7 +5,7 @@
       <div class="reviews-slider js-reviews-slider">
         <!-- <button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="">Previous</button> -->
         <div class="carousel_box">
-        <carousel :per-page="1" :mouse-drag="false" :autoplay="true" :autoplayTimeout="3000" :loop="true" style="max-width: 710px">
+        <carousel :per-page="1" :mouse-drag="false" :autoplay="true" :autoplayTimeout="3000" :loop="true" style="max-width: 300px">
           <slide>
             <div class="reviews-slider__item r-item">
                   <div class="r-item__pic">

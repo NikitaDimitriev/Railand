@@ -14,7 +14,7 @@
             <div class="rubs__item ">Здоровье и красота</div>
           </div> -->
          <div class="magazine__list rubs-list">
-            <div class="rubs-list__item rubs-list__item_x2">
+            <!-- <div class="rubs-list__item rubs-list__item_x2">
             <router-link :to='`/live-in-phuket/Kata`'> 
               <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/09/Baan-Kata-Villa-2-Landscape.jpg)">
                 <div class="nlarge-item__content">
@@ -24,8 +24,8 @@
                 </div>
               </div>
             </router-link>
-            </div>
-            <div class="rubs-list__item " style="width:300px">
+            </div> -->
+            <!-- <div class="rubs-list__item " style="width:300px">
             <router-link :to='`/live-in-phuket/Botanica`'>
               <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/08/Botanica-Villa-Phuket-2.jpg)">
                 <div class="nlarge-item__content">
@@ -35,8 +35,8 @@
                 </div>
               </div>
             </router-link>
-            </div>
-            <div class="rubs-list__item" style="width:300px">
+            </div> -->
+            <!-- <div class="rubs-list__item" style="width:300px">
             <router-link :to='`/live-in-phuket/RPM`'>
               <div class="nlarge-item" style="background-image: url(https://RealLifePhuket.com/wp-content/uploads/2018/10/RPM-Condo-4-Custom.jpg)">
                 <div class="nlarge-item__content">
@@ -46,17 +46,17 @@
                 </div>
               </div>
             </router-link>
-            </div>
+            </div> -->
               <div class="rubs-list__item" v-for="(article, index) of articles" :key="index">
                 <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">
                   <div class="n-item__top">
-                    <img src="https://via.placeholder.com/350x180" width="350" height="180" alt="">
+                    <img :src="'http://rl-property.com/'+article.mainPhoto" width="350" height="180" alt="">
                   </div>
                   <div class="n-item__body">
-                    <div class="n-item__data">23 апреля 2018</div>
-                    <h3 class="n-item__title">Эволюционируя вместе <br /> с Пхукетом</h3>
-                    <div class="n-item__txt"> Счастливое ли число семь? Для Пола Роппа определенно да, поскольку всего лишь семь лет ему потребовалась на то, чтобы превратить Пхукет в жемчужину свой розничной сети. </div>
+                    <div class="n-item__data">{{article.date}}</div>
+                    <h3 class="n-item__title">{{article.name}}</h3>
+                    <div class="n-item__txt"> {{article.text[0]}} </div>
                     <a href="#" class="n-item__link">
                       <span>читать далее <svg class="icon icon-arr">
                           <use xlink:href="img/sprite.svg#icon-arr"></use>
@@ -67,7 +67,7 @@
                 </div>
                 </router-link>
               </div>
-            <div class="rubs-list__footer catalog-page">
+            <!-- <div class="rubs-list__footer catalog-page">
               <div class="catalog-page__navigation">
                 <span class="catalog-page__first catalog-page__current">1</span>
                 <a href="" class="catalog-page__link">2</a>
@@ -85,7 +85,7 @@
                 <a class="catalog-page__link" href="">50</a>
                 <a class="catalog-page__link" href="">100</a>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@ export default {
     };
   },
   mounted() {
-    // this.getArticles();
+    this.getArticles();
   },
   methods: {
     getArticles() {
@@ -114,6 +114,7 @@ export default {
         .get("http://rl-property.com/api/get-all-articles")
         .then(response => {
           this.articles = response.data;
+          console.log(this.articles);
         });
     }
   }

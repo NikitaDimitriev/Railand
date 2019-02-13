@@ -6573,6 +6573,13 @@ img {
     body {
         font-size: 16px
     }
+    .columns__left {
+        width: 100%;
+    }
+    .columns{
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width:599px) {

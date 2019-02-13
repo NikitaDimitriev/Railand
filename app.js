@@ -67,7 +67,7 @@ app.delete('/api/delete-complex/:id', ComplexCtrl.deleteComplex);
 
 app.post('/api/create-article', ArticlesCtrl.createArticle);
 app.get('/api/get-all-articles', ArticlesCtrl.getAllArticles);
-app.get('/api/get-article-by-id', ArticlesCtrl.getArticleById);
+app.get('/api/get-article-by-id/:id', ArticlesCtrl.getArticleById);
 
 app.post('/api/send-order-mail', MailCtrl.sendMail);
 app.post('/api/send-reserv-mail', MailCtrl.sendMailReserv);
