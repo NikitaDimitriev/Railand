@@ -83,7 +83,7 @@
             <nav class="nav">
               <router-link to="/" class="nav__link">Главная</router-link>
               <router-link to="/catalog" class="nav__link">недвижимость</router-link>
-              <router-link to="/cooperation" class="nav__link">Владельцам</router-link>
+              <!-- <router-link to="/cooperation" class="nav__link">Владельцам</router-link> -->
               <router-link to="/live-in-phuket" class="nav__link">жизнь на Пхукете</router-link>
             </nav>
           </div>

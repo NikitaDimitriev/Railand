@@ -111,15 +111,16 @@
           </ul> 
         </div>
       </div>
-
-    <router-link to="/catalog">
-      <button type="button" class="apartments__btn btn">
-        <span>Показать весь список <svg class="icon icon-arr">
-            <use xlink:href="../../static/sprite.svg#icon-arr"></use>
-          </svg>
-        </span>
-      </button>
-    </router-link>
+    <div class="catalog-button">
+      <router-link to="/catalog">
+        <button type="button" class="apartments__btn btn">
+          <span>Показать весь список <svg class="icon icon-arr">
+              <use xlink:href="../../static/sprite.svg#icon-arr"></use>
+            </svg>
+          </span>
+        </button>
+      </router-link>
+    </div>
 
     <div class="order" id="order">
     <div class="order__in inner">
@@ -497,8 +498,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.apartments__btn .btn{
-  margin: 90px 45%;
+.catalog-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.catalog-button a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
 }
 @media only screen and (max-width: 600px) {
 .apartments__btn .btn{

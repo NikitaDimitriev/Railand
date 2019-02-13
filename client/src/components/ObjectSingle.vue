@@ -146,7 +146,7 @@
                     >
                       <img
                         :src="'http://rl-property.com/'+object.photo[index]"
-                        width="160"
+                        min-width="160"
                         height="100"
                         alt
                       >
