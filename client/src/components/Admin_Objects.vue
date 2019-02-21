@@ -1059,10 +1059,12 @@ export default {
       this.$axios
         .put("http://rl-property.com/api/update-object", data)
         .then(response => {
+           this.getObjects();
           this.$message({
             type: "success",
             message: `Object was updated`
           });
+          this.updatePanel = false;
         });
     },
     onFileChange(e) {

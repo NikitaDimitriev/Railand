@@ -298,7 +298,6 @@ async function updateObject(req, res) {
         price = req.body.price.priceSales;
     }
     let imageName='';
-    if (req.body.image) {
         if(req.body.image.includes('photo/') || req.body.image.includes('iblock/')){
             imageName = req.body.image
         }else{
@@ -310,7 +309,7 @@ async function updateObject(req, res) {
                 console.log("Image saved successfully");
             });
             imageName = imageName+'.'+extention;
-        }
+        
     }
     // if (req.body.photo) {
     //     for (let i = 0; i < req.body.photo.length; i++) {
