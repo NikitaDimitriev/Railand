@@ -277,7 +277,7 @@
                     </button>
                   </div>
                 </div>
-                <div class="columns__right" v-if="complex">
+                <!-- <div class="columns__right" v-if="complex">
                   <div class="similar">
                     <div class="similar__top">{{complex.titleRu}}</div>
                     <div class="similar__pic">
@@ -295,7 +295,7 @@
                       </button>
                     </router-link>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- END cards-body -->
