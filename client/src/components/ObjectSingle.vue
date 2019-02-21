@@ -119,7 +119,7 @@
               <div class="slideshow">
                 <div class="slideshow__preview">
                   <img
-                    :src="mainPhoto || 'http://rl-property.com/'+this.object.mainPhoto"
+                    :src="mainPhoto || 'http://localhost:8080/'+this.object.mainPhoto"
                     width="730"
                     height="450"
                     alt
@@ -145,7 +145,7 @@
                       @click="clicked = true, setPhoto(index) "
                     >
                       <img
-                        :src="'http://rl-property.com/'+object.photo[index]"
+                        :src="'http://localhost:8080/'+object.photo[index]"
                         min-width="160"
                         height="100"
                         alt
@@ -282,7 +282,7 @@
                     <div class="similar__top">{{complex.titleRu}}</div>
                     <div class="similar__pic">
                       <img
-                        :src="'http://rl-property.com/'+complex.mainPhoto"
+                        :src="'http://localhost:8080/'+complex.mainPhoto"
                         width="225"
                         height="140"
                         alt
@@ -336,7 +336,7 @@ export default {
     getComplex() {
       this.$axios
         .get(
-          `http://rl-property.com/api/get-complex-by-id/${this.object.complexId}`
+          `http://localhost:8080/api/get-complex-by-id/${this.object.complexId}`
         )
         .then(response => {
           this.complex = response.data;
@@ -353,7 +353,7 @@ export default {
       let id = this.$route.params.id;
       console.log(this.$route.params);
       this.$axios
-        .get(`http://rl-property.com/api/get-object-by-id/${id}`)
+        .get(`http://localhost:8080/api/get-object-by-id/${id}`)
         .then(response => {
           this.object = response.data;
           this.carouselPhoto = this.object.photo;
@@ -373,9 +373,9 @@ export default {
       }
       this.activePhoto = index;
       if (!this.clicked) {
-        this.mainPhoto = "http://rl-property.com/" + this.object.mainPhoto;
+        this.mainPhoto = "http://localhost:8080/" + this.object.mainPhoto;
       } else if (this.clicked) {
-        this.mainPhoto = "http://rl-property.com/" + this.object.photo[index];
+        this.mainPhoto = "http://localhost:8080/" + this.object.photo[index];
       }
     },
     scrollTo() {
@@ -408,7 +408,7 @@ export default {
       };
       console.log(data);
       this.$axios
-        .post("http://rl-property.com/api/send-reserv-mail", { data })
+        .post("http://localhost:8080/api/send-reserv-mail", { data })
         .then(response => {
           console.log(response);
         });

@@ -299,14 +299,14 @@ async function updateObject(req, res) {
     if(req.body.image.includes('photo/') || req.body.image.includes('iblock/')){
         imageName = req.body.image
     }else{
-         imageName = 'photo/'+makeid();
-         extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
-        ba64.writeImage('upload/photo/' + imageName, req.body.image, function (err) {
+        extention = req.body.image.substring("data:image/".length, req.body.image.indexOf(";base64"))
+        imageName = 'photo/'+makeid();
+        ba64.writeImage('upload/' + imageName, req.body.image, function (err) {
             if (err) throw err;
     
             console.log("Image saved successfully");
-            imageName+'.'+extention;
         });
+        imageName = imageName+'.'+extention;
     }
     // if (req.body.photo) {
     //     for (let i = 0; i < req.body.photo.length; i++) {
@@ -320,7 +320,7 @@ async function updateObject(req, res) {
     // }
     try {
         console.log(req.body._id);
-        let create = await Apertment.update({ _id: ObjectId(req.body._id) }, {
+        let create = await Apertment.updateOne({ _id: ObjectId(req.body._id) }, {
             $set: {
                 titleRu: req.body.titleRu,
                 titleEn: req.body.titleRu,

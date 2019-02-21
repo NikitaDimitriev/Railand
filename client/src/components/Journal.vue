@@ -51,7 +51,7 @@
                 <router-link :to='`/live-in-phuket/${article._id}`'>
                 <div class="n-item">
                   <div class="n-item__top">
-                    <img :src="'http://rl-property.com/'+article.mainPhoto" width="350" height="180" alt="">
+                    <img :src="'http://localhost:8080/'+article.mainPhoto" width="350" height="180" alt="">
                   </div>
                   <div class="n-item__body">
                     <div class="n-item__data">{{article.date}}</div>
@@ -111,7 +111,7 @@ export default {
   methods: {
     getArticles() {
       this.$axios
-        .get("http://rl-property.com/api/get-all-articles")
+        .get("http://localhost:8080/api/get-all-articles")
         .then(response => {
           this.articles = response.data;
           console.log(this.articles);
