@@ -85,12 +85,12 @@
                     <span class="objects__link" @click="getComplex()">Комплексы</span>
                   </div>
                 </div>
-                <div class="search">
+                <!-- <div class="search">
                   <form action>
                     <input class="search__field" type="text" placeholder="Поиск" name="search">
                     <button class="search__btn" type="submit">Submit</button>
                   </form>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- BEGIN cards-aside -->
@@ -311,7 +311,7 @@
                         <div
                           class="price price__wh"
                           style="font-size: 20px"
-                        >{{getPriceCurrency(object) === 'THB' ? '&#3647;' : ' '}} {{getPrice(object) || "По запросу"}}</div>
+                        >{{getPriceCurrency(object) === 'THB' ? '&#3647;' : '&#3647;'}} {{getPrice(object) || "По запросу"}}</div>
                       </div>
                       <div class="card__slider">
                         <div class="card__slider-item">
