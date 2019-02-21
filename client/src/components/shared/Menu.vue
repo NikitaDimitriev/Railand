@@ -368,7 +368,7 @@ export default {
           password: this.password
         };
         this.$axios
-          .post("http://localhost:8080/api/sign-up-user", data)
+          .post("http://rl-property.com/api/sign-up-user", data)
           .then(response => {
             this.showRegistrationModal = !this.showRegistrationModal;
             localStorage.setItem("auth", true);
@@ -385,7 +385,7 @@ export default {
         password: this.loginPassword
       };
       this.$axios
-        .post("http://localhost:8080/api/log-in-user", data)
+        .post("http://rl-property.com/api/log-in-user", data)
         .then(response => {
           this.showLoginModal = !this.showLoginModal;
           console.log(response.data);
@@ -399,7 +399,7 @@ export default {
       if (localStorage.getItem("auth") === "true") {
         let id = localStorage.getItem("id");
         this.$axios
-          .get(`http://localhost:8080/api/get-current-user/${id}`)
+          .get(`http://rl-property.com/api/get-current-user/${id}`)
           .then(response => {
             this.user = response.data;
             console.log(response);

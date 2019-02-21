@@ -14,7 +14,7 @@
                 <div class="location__info">
                   <span>Регистрационный номер: 0835554000013</span>
                   <span> Тел/факс: 8-10-66-7632-44-48; +66-84-84-55-111. </span>
-                  <a href="mailto:info@localhost:8080" class="location__email">info@localhost:8080</a>
+                  <a href="mailto:info@rl-property.com" class="location__email">info@rl-property.com</a>
                 </div>
               </div>
               <div class="location__body">
