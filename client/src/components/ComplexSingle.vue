@@ -72,7 +72,7 @@
               <div class="slideshow">
                 <div class="slideshow__preview">
                   <img
-                    :src="mainPhoto || 'http://localhost:8080/'+this.object.mainPhoto"
+                    :src="mainPhoto || 'http://rl-property.com/'+this.object.mainPhoto"
                     width="730"
                     height="450"
                     alt
@@ -90,7 +90,7 @@
                       @click="clicked = true, setPhoto(index) "
                     >
                       <img
-                        :src="'http://localhost:8080/'+object.photo[index]"
+                        :src="'http://rl-property.com/'+object.photo[index]"
                         width="160"
                         height="100"
                         alt
@@ -203,7 +203,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://localhost:8080/'+object[0].mainPhoto" alt="аппартамены">
+                      <img :src="'http://rl-property.com/'+object[0].mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export default {
       let id = this.$route.params.id;
       console.log(this.$route.params);
       await this.$axios
-        .get(`http://localhost:8080/api/get-complex-by-id/${id}`)
+        .get(`http://rl-property.com/api/get-complex-by-id/${id}`)
         .then(response => {
           this.object = response.data;
           console.log(this.object);
@@ -276,9 +276,9 @@ export default {
     setPhoto(index) {
       this.activePhoto = index;
       if (!this.clicked) {
-        this.mainPhoto = "http://localhost:8080/" + this.object.mainPhoto;
+        this.mainPhoto = "http://rl-property.com/" + this.object.mainPhoto;
       } else if (this.clicked) {
-        this.mainPhoto = "http://localhost:8080/" + this.object.photo[index];
+        this.mainPhoto = "http://rl-property.com/" + this.object.photo[index];
       }
     },
     scrollTo() {

@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     port: 25,
     auth: {
-        user: 'welcome@localhost:8080',
+        user: 'welcome@rl-property.com',
         pass: 'W4b7z9mx'
     }
 });
@@ -30,9 +30,9 @@ async function sendMail(req, res) {
                 listOfTypes = listOfTypes + " Земельный участок"
             }
             var mailOptions = {
-                from: 'welcome@localhost:8080',
+                from: 'welcome@rl-property.com',
                 // to: 'nikitadimitriev000@gmail.com',
-                to: 'marketing@localhost:8080',
+                to: 'marketing@rl-property.com',
                 subject: 'Заявка на аренду',
                 html: `<ul>
                             <li>Расположение: ${req.body.filter.location}</li>
@@ -73,9 +73,9 @@ async function sendMail(req, res) {
                 statusOfObject = "Все";
             }
             var mailOptions = {
-                from: 'welcome@localhost:8080',
+                from: 'welcome@rl-property.com',
                 // to: 'nikitadimitriev000@gmail.com',
-                to: 'marketing@localhost:8080',
+                to: 'marketing@rl-property.com',
                 subject: 'Заявка',
                 html: `<ul>
                             <li>Расположение: ${req.body.filter.location}</li>
@@ -106,16 +106,16 @@ async function sendMailReserv(req, res){
     try{
         console.log(req.body); 
         var mailOptions = {
-            from: 'welcome@localhost:8080',
+            from: 'welcome@rl-property.com',
             // to: 'nikitadimitriev000@gmail.com',
-            to: 'marketing@localhost:8080',
+            to: 'marketing@rl-property.com',
             subject: 'Бронь!',
             html: `<ul>
                         <li>Даты: ${req.body.data.date[0]} - ${req.body.data.date[1]}</li>
                         <li>Количество спален: ${req.body.data.countOfGuest}</li>
                         <li>Название объекта: ${req.body.data.nameOfObject}</li>
                     </ul>
-                    <a href="http://localhost:8080/catalog/rent/${req.body.data.id}">Перейти к объекту</a>`
+                    <a href="http://rl-property.com/catalog/rent/${req.body.data.id}">Перейти к объекту</a>`
         };
         await transporter.sendMail(mailOptions, function (error, info) {
             if (error) {

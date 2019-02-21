@@ -76,7 +76,7 @@
             <router-link :to="`/catalog/sales/${object._id}`">
               <div class="aitem">
                 <div class="aitem__pic">
-                  <img :src="'http://localhost:8080/'+object.mainPhoto" width="255" height="300" alt="">
+                  <img :src="'http://rl-property.com/'+object.mainPhoto" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
                   <div class="aitem__title"> {{object.titleRu || "Апартаменты с видом на море в Ката"}} </div>
@@ -95,7 +95,7 @@
             <router-link :to="`/catalog/rent/${object._id}`">
               <div class="aitem">
                 <div class="aitem__pic">
-                  <img :src="'http://localhost:8080/'+object.mainPhoto" width="255" height="300" alt="">
+                  <img :src="'http://rl-property.com/'+object.mainPhoto" width="255" height="300" alt="">
                 </div>
                 <div class="aitem__content">
                   <div class="aitem__title"> {{object.titleRu || "Апартаменты с видом на море в Ката"}} </div>
@@ -469,7 +469,7 @@ export default {
   methods: {
     getObjectsRent() {
       this.$axios
-        .get("http://localhost:8080/api/get-objects-rent")
+        .get("http://rl-property.com/api/get-objects-rent")
         .then(response => {
           this.objectsRent = response.data;
           console.log(this.objects);
@@ -477,14 +477,14 @@ export default {
     },
     getObjectsSales() {
       this.$axios
-        .get("http://localhost:8080/api/get-objects-sales")
+        .get("http://rl-property.com/api/get-objects-sales")
         .then(response => {
           this.objectsSales = response.data;
           console.log(this.objectsSales);
         });
     },
     searchByFilter() {
-      this.$axios.post("http://localhost:8080/api/send-order-mail", { filter: this.filter }).then(response=>{
+      this.$axios.post("http://rl-property.com/api/send-order-mail", { filter: this.filter }).then(response=>{
         console.log(response);
       })
       this.$router.push({ path: "/catalog", query: { filter: this.filter } });

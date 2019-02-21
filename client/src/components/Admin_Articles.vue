@@ -107,7 +107,7 @@ export default {
       };
       console.log(data);
       this.$axios
-        .post("http://localhost:8080/api/create-article", data)
+        .post("http://rl-property.com/api/create-article", data)
         .then(response => {
           console.log(response);
           (this.name = ""),
