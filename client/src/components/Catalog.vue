@@ -315,7 +315,7 @@
                       </div>
                       <div class="card__slider">
                         <div class="card__slider-item">
-                          <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                          <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                         </div>
                       </div>
                     </div>
@@ -348,7 +348,7 @@
                     <div class="card__top">
                       <div class="card__slider">
                         <div class="card__slider-item">
-                          <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                          <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                         </div>
                       </div>
                     </div>
@@ -428,7 +428,7 @@ export default {
   methods: {
     getComplex() {
       this.$axios
-        .get("http://rl-property.com/api/get-complex")
+        .get("http://localhost:8080/api/get-complex")
         .then(response => {
           this.complex = response.data;
           this.complexList = true;
@@ -437,7 +437,7 @@ export default {
     },
     filtering() {
       this.$axios
-        .post("http://rl-property.com/api/get-objects-filters", {
+        .post("http://localhost:8080/api/get-objects-filters", {
           filter: this.filter
         })
         .then(response => {
@@ -451,7 +451,7 @@ export default {
     },
     getInfoSales() {
       this.$axios
-        .get("http://rl-property.com/api/get-info-sales")
+        .get("http://localhost:8080/api/get-info-sales")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -460,7 +460,7 @@ export default {
     },
     getInfoRent() {
       this.$axios
-        .get("http://rl-property.com/api/get-info-rent")
+        .get("http://localhost:8080/api/get-info-rent")
         .then(response => {
           this.info = response.data;
           this.setPages();
@@ -474,7 +474,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-sales/${
+          `http://localhost:8080/api/get-objects-pagination-sales/${
             this.page
           }/${this.perPage}`
         )
@@ -490,7 +490,7 @@ export default {
       };
       this.$axios
         .get(
-          `http://rl-property.com/api/get-objects-pagination-rent/${
+          `http://localhost:8080/api/get-objects-pagination-rent/${
             this.page
           }/${this.perPage}`
         )

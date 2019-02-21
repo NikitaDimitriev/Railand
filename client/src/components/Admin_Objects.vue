@@ -148,7 +148,7 @@
                 ></el-input>
                 <el-input
                   placeholder="Distance to beach"
-                  v-model="newObj.distanсeToBitch"
+                  v-model="newObj.distanceToBitch"
                   clearable
                   class="input_articles"
                 ></el-input>
@@ -287,7 +287,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -320,7 +320,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -425,7 +425,7 @@
                     >
                   </div>
                   <div v-if="mainPhoto">
-                    <img :src="`http://rl-property.com/${mainPhoto}`" class="preloadImage">
+                    <img :src="`http://localhost:8080/${mainPhoto}`" class="preloadImage">
                     <button @click="removeImage">Remove image</button>
                   </div>
                   <div v-if="!mainPhoto && image">
@@ -522,7 +522,7 @@
                   ></el-input>
                   <el-input
                     placeholder="Distance to beach"
-                    v-model="updatedObject.distanсeToBitch"
+                    v-model="updatedObject.distanceToBitch"
                     clearable
                     class="input_articles"
                   ></el-input>
@@ -573,7 +573,7 @@
                   </div>
                   <div v-if="photos">
                     <div v-for="(photo, index) in photos" :key="index" class="imageContent">
-                      <img :src="`http://rl-property.com/${photo}`" class="preloadImage">
+                      <img :src="`http://localhost:8080/${photo}`" class="preloadImage">
                     </div>
                   </div>
                   <el-button
@@ -672,7 +672,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -706,7 +706,7 @@
                 <div class="card__top">
                   <div class="card__slider">
                     <div class="card__slider-item">
-                      <img :src="'http://rl-property.com/'+object.mainPhoto" alt="аппартамены">
+                      <img :src="'http://localhost:8080/'+object.mainPhoto" alt="аппартамены">
                     </div>
                   </div>
                 </div>
@@ -1010,7 +1010,7 @@ export default {
       this.image = "";
       this.updatePanel = true;
       this.$axios
-        .get(`http://rl-property.com/api/get-object-by-id/${id}`)
+        .get(`http://localhost:8080/api/get-object-by-id/${id}`)
         .then(response => {
           this.updatedObject = Object.assign({}, response.data);
           this.typeObjectUpdate = response.data.typeOfObject;
@@ -1034,7 +1034,7 @@ export default {
           this.photos = this.updatedObject.photo;
           console.log(this.image, this.photos);
           this.$axios
-            .get(`http://rl-property.com/${this.updatedObject.mainPhoto}`)
+            .get(`http://localhost:8080/${this.updatedObject.mainPhoto}`)
             .then(response => {
               this.mainPhoto = this.updatedObject.mainPhoto;
               console.log(response);
@@ -1044,6 +1044,7 @@ export default {
     },
     removeImage() {
       this.image = "";
+      this.mainPhoto = "";
     },
     removePhotos() {
       this.photos = [];
@@ -1056,7 +1057,7 @@ export default {
       data.type = this.typeObjectUpdate;
       console.log(data);
       this.$axios
-        .put("http://rl-property.com/api/update-object", data)
+        .put("http://localhost:8080/api/update-object", data)
         .then(response => {
           this.$message({
             type: "success",
@@ -1103,8 +1104,10 @@ export default {
       data.image = this.image;
       data.photo = this.photos;
       data.code = this.generedCode;
+      data.beatch = this.newObj.distanсeToBitch;
+      console.log(data)
       this.$axios
-        .post("http://rl-property.com/api/create-object", data)
+        .post("http://localhost:8080/api/create-object", data)
         .then(response => {
           this.$message({
             type: "success",
@@ -1152,7 +1155,7 @@ export default {
     },
     getObjects() {
       this.$axios
-        .get("http://rl-property.com/api/get-objects")
+        .get("http://localhost:8080/api/get-objects")
         .then(response => {
           this.objects = response.data.reverse();
           console.log(this.objects.length);
@@ -1162,7 +1165,7 @@ export default {
     },
     deleteObject(id) {
       this.$axios
-        .delete("http://rl-property.com/api/delete-object/" + id)
+        .delete("http://localhost:8080/api/delete-object/" + id)
         .then(response => {
           this.$message({
             type: "success",

@@ -31,7 +31,7 @@
               <figure class="subjects-l__figure">
                 <img
                   class="subjects-l__pic"
-                  :src="'http://rl-property.com/'+this.article.photo[0]"
+                  :src="'http://localhost:8080/'+this.article.photo[0]"
                 >
                 <figcaption class="subjects-l__desc">Фотография взята с Shatterstock</figcaption>
               </figure>
@@ -44,7 +44,7 @@
               <figure class="subjects-l__figure">
                 <img
                   class="subjects-l__pic"
-                  :src="'http://rl-property.com/'+this.article.photo[1]"
+                  :src="'http://localhost:8080/'+this.article.photo[1]"
                 >
                 <figcaption class="subjects-l__desc">Фотография взята с Shatterstock</figcaption>
               </figure>
@@ -57,7 +57,7 @@
               <figure class="subjects-l__figure">
                 <img
                   class="subjects-l__pic"
-                  :src="'http://rl-property.com/'+this.article.photo[2]"
+                  :src="'http://localhost:8080/'+this.article.photo[2]"
                 >
                 <figcaption class="subjects-l__desc">Фотография взята с Shatterstock</figcaption>
               </figure>
@@ -171,7 +171,7 @@ export default {
     getArticleById() {
       let id = this.$route.params.id;
       this.$axios
-        .get(`http://rl-property.com/api/get-article-by-id/${id}`)
+        .get(`http://localhost:8080/api/get-article-by-id/${id}`)
         .then(response => {
           console.log(response);
           this.article = response.data;

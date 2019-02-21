@@ -227,11 +227,13 @@ async function createObject(req, res) {
         }
     }
     try {
+        let beatch = req.body.beatch;
+        console.log(beatch, req.body.price);
         let create = await Apertment.create({
             titleRu: req.body.nameOfObjectRU,
             titleEn: req.body.nameOfObjectEN,
             area: req.body.area,
-            distanceToBitch: req.body.distanceToBitch,
+            distanceToBitch: req.body.beatch,
             rooms: req.body.rooms,
             distanсeToAiroport: req.body.distanсeToAiroport,
             badroom: req.body.badroom,
