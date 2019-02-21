@@ -415,7 +415,7 @@
                   </el-select>
                   <el-checkbox v-model="updatedObject.topOfList">Set to top</el-checkbox>
                   <el-checkbox v-model="updatedObject.active">Active</el-checkbox>
-                  <div v-if="!image" style="font-size:18px">
+                  <div v-if="!image && !mainPhoto" style="font-size:18px">
                     <label for="imageUpdate" class="fileInput">Add main photo</label>
                     <input
                       type="file"
@@ -1051,7 +1051,7 @@ export default {
     },
     updateObject(object) {
       let data = this.updatedObject;
-      data.image = this.image;
+      data.image = this.image || this.mainPhoto;
       console.log(this.photos)
       data.photo = this.photos;
       data.type = this.typeObjectUpdate;
